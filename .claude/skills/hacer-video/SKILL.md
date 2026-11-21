@@ -17,6 +17,11 @@ Carpeta de Drive `¿No lo sabías?` (búscala con `mcp__Google_Drive__search_fil
 - **`personajes/`**: personajes creados en días anteriores (`<nombre>.js`). Si necesitas uno que no esté en
   `canal/personajes/`, descárgalo de ahí (`read_file_content`) y guárdalo en `canal/personajes/<nombre>.js`.
 
+**Si no tienes herramientas de Google Drive** (`mcp__Google_Drive__*`) en esta sesión: sigue igualmente.
+Elige el tema evitando los de `canal/ejemplos/` y cualquier tema que te parezca muy trillado, entrega **todo**
+(vídeo, portada, publicacion.txt y fuentes.md) con `SendUserFile`, y en la línea final avisa:
+"Drive no estaba conectado a la tarea: el historial no se ha guardado".
+
 ## 1. Elegir el tema
 1. Si `Temas pendientes` tiene temas bajo la línea `----- TEMAS -----`, usa el primero que **no tenga ya
    subcarpeta** en el historial.
