@@ -73,12 +73,13 @@ const EFECTOS = {
   objeto: {
     estado(c, e, td, t) {
       const [x, y] = e.pos; const dx = e.entra === "izquierda" ? -350 : 350;
-      c.objeto = { x: lerp(x + dx, x, easeOut(td / .8)), y, a: td > -0.01 ? 1 : 0, asustado: e.asustado != null && t >= e.asustado };
+      e._o = { x: lerp(x + dx, x, easeOut(td / .8)), y, asustado: e.asustado != null && t >= e.asustado };
+      if (td >= 0) c.objeto = e._o;  // el último objeto visible es el que se puede alcanzar
     },
     dibujo(c, e, td) {
-      if (td < 0) return; const o = c.objeto;
-      if (e.forma === "svg") { const g = el("g", { transform: `translate(${o.x},${o.y})` }, c.OV); g.innerHTML = e.svg; }
-      else cangrejo(c.OV, o.x, o.y, o.asustado);
+      if (td < 0) return; const o = e._o;
+      const g = el("g", { "data-objeto": 1, transform: `translate(${o.x},${o.y})` }, c.OV);
+      if (e.forma === "svg") g.innerHTML = e.svg; else cangrejo(g, 0, 0, o.asustado);
     },
   },
   alcanzar: {
@@ -169,6 +170,45 @@ const EFECTOS = {
         etiqueta(c.OV, l.texto, x, 800, { alpha: a, size: 38 });
         if (l.sub) etiqueta(c.OV, l.sub, x, 560, { alpha: a, size: 38, fondo: l.color, color: "#fff" });
       }
+    },
+  },
+  posicion: {
+    estado(c, e, td) {
+      const k = easeInOut(td / (e.duracion ?? .7)), P = c.P;
+      if (e.x != null) P.x = lerp(P.x, e.x, k); if (e.y != null) P.y = lerp(P.y, e.y, k);
+      if (e.escala != null) P.s = lerp(P.s, P.s * e.escala, k);
+    },
+  },
+  sello: {
+    dibujo(c, e, td, t) {
+      const a = vis(e, t, .15); if (a <= .01) return; const [x, y] = e.pos || [540, 700], col = e.color || "#E63946";
+      const s = lerp(2.2, 1, easeOut(td / .25));
+      const g = el("g", { transform: `translate(${x},${y}) rotate(${e.rot ?? -12}) scale(${s})`, opacity: a }, c.OV);
+      const tx = el("text", { "text-anchor": "middle", y: (e.size || 110) * .36, "font-size": e.size || 110, "font-weight": 900, fill: col, "letter-spacing": 6 }, g);
+      tx.textContent = e.texto; const w = tx.getComputedTextLength() + 70, h = (e.size || 110) * 1.35;
+      g.insertBefore(el("rect", { x: -w / 2, y: -h / 2, width: w, height: h, rx: 18, fill: "#fff", "fill-opacity": .92, stroke: col, "stroke-width": 12 }), tx);
+    },
+  },
+  linea_tiempo: {
+    dibujo(c, e, td, t) {
+      const a = vis(e, t); if (a <= .01) return;
+      const [r0, r1] = e.rango, y = e.y ?? 1180, X = an => 120 + (an - r0) / (r1 - r0) * 840;
+      const OV = c.OV, k = easeOut(td / .6);
+      el("line", { x1: 120, y1: y, x2: lerp(120, 960, k), y2: y, stroke: "#fff", "stroke-width": 8, "stroke-linecap": "round", opacity: a }, OV);
+      (e.tramos || []).forEach((tr, j) => {
+        const b = win(t, tr.desde ?? 0); if (b <= .01) return; const x1 = X(tr.de), x2 = X(tr.a), col = tr.color || ["#FFD23F", "#2EC4B6", "#FF7F50"][j % 3];
+        const kk = easeOut((t - (tr.desde ?? 0)) / .6), yy = y - 95;
+        el("path", { d: `M${x1},${yy + 25} V${yy} H${lerp(x1, x2, kk)} V${yy + 25}`, fill: "none", stroke: col, "stroke-width": 8, "stroke-linejoin": "round", opacity: b }, OV);
+        etiqueta(OV, tr.texto, (x1 + x2) / 2, yy - 45, { alpha: b, fondo: col, size: 40, scale: easeBack((t - (tr.desde ?? 0)) / .45) });
+      });
+      (e.puntos || []).forEach(pt => {
+        const b = win(t, pt.desde ?? 0); if (b <= .01) return; const x = X(pt.anio), s = easeBack((t - (pt.desde ?? 0)) / .4);
+        const g = el("g", { "data-punto": 1, opacity: b }, OV);
+        el("circle", { cx: x, cy: y, r: 18 * s, fill: pt.color || "#FFD23F", stroke: "#0B1320", "stroke-width": 5 }, g);
+        if (pt.icono) el("text", { x, y: y + 105, "text-anchor": "middle", "font-size": 64 * s }, g).textContent = pt.icono;
+        const tx = el("text", { x, y: y + 150, "text-anchor": "middle", "font-size": 36, "font-weight": 900, fill: "#fff", stroke: "#0B1320", "stroke-width": 6, "paint-order": "stroke" }, g);
+        tx.textContent = pt.etiqueta ?? String(pt.anio);
+      });
     },
   },
   contador: {

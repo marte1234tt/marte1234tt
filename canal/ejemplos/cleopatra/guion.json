@@ -1,0 +1,352 @@
+{
+ "tema": "Cleopatra",
+ "categoria": "historia",
+ "personaje": "cleopatra",
+ "escenas": [
+  {
+   "titulo": "¿MÁS CERCA DE LA LUNA?",
+   "texto": "Cleopatra vivió más cerca de la llegada a la Luna que de la construcción de las pirámides. ¿Cómo? Echa cuentas.",
+   "efectos": [
+    {
+     "tipo": "entrada"
+    },
+    {
+     "tipo": "mirar",
+     "x": "vaiven"
+    },
+    {
+     "tipo": "objeto",
+     "forma": "svg",
+     "svg": "<text font-size=\"160\" text-anchor=\"middle\" y=\"56\">🌕</text>",
+     "pos": [
+      880,
+      640
+     ],
+     "entra": "derecha",
+     "desde": "Luna"
+    },
+    {
+     "tipo": "objeto",
+     "forma": "svg",
+     "svg": "<text font-size=\"160\" text-anchor=\"middle\" y=\"56\">🔺</text>",
+     "pos": [
+      200,
+      640
+     ],
+     "entra": "izquierda",
+     "desde": "pirámides"
+    },
+    {
+     "tipo": "bocadillo",
+     "texto": "¿¡Cómo!?",
+     "pos": [
+      700,
+      520
+     ],
+     "desde": "Cómo"
+    }
+   ]
+  },
+  {
+   "titulo": "ECHA CUENTAS",
+   "texto": "La Gran Pirámide de Guiza se terminó hacia el año 2560 antes de Cristo. Cleopatra murió en el 30 antes de Cristo: más de 2.500 años después. ¿Y la Luna? 1969. Solo unos 2.000 años más tarde.",
+   "efectos": [
+    {
+     "tipo": "posicion",
+     "y": 720,
+     "escala": 0.62,
+     "desde": 0
+    },
+    {
+     "tipo": "mirar",
+     "x": 0,
+     "y": 0.8
+    },
+    {
+     "tipo": "linea_tiempo",
+     "rango": [
+      -2800,
+      2200
+     ],
+     "y": 1170,
+     "desde": 0.3,
+     "puntos": [
+      {
+       "anio": -2560,
+       "etiqueta": "2560 a.C.",
+       "icono": "🔺",
+       "desde": "Guiza"
+      },
+      {
+       "anio": -30,
+       "etiqueta": "30 a.C.",
+       "icono": "👑",
+       "desde": "Cleopatra"
+      },
+      {
+       "anio": 1969,
+       "etiqueta": "1969",
+       "icono": "🌕",
+       "desde": "Luna"
+      }
+     ],
+     "tramos": [
+      {
+       "de": -2560,
+       "a": -30,
+       "texto": "2.530 AÑOS",
+       "desde": "2.500"
+      },
+      {
+       "de": -30,
+       "a": 1969,
+       "texto": "1.999 AÑOS",
+       "desde": "2.000",
+       "color": "#2EC4B6"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "titulo": "¿EGIPCIA?",
+   "texto": "Y otra sorpresa: Cleopatra no era egipcia. Su familia, los Ptolomeos, era de origen griego y llevaba casi trescientos años gobernando Egipto.",
+   "efectos": [
+    {
+     "tipo": "posicion",
+     "y": 960,
+     "escala": 1,
+     "desde": -1
+    },
+    {
+     "tipo": "sello",
+     "texto": "GRIEGA",
+     "color": "#3A86FF",
+     "pos": [
+      540,
+      520
+     ],
+     "desde": "griego"
+    },
+    {
+     "tipo": "etiqueta",
+     "texto": "LOS PTOLOMEOS",
+     "pos": [
+      540,
+      1380
+     ],
+     "fondo": "#FFD23F",
+     "desde": "Ptolomeos"
+    },
+    {
+     "tipo": "etiqueta",
+     "texto": "~300 AÑOS",
+     "pos": [
+      880,
+      760
+     ],
+     "fondo": "#2EC4B6",
+     "color": "#FFFFFF",
+     "desde": "trescientos"
+    }
+   ]
+  },
+  {
+   "titulo": "POLÍGLOTA",
+   "texto": "Pero ella sí aprendió egipcio: fue la primera de su familia en hacerlo. Y según Plutarco, hablaba sin intérprete con etíopes, hebreos, árabes, sirios, medos y partos.",
+   "efectos": [
+    {
+     "tipo": "bocadillo",
+     "texto": "¡Ya hablo egipcio!",
+     "pos": [
+      720,
+      520
+     ],
+     "desde": "egipcio",
+     "hasta": "Plutarco"
+    },
+    {
+     "tipo": "etiqueta",
+     "texto": "ETÍOPES",
+     "pos": [
+      190,
+      600
+     ],
+     "desde": "etíopes"
+    },
+    {
+     "tipo": "etiqueta",
+     "texto": "HEBREOS",
+     "pos": [
+      890,
+      600
+     ],
+     "desde": "hebreos"
+    },
+    {
+     "tipo": "etiqueta",
+     "texto": "ÁRABES",
+     "pos": [
+      170,
+      800
+     ],
+     "desde": "árabes"
+    },
+    {
+     "tipo": "etiqueta",
+     "texto": "SIRIOS",
+     "pos": [
+      910,
+      800
+     ],
+     "desde": "sirios"
+    },
+    {
+     "tipo": "etiqueta",
+     "texto": "MEDOS",
+     "pos": [
+      180,
+      1000
+     ],
+     "desde": "medos"
+    },
+    {
+     "tipo": "etiqueta",
+     "texto": "PARTOS",
+     "pos": [
+      900,
+      1000
+     ],
+     "desde": "partos"
+    }
+   ]
+  },
+  {
+   "titulo": "¿UNA ALFOMBRA?",
+   "texto": "¿Y lo de que llegó a ver a Julio César enrollada en una alfombra? Plutarco cuenta otra cosa: entró escondida en un saco de ropa de cama. La alfombra se añadió después.",
+   "efectos": [
+    {
+     "tipo": "objeto",
+     "forma": "svg",
+     "svg": "<g><rect x=\"-120\" y=\"-40\" width=\"240\" height=\"80\" rx=\"40\" fill=\"#C0392B\"/><rect x=\"-112\" y=\"-32\" width=\"224\" height=\"64\" rx=\"32\" fill=\"none\" stroke=\"#FFD23F\" stroke-width=\"7\" stroke-dasharray=\"20 14\"/><ellipse cx=\"118\" cy=\"0\" rx=\"28\" ry=\"40\" fill=\"#8E2A1F\"/><circle cx=\"118\" cy=\"0\" r=\"16\" fill=\"none\" stroke=\"#FFD23F\" stroke-width=\"5\"/></g>",
+     "pos": [
+      860,
+      1160
+     ],
+     "entra": "derecha",
+     "desde": "alfombra"
+    },
+    {
+     "tipo": "mirar",
+     "x": 0.8,
+     "y": 0.6
+    },
+    {
+     "tipo": "etiqueta",
+     "texto": "SACO DE ROPA DE CAMA",
+     "pos": [
+      540,
+      1385
+     ],
+     "fondo": "#FFE66D",
+     "desde": "saco"
+    },
+    {
+     "tipo": "sello",
+     "texto": "MITO",
+     "pos": [
+      540,
+      540
+     ],
+     "desde": "añadió"
+    }
+   ]
+  },
+  {
+   "titulo": "¿UNA SERPIENTE?",
+   "texto": "Y su famosa muerte por la mordedura de un áspid tampoco es segura. El propio Plutarco lo admite: la verdad, nadie la sabe.",
+   "efectos": [
+    {
+     "tipo": "objeto",
+     "forma": "svg",
+     "svg": "<text font-size=\"170\" text-anchor=\"middle\" y=\"59\">🐍</text>",
+     "pos": [
+      870,
+      1150
+     ],
+     "entra": "derecha",
+     "desde": "áspid"
+    },
+    {
+     "tipo": "mirar",
+     "x": 0.8,
+     "y": 0.6
+    },
+    {
+     "tipo": "sello",
+     "texto": "DUDOSO",
+     "color": "#9B5DE5",
+     "pos": [
+      540,
+      540
+     ],
+     "desde": "segura"
+    },
+    {
+     "tipo": "etiqueta",
+     "texto": "NADIE LO SABE",
+     "pos": [
+      540,
+      1385
+     ],
+     "fondo": "#FFD23F",
+     "desde": "nadie"
+    }
+   ]
+  },
+  {
+   "titulo": "¿CUÁL TE SORPRENDE MÁS?",
+   "texto": "¿Cuál de estos datos te ha sorprendido más? Te leo en comentarios. ¡Y síguenos para más curiosidades!",
+   "efectos": [
+    {
+     "tipo": "encuesta",
+     "desde": 0
+    },
+    {
+     "tipo": "cierre",
+     "desde": "síguenos"
+    }
+   ]
+  }
+ ],
+ "encuesta": [
+  "Más cerca de la Luna",
+  "No era egipcia",
+  "Hablaba sin intérprete",
+  "Lo de la alfombra"
+ ],
+ "publicacion": {
+  "instagram": "Cleopatra vivió más cerca de la llegada a la Luna que de la construcción de las pirámides 🌕🔺🤯\n\nY no era egipcia, no llegó enrollada en una alfombra… y ni siquiera sabemos seguro cómo murió.\n\n👇 ¿Cuál te ha sorprendido más?\nA) Más cerca de la Luna\nB) No era egipcia\nC) Hablaba sin intérprete\nD) Lo de la alfombra\n\nSíguenos para una curiosidad nueva cada día 🔔\n\n#curiosidades #historia #cleopatra #antiguoegipto #sabiasque",
+  "tiktok": "¿Cleopatra más cerca de la Luna que de las pirámides? 🌕🔺 ¿Cuál te sorprende más? 👇\n#curiosidades #historia #cleopatra #antiguoegipto #datoscuriosos #aprendeentiktok",
+  "youtube_titulo": "Cleopatra vivió más cerca de la Luna que de las pirámides 🌕 #shorts #curiosidades"
+ },
+ "fuentes": [
+  "WorldAtlas — ¿Cleopatra más cerca de la llegada a la Luna?: https://www.worldatlas.com/articles/so-cleopatra-lived-closer-in-time-to-the-first-lunar-landing-than-the-great-pyramids.html",
+  "IFLScience — Cleopatra y las pirámides: https://www.iflscience.com/cleopatra-lived-closer-in-time-to-the-artemis-ii-launch-than-to-the-construction-of-the-pyramids-83380",
+  "ASOR — Las lenguas de Cleopatra (Plutarco, Vida de Antonio 27): https://asor.org/?p=94594",
+  "Wikipedia — Cleopatra (dinastía ptolemaica, griego como lengua materna): https://en.wikipedia.org/wiki/Cleopatra",
+  "Plutarco, Vida de César 49 (el saco de ropa de cama), Livius: https://www.livius.org/sources/content/plutarch/plutarchs-caesar/war-in-alexandria/",
+  "Wikipedia — Apolodoro de Sicilia: https://en.wikipedia.org/wiki/Apollodorus_the_Sicilian",
+  "Live Science — ¿Cómo murió realmente Cleopatra?: https://www.livescience.com/archaeology/ancient-egyptians/how-did-cleopatra-really-die",
+  "History.com — Cleopatra y el áspid: https://www.history.com/articles/cleopatra-suicide-snake-bite"
+ ],
+ "portada": {
+  "escena": 0,
+  "t": "Cómo",
+  "linea1": "MÁS CERCA DE",
+  "linea2": "LA LUNA 🌕",
+  "color2": "#FFD23F",
+  "banda": "QUE DE LAS PIRÁMIDES 🔺",
+  "color_banda": "#E63946"
+ }
+}

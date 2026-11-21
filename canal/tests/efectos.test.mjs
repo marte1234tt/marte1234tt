@@ -78,3 +78,36 @@ test('efecto desconocido avisa sin romper', async () => {
   assert.ok(avisos.some(a => a.includes('zzz')));
   await p.close();
 });
+
+test('línea de tiempo dibuja un punto por año y sus tramos', async () => {
+  const lt = { tipo: 'linea_tiempo', desde: 0, rango: [-2700, 2100], y: 1180,
+    puntos: [{ anio: -2560, etiqueta: '2560 a.C.', icono: '🔺', desde: 0 }, { anio: -30, etiqueta: '30 a.C.', desde: 0 }, { anio: 1969, etiqueta: '1969', desde: 0 }],
+    tramos: [{ de: -2560, a: -30, texto: '2.530 años', desde: 0 }, { de: -30, a: 1969, texto: '1.999 años', desde: 0 }] };
+  const { p, errores } = await pagina(cfgBase([{ titulo: 'X', start: 0, dur: 10, efectos: [lt] }]));
+  await p.evaluate(() => render(5));
+  const n = await p.evaluate(() => document.querySelectorAll('#overlay [data-punto]').length);
+  const textos = await p.evaluate(() => [...document.querySelectorAll('#overlay text')].map(t => t.textContent));
+  assert.equal(n, 3); assert.ok(textos.includes('2.530 años') && textos.includes('1969'));
+  assert.deepEqual(errores, []);
+  await p.close();
+});
+
+test('sello y posición del personaje', async () => {
+  const { p, errores } = await pagina(cfgBase([{ titulo: 'X', start: 0, dur: 10, efectos: [
+    { tipo: 'posicion', y: 760, escala: 0.7, desde: 0 }, { tipo: 'sello', texto: 'MITO', pos: [540, 700], desde: 0 }] }]));
+  await p.evaluate(() => render(5));
+  const tr = await p.evaluate(() => document.getElementById('oct').getAttribute('transform'));
+  const sello = await p.evaluate(() => [...document.querySelectorAll('#overlay text')].some(t => t.textContent === 'MITO'));
+  assert.match(tr, /translate\(540,7\d\d\.?\d*\) scale\(0\.66/); assert.ok(sello); assert.deepEqual(errores, []);
+  await p.close();
+});
+
+test('dos objetos en la misma escena se dibujan cada uno en su sitio', async () => {
+  const svg = '<circle r="40" fill="red"/>';
+  const { p } = await pagina(cfgBase([{ titulo: 'X', start: 0, dur: 10, efectos: [
+    { tipo: 'objeto', forma: 'svg', svg, pos: [880, 640], desde: 0 }, { tipo: 'objeto', forma: 'svg', svg, pos: [200, 640], desde: 0 }] }]));
+  await p.evaluate(() => render(5));
+  const xs = await p.evaluate(() => [...document.querySelectorAll('#overlay [data-objeto]')].map(g => Math.round(g.getBoundingClientRect().x + g.getBoundingClientRect().width / 2)).sort((a, b) => a - b));
+  assert.deepEqual(xs, [200, 880]);
+  await p.close();
+});

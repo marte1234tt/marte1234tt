@@ -91,3 +91,12 @@ def test_resuelve_campos_de_tiempo_secundarios(tmp_path):
     ef = cfg["escenas"][1]["efectos"]
     assert isinstance(ef[0]["desde_der"], float) and isinstance(ef[1]["asustado"], float)
     assert ef[1]["asustado"] == pytest.approx(ef[0]["desde_der"] + 0.2)
+
+
+def test_resuelve_tiempos_anidados(tmp_path):
+    cfg = _prep(tmp_path, [{"tipo": "linea_tiempo", "desde": 0,
+                            "puntos": [{"anio": -2560, "desde": "Dos"}],
+                            "tramos": [{"de": -2560, "a": -30, "desde": "Dos+0.5"}]}])
+    e = cfg["escenas"][1]["efectos"][0]
+    assert isinstance(e["puntos"][0]["desde"], float)
+    assert e["tramos"][0]["desde"] == pytest.approx(e["puntos"][0]["desde"] + 0.5)

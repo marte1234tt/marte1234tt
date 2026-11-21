@@ -78,11 +78,14 @@ def preparar(guion_path: str, salida_dir: str, synth=None) -> dict:
         idx = [k for k, (_, s) in enumerate(toks) if s == i]
         start = 0.0 if i == 0 else max(0.0, tiempos[idx[0]][0] - 0.08)
         efectos = []
+        def resolver_todo(x):
+            if isinstance(x, list):
+                return [resolver_todo(v) for v in x]
+            if isinstance(x, dict):
+                return {k: (_resolver(v, idx, toks, tiempos, start) if k in CAMPOS_TIEMPO else resolver_todo(v)) for k, v in x.items()}
+            return x
         for ef in e.get("efectos", []):
-            ef = dict(ef)
-            for campo in CAMPOS_TIEMPO:
-                if campo in ef:
-                    ef[campo] = _resolver(ef[campo], idx, toks, tiempos, start)
+            ef = resolver_todo(ef)
             ef.setdefault("desde", 0.0)
             efectos.append(ef)
         escenas.append({"titulo": e["titulo"], "start": start, "efectos": efectos})

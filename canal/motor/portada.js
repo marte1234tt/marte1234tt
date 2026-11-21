@@ -28,8 +28,9 @@ const { abrir } = require('./render.js');
     if (por.banda) {
       const g = el('g', { transform: 'translate(540,1560) rotate(-3)' }, svg);
       const r = el('rect', { y: -70, height: 140, rx: 30, fill: por.color_banda || '#3A86FF' }, g);
-      const t = el('text', { y: 30, 'text-anchor': 'middle', 'font-size': 84, 'font-weight': 900, fill: '#fff' }, g); t.textContent = por.banda;
-      const w = Math.min(1000, t.getComputedTextLength() + 120); r.setAttribute('x', -w / 2); r.setAttribute('width', w);
+      let fs = 84; const t = el('text', { y: 30, 'text-anchor': 'middle', 'font-size': fs, 'font-weight': 900, fill: '#fff' }, g); t.textContent = por.banda;
+      while (t.getComputedTextLength() > 840 && fs > 40) { fs -= 4; t.setAttribute('font-size', fs); t.setAttribute('y', fs * .36); }
+      const w = t.getComputedTextLength() + 120; r.setAttribute('x', -w / 2); r.setAttribute('width', w);
     }
   }, { T, por });
   await p.screenshot({ path: out });

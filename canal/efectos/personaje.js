@@ -37,6 +37,7 @@ const Personaje = {
       return { body, blood, mano, sc, nc };
     });
     const C = el("g", { id: "cuerpoG" }, O); this.C = C;
+    if (def.detras) { const g = el("g", {}, C); g.innerHTML = def.detras; }
     this.cuerpo = el("path", { d: def.cuerpo, fill: "url(#bodyGrad)" }, C);
     if (def.manchas) { const m = el("g", { fill: def.colores?.mancha || "#000", opacity: .18 }, C); def.manchas.forEach(([x, y, r]) => el("circle", { cx: x, cy: y, r }, m)); }
     if (def.brillo) { const [x, y, rx, ry, rot] = def.brillo; el("ellipse", { cx: x, cy: y, rx, ry, fill: "#fff", opacity: .28, transform: `rotate(${rot || 0} ${x} ${y})` }, C); }

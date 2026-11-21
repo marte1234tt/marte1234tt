@@ -37,3 +37,18 @@ def test_hacer_pulpo_completo():
     assert "INSTAGRAM" in pub and "#curiosidades" in pub and "TIKTOK" in pub and "YOUTUBE" in pub
     assert os.path.exists(os.path.join(salida, "fuentes.md"))
     assert len(os.listdir(os.path.join(salida, "fotogramas"))) == 10
+
+
+def test_portada_banda_larga_no_se_sale(tmp_path):
+    g = {"tema": "x", "personaje": "pulpo", "escenas": [{"titulo": "A", "texto": "Hola mundo bonito.", "efectos": []}],
+         "portada": {"escena": 0, "t": 0.5, "linea1": "UNO", "linea2": "DOS",
+                     "banda": "QUE DE LAS PIRÁMIDES DE EGIPTO 🔺", "color_banda": "#E63946"}}
+    p = tmp_path / "guion.json"; p.write_text(json.dumps(g, ensure_ascii=False))
+    P.preparar(str(p), str(tmp_path / "o"), synth=synth_falso)
+    png = tmp_path / "portada.png"
+    subprocess.run(["node", "motor/portada.js", str(tmp_path / "o" / "tmp" / "config.json"), str(png)], cwd=RAIZ, check=True)
+    im = Image.open(png).convert("RGB")
+    # ni el texto (blanco) ni la banda (rojo) pueden llegar a los 30 px de cada borde
+    fuera = [(x, y) for x in list(range(0, 30)) + list(range(1050, 1080)) for y in range(1400, 1760, 3)
+             if (lambda c: (min(c) > 225) or (c[0] > 180 and c[1] < 110 and c[2] < 110))(im.getpixel((x, y)))]
+    assert fuera == [], f"la banda o su texto se salen: {fuera[:5]}"
