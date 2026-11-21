@@ -63,15 +63,18 @@ Mira las 10 imágenes de `<carpeta>/fotogramas/` y `portada.png`:
 - la portada se entiende en pequeño.
 Corrige y repite como mucho 2 veces. Si sigue mal, entrega igualmente con " (revisar)" en el nombre de la carpeta de Drive.
 
-## 7. Entregar en Google Drive
-1. Busca la carpeta `config.drive_carpeta` (`mcp__Google_Drive__search_files`); si no existe, créala
-   (`create_file` con `contentMimeType`/`mimeType` de carpeta `application/vnd.google-apps.folder`).
-2. Crea dentro la subcarpeta `AAAA-MM-DD <tema>`.
-3. Sube `video.mp4` (`video/mp4`) y `portada.png` (`image/png`) con `base64Content` = `sha256:<hash>:<ruta absoluta>`
-   (hash con `sha256sum`) y `disableConversionToGoogleType: true`.
+## 7. Entregar
+**El vídeo NO va a Drive** (el conector admite ~3 MB por llamada y los vídeos pesan ~8 MB).
+1. **Vídeo:** envíalo con `SendUserFile` (`files: [<ruta>/video.mp4]`, `status: "proactive"`, `display: "render"`,
+   `caption: "<tema> · <duración> s · listo para publicar"`). Le llega al usuario a la app con aviso al móvil.
+2. **Drive** (portada y textos): busca la carpeta `config.drive_carpeta` con `mcp__Google_Drive__search_files`
+   (`title contains 'No lo sabías' and mimeType = 'application/vnd.google-apps.folder'`); si no existe, créala
+   (`create_file`, `contentMimeType: application/vnd.google-apps.folder`). Dentro, crea la subcarpeta `AAAA-MM-DD <tema>`.
+3. Sube `portada.png` (`image/png`, `base64Content` = `sha256:<hash>:<ruta absoluta>`, hash con `sha256sum`,
+   `disableConversionToGoogleType: true`). Si algún archivo pasa de 3 MB, no lo subas: mándalo también con `SendUserFile`.
 4. Sube `publicacion.txt` y `fuentes.md` con `textContent` (`text/plain`, `disableConversionToGoogleType: true`).
 
 ## 8. Cerrar
 - Añade a `temas/usados.json` `{fecha, tema, categoria, personaje}`; quita el tema de `cola.txt` si venía de ahí.
 - Commit (guion, personaje nuevo, usados.json; nunca `salida/` ni `.mp4`) y push a la rama de trabajo.
-- Termina con una línea: tema · duración · enlace a la carpeta de Drive.
+- Termina con una línea: tema · duración · enlace a la carpeta de Drive (el vídeo ya va en el aviso de la app).
