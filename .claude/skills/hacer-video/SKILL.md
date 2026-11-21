@@ -6,13 +6,23 @@ description: Crea y entrega el vídeo diario de la cuenta de curiosidades @nolos
 # Hacer el vídeo de «¿No lo sabías?»
 
 Todo vive en `canal/` (ejecuta los comandos desde ahí). Lee `canal/config.json` primero.
-Ejemplo completo de guion: `canal/ejemplos/pulpo/guion.json` (animales) y `canal/ejemplos/cleopatra/guion.json` (historia).
+Ejemplos completos de guion: `canal/ejemplos/pulpo/guion.json` (animales) y `canal/ejemplos/cleopatra/guion.json` (historia).
+
+## 0. Memoria del canal (está en Google Drive, no en git)
+Carpeta de Drive `¿No lo sabías?` (búscala con `mcp__Google_Drive__search_files`:
+`title contains 'No lo sabías' and mimeType = 'application/vnd.google-apps.folder'`). Dentro:
+- **Una subcarpeta por vídeo hecho**, con nombre `AAAA-MM-DD <tema> · <categoría> · <personaje>`. Ese es el historial:
+  lístalo con `parentId = '<id carpeta>' and mimeType = 'application/vnd.google-apps.folder'`.
+- **`Temas pendientes`** (Google Doc que edita el usuario): léelo con `read_file_content`.
+- **`personajes/`**: personajes creados en días anteriores (`<nombre>.js`). Si necesitas uno que no esté en
+  `canal/personajes/`, descárgalo de ahí (`read_file_content`) y guárdalo en `canal/personajes/<nombre>.js`.
 
 ## 1. Elegir el tema
-1. Si `temas/cola.txt` tiene líneas, usa la primera (y quítala al terminar).
-2. Si no, elige categoría con los pesos de `config.categorias` (historia y ciencia rara son las principales),
-   **sin repetir la categoría de los 2 últimos** de `temas/usados.json`, y busca en la web una curiosidad
-   sorprendente y verificable de esa categoría que **no esté ya en `usados.json`**.
+1. Si `Temas pendientes` tiene temas bajo la línea `----- TEMAS -----`, usa el primero que **no tenga ya
+   subcarpeta** en el historial.
+2. Si no, elige categoría con los pesos de `canal/config.json` → `categorias` (historia y ciencia rara son las principales),
+   **sin repetir la categoría de los 2 vídeos más recientes** del historial, y busca en la web una curiosidad
+   sorprendente y verificable de esa categoría que **no esté ya en el historial**.
 3. Busca un tema con un "giro" (algo que la gente cree y no es, o una comparación que vuela la cabeza).
 
 ## 2. Investigar
@@ -44,9 +54,10 @@ Crea `canal/temas/AAAA-MM-DD-<slug>/guion.json` con el formato del ejemplo:
   `EFECTOS.mi_efecto = {estado(c,e,td,t){...}, dibujo(c,e,td,t){...}}` (mira `canal/efectos/efectos.js`).
 
 ## 4. Personaje
-- Si ya existe en `canal/personajes/`, reutilízalo. Si no, créalo siguiendo `canal/personajes/LEEME.md`.
-- Comprueba 3 capturas antes de seguir:
-  `node -e` con `motor/render.js` (`abrir`) o ejecuta el vídeo y mira `fotogramas/`.
+- Si ya existe en `canal/personajes/` o en la carpeta `personajes/` de Drive, reutilízalo. Si no, créalo siguiendo
+  `canal/personajes/LEEME.md` y **súbelo a Drive** (`personajes/<nombre>.js`, `text/plain`,
+  `disableConversionToGoogleType: true`) para que los próximos días lo encuentren.
+- Comprueba 3 capturas antes de seguir (`node -e` con `abrir` de `motor/render.js`, o fabrica y mira `fotogramas/`).
 
 ## 5. Fabricar
 ```bash
@@ -69,12 +80,13 @@ Corrige y repite como mucho 2 veces. Si sigue mal, entrega igualmente con " (rev
    `caption: "<tema> · <duración> s · listo para publicar"`). Le llega al usuario a la app con aviso al móvil.
 2. **Drive** (portada y textos): busca la carpeta `config.drive_carpeta` con `mcp__Google_Drive__search_files`
    (`title contains 'No lo sabías' and mimeType = 'application/vnd.google-apps.folder'`); si no existe, créala
-   (`create_file`, `contentMimeType: application/vnd.google-apps.folder`). Dentro, crea la subcarpeta `AAAA-MM-DD <tema>`.
+   (`create_file`, `contentMimeType: application/vnd.google-apps.folder`). Dentro, crea la subcarpeta `AAAA-MM-DD <tema> · <categoría> · <personaje>` (es el historial).
 3. Sube `portada.png` (`image/png`, `base64Content` = `sha256:<hash>:<ruta absoluta>`, hash con `sha256sum`,
    `disableConversionToGoogleType: true`). Si algún archivo pasa de 3 MB, no lo subas: mándalo también con `SendUserFile`.
 4. Sube `publicacion.txt` y `fuentes.md` con `textContent` (`text/plain`, `disableConversionToGoogleType: true`).
 
 ## 8. Cerrar
-- Añade a `temas/usados.json` `{fecha, tema, categoria, personaje}`; quita el tema de `cola.txt` si venía de ahí.
-- Commit (guion, personaje nuevo, usados.json; nunca `salida/` ni `.mp4`) y push a la rama de trabajo.
-- Termina con una línea: tema · duración · enlace a la carpeta de Drive (el vídeo ya va en el aviso de la app).
+- El historial ya quedó en Drive (la subcarpeta del paso 7). No hace falta tocar git en la ejecución diaria.
+- Si trabajas en una sesión con el repositorio y has mejorado la caja de efectos o el motor, haz commit y push
+  (nunca `salida/` ni `.mp4`).
+- Termina con una línea: tema · duración · enlace a la subcarpeta de Drive (el vídeo ya va en el aviso de la app).
