@@ -92,7 +92,8 @@ def preparar(guion_path: str, salida_dir: str, synth=None) -> dict:
     subtitulos([(t[0], t[1], w) for (w, _), t in zip(toks, tiempos)], os.path.join(tmp, "subs.ass"))
     musica(total, os.path.join(tmp, "musica.wav"))
     cfg = {"total": total, "cuenta": cfg_canal["cuenta"], "etiqueta": cfg_canal["etiqueta"],
-           "personaje": g.get("personaje"), "encuesta": g.get("encuesta", []), "js": g.get("js"),
+           "personaje": g.get("personaje"), "encuesta": g.get("encuesta", []),
+           "js": os.path.join(os.path.dirname(os.path.abspath(guion_path)), g["js"]) if g.get("js") else None,
            "escenas": escenas}
     if g.get("portada"):
         por = dict(g["portada"]); i = int(por.get("escena", 0))
