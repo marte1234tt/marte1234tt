@@ -1,0 +1,421 @@
+{
+ "tema": "El pulpo",
+ "categoria": "animales",
+ "personaje": "pulpo",
+ "escenas": [
+  {
+   "titulo": "¿EXTRATERRESTRE?",
+   "texto": "Este bicho tiene tres corazones. Sangre azul. ¡Y saborea con los brazos! ¿Un alien? Nooo.",
+   "efectos": [
+    {
+     "tipo": "entrada"
+    },
+    {
+     "tipo": "antenas",
+     "hasta": "alien+0.45"
+    },
+    {
+     "tipo": "iconos",
+     "forma": "corazon",
+     "n": 3,
+     "pos": [
+      200,
+      620
+     ],
+     "desde": "corazones"
+    },
+    {
+     "tipo": "iconos",
+     "forma": "gota",
+     "color": "#3A86FF",
+     "n": 1,
+     "pos": [
+      900,
+      640
+     ],
+     "desde": "azul"
+    },
+    {
+     "tipo": "senalar",
+     "extremidad": 7,
+     "objetivo": [
+      853,
+      1112
+     ],
+     "desde": "brazos",
+     "hasta": "brazos+1.6"
+    },
+    {
+     "tipo": "etiqueta",
+     "texto": "¡NO!",
+     "pos": [
+      540,
+      520
+     ],
+     "fondo": "#7CFC9A",
+     "desde": "alien+0.65"
+    },
+    {
+     "tipo": "mirar",
+     "x": "vaiven"
+    }
+   ]
+  },
+  {
+   "titulo": "3 CORAZONES",
+   "texto": "Es el pulpo. Y lo de los corazones va en serio: tiene tres. Dos bombean sangre a las branquias, y el tercero, a todo el cuerpo.",
+   "efectos": [
+    {
+     "tipo": "etiqueta",
+     "texto": "EL PULPO",
+     "pos": [
+      540,
+      1360
+     ],
+     "fondo": "#FFD23F",
+     "desde": "pulpo",
+     "hasta": "tres"
+    },
+    {
+     "tipo": "rayosX",
+     "desde": "tres-0.3"
+    },
+    {
+     "tipo": "organo",
+     "id": "corazon_izq",
+     "desde": "Dos"
+    },
+    {
+     "tipo": "organo",
+     "id": "corazon_der",
+     "desde": "Dos+0.25"
+    },
+    {
+     "tipo": "organo",
+     "id": "corazon_centro",
+     "desde": "tercero"
+    },
+    {
+     "tipo": "etiqueta",
+     "texto": "BRANQUIA",
+     "ancla": "corazon_izq",
+     "pos": [
+      170,
+      500
+     ],
+     "desde": "branquias-0.3"
+    },
+    {
+     "tipo": "etiqueta",
+     "texto": "BRANQUIA",
+     "ancla": "corazon_der",
+     "pos": [
+      910,
+      500
+     ],
+     "desde": "branquias-0.3"
+    },
+    {
+     "tipo": "etiqueta",
+     "texto": "CUERPO",
+     "ancla": "corazon_centro",
+     "pos": [
+      540,
+      450
+     ],
+     "fondo": "#FFD23F",
+     "desde": "tercero+0.1"
+    },
+    {
+     "tipo": "mirar",
+     "x": 0,
+     "y": -0.6
+    }
+   ]
+  },
+  {
+   "titulo": "SANGRE AZUL",
+   "texto": "¿Y por qué tantos? Porque su sangre es azul. Nosotros usamos hierro, él usa cobre: una proteína llamada hemocianina. Transporta peor el oxígeno. ¡Así que toca bombear el doble!",
+   "efectos": [
+    {
+     "tipo": "rayosX",
+     "desde": -1
+    },
+    {
+     "tipo": "organo",
+     "id": "corazon_izq",
+     "desde": -1
+    },
+    {
+     "tipo": "organo",
+     "id": "corazon_der",
+     "desde": -1
+    },
+    {
+     "tipo": "organo",
+     "id": "corazon_centro",
+     "desde": -1
+    },
+    {
+     "tipo": "flujo",
+     "color": "#5AA2FF",
+     "desde": "azul-0.2"
+    },
+    {
+     "tipo": "comparacion",
+     "izq": {
+      "forma": "gota",
+      "color": "#E63946",
+      "texto": "HIERRO · Fe",
+      "sub": "TÚ"
+     },
+     "der": {
+      "forma": "gota",
+      "color": "#3A86FF",
+      "texto": "COBRE · Cu",
+      "sub": "PULPO"
+     },
+     "desde": "hierro",
+     "desde_der": "cobre",
+     "hasta": "oxígeno+1.2"
+    },
+    {
+     "tipo": "etiqueta",
+     "texto": "HEMOCIANINA",
+     "pos": [
+      540,
+      1360
+     ],
+     "fondo": "#3A86FF",
+     "color": "#FFFFFF",
+     "desde": "hemocianina",
+     "hasta": "oxígeno+2.5"
+    },
+    {
+     "tipo": "latido",
+     "velocidad": 2,
+     "desde": "oxígeno"
+    }
+   ]
+  },
+  {
+   "titulo": "¿CEREBRO EN LOS BRAZOS?",
+   "texto": "Pero lo más loco está en sus brazos. Dos tercios de sus neuronas no están en la cabeza. ¡Están repartidas por los ocho brazos! Cada brazo explora y reacciona casi por su cuenta.",
+   "efectos": [
+    {
+     "tipo": "rayosX",
+     "desde": "cabeza-0.2"
+    },
+    {
+     "tipo": "organo",
+     "id": "cerebro",
+     "desde": "cabeza-0.2"
+    },
+    {
+     "tipo": "luces",
+     "desde": "neuronas"
+    },
+    {
+     "tipo": "etiqueta",
+     "texto": "1/3 · CABEZA",
+     "ancla": "cerebro",
+     "pos": [
+      540,
+      500
+     ],
+     "desde": "cabeza-0.1"
+    },
+    {
+     "tipo": "etiqueta",
+     "texto": "2/3 · BRAZOS",
+     "pos": [
+      540,
+      1380
+     ],
+     "fondo": "#FFE66D",
+     "desde": "ocho-0.2"
+    },
+    {
+     "tipo": "agitar",
+     "intensidad": 1.8,
+     "desde": "explora"
+    }
+   ]
+  },
+  {
+   "titulo": "SABOREA AL TOCAR",
+   "texto": "Y sus ventosas tienen receptores únicos: saborean todo lo que tocan. Literalmente, prueba la comida antes de llevársela a la boca.",
+   "efectos": [
+    {
+     "tipo": "objeto",
+     "forma": "cangrejo",
+     "pos": [
+      900,
+      1230
+     ],
+     "entra": "derecha",
+     "desde": 0.1,
+     "asustado": "tocan"
+    },
+    {
+     "tipo": "alcanzar",
+     "extremidad": 7,
+     "objetivo": "objeto",
+     "desde": "ventosas",
+     "hasta": "comida+1.2"
+    },
+    {
+     "tipo": "saborear",
+     "extremidad": 7,
+     "desde": "saborean"
+    },
+    {
+     "tipo": "mirar",
+     "x": 0.8,
+     "y": 0.7
+    },
+    {
+     "tipo": "bocadillo",
+     "texto": "¡Mmm… cangrejo!",
+     "pos": [
+      330,
+      560
+     ],
+     "desde": "tocan",
+     "hasta": "comida+2"
+    },
+    {
+     "tipo": "etiqueta",
+     "texto": "SABOR + TACTO",
+     "pos": [
+      540,
+      1390
+     ],
+     "fondo": "#FFE66D",
+     "desde": "comida"
+    }
+   ]
+  },
+  {
+   "titulo": "SIN HUESOS",
+   "texto": "¿Y sabes qué más? No tiene huesos. Puede colarse por cualquier agujero por el que le quepa el pico, que es lo único duro de su cuerpo.",
+   "efectos": [
+    {
+     "tipo": "aplastar",
+     "escala": 0.62,
+     "desde": "colarse-0.3"
+    },
+    {
+     "tipo": "etiqueta",
+     "texto": "0 HUESOS",
+     "pos": [
+      540,
+      1400
+     ],
+     "fondo": "#FFD23F",
+     "desde": "huesos-0.1",
+     "hasta": "colarse+0.6"
+    },
+    {
+     "tipo": "etiqueta",
+     "texto": "PICO: LO ÚNICO DURO",
+     "ancla": "pico",
+     "pos": [
+      760,
+      520
+     ],
+     "desde": "pico-0.1"
+    }
+   ]
+  },
+  {
+   "titulo": "¿DALTÓNICO?",
+   "texto": "Y el remate: sus ojos solo tienen un tipo de célula para captar la luz. En teoría, no distingue colores. ¡Y aun así es un maestro del camuflaje! Los científicos aún investigan cómo lo hace.",
+   "efectos": [
+    {
+     "tipo": "mirar",
+     "x": 0,
+     "y": 0
+    },
+    {
+     "tipo": "etiqueta",
+     "texto": "1 SOLO TIPO DE\nFOTORRECEPTOR",
+     "ancla": "ojo_der",
+     "pos": [
+      840,
+      500
+     ],
+     "desde": "célula-0.2",
+     "hasta": "camuflaje"
+    },
+    {
+     "tipo": "gris",
+     "desde": "colores-0.4",
+     "hasta": "camuflaje"
+    },
+    {
+     "tipo": "camuflaje",
+     "colores": [
+      "#FF7F50",
+      "#3BB273",
+      "#E9C46A",
+      "#9B5DE5",
+      "#2EC4B6"
+     ],
+     "desde": "camuflaje"
+    },
+    {
+     "tipo": "etiqueta",
+     "texto": "¿CÓMO LO HACE?",
+     "pos": [
+      540,
+      1390
+     ],
+     "fondo": "#FFD23F",
+     "desde": "científicos"
+    }
+   ]
+  },
+  {
+   "titulo": "¿CUÁL ELIGES?",
+   "texto": "Si pudieras quedarte con uno de sus poderes, ¿cuál elegirías? Te leo en comentarios. ¡Y síguenos para más curiosidades!",
+   "efectos": [
+    {
+     "tipo": "encuesta",
+     "desde": 0
+    },
+    {
+     "tipo": "cierre",
+     "desde": "síguenos"
+    }
+   ]
+  }
+ ],
+ "encuesta": [
+  "3 corazones",
+  "Brazos que piensan",
+  "Saborear al tocar",
+  "Cuerpo sin huesos"
+ ],
+ "publicacion": {
+  "instagram": "Este bicho tiene 3 corazones, sangre azul… ¡y saborea con los brazos! 🐙🤯\n\nY eso no es lo más raro: no tiene huesos y casi no distingue colores, pero es un maestro del camuflaje.\n\n👇 Si pudieras quedarte con UNO de sus poderes, ¿cuál elegirías?\nA) 3 corazones\nB) Brazos que piensan\nC) Saborear al tocar\nD) Cuerpo sin huesos\n\nSíguenos para una curiosidad nueva cada día 🔔\n\n#curiosidades #sabiasque #pulpo #animales #ciencia",
+  "tiktok": "¿3 corazones Y sangre azul? 🐙🤯 ¿Con qué poder te quedas? 👇\n#curiosidades #sabiasque #pulpo #animales #datoscuriosos #aprendeentiktok",
+  "youtube_titulo": "El pulpo tiene 3 corazones y sangre azul 🐙 #shorts #curiosidades"
+ },
+ "fuentes": [
+  "Smithsonian Magazine — https://www.smithsonianmag.com/science-nature/ten-wild-facts-about-octopuses-they-have-three-hearts-big-brains-and-blue-blood-7625828/",
+  "Live Science — https://www.livescience.com/55478-octopus-facts.html",
+  "Harvard Gazette (Cell, 2020) — https://news.harvard.edu/gazette/story/2020/10/octopus-suction-cups-hold-its-taste-and-touch-sensors/",
+  "Scientific American — https://www.scientificamerican.com/article/octopuses-are-colorblind-heres-how-they-see-the-world/",
+  "National Aquarium — https://aqua.org/stories/2020-10-08-an-ode-to-the-octopus"
+ ],
+ "portada": {
+  "escena": 2,
+  "t": "oxígeno+0.5",
+  "linea1": "TIENE 3",
+  "linea2": "CORAZONES",
+  "color2": "#FF3B5C",
+  "banda": "¡Y SANGRE AZUL!",
+  "color_banda": "#3A86FF"
+ }
+}
