@@ -83,3 +83,11 @@ def test_portada_se_resuelve_a_tiempo_absoluto(tmp_path):
     esc = cfg["escenas"][1]
     assert esc["start"] < cfg["portada"]["T"] < esc["start"] + esc["dur"]
     assert cfg["portada"]["linea1"] == "A"
+
+
+def test_resuelve_campos_de_tiempo_secundarios(tmp_path):
+    cfg = _prep(tmp_path, [{"tipo": "comparacion", "desde": 0, "desde_der": "Dos"},
+                           {"tipo": "objeto", "desde": 0, "asustado": "Dos+0.2"}])
+    ef = cfg["escenas"][1]["efectos"]
+    assert isinstance(ef[0]["desde_der"], float) and isinstance(ef[1]["asustado"], float)
+    assert ef[1]["asustado"] == pytest.approx(ef[0]["desde_der"] + 0.2)

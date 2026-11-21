@@ -11,6 +11,7 @@ from motor.musica import musica
 
 COLA = 1.4          # segundos extra al final
 INICIO_DEFECTO = 0.3  # si una pista no aparece
+CAMPOS_TIEMPO = ("desde", "hasta", "desde_der", "asustado")  # campos de efectos que se dan como pista
 
 
 def norm(s: str) -> str:
@@ -79,7 +80,7 @@ def preparar(guion_path: str, salida_dir: str, synth=None) -> dict:
         efectos = []
         for ef in e.get("efectos", []):
             ef = dict(ef)
-            for campo in ("desde", "hasta"):
+            for campo in CAMPOS_TIEMPO:
                 if campo in ef:
                     ef[campo] = _resolver(ef[campo], idx, toks, tiempos, start)
             ef.setdefault("desde", 0.0)

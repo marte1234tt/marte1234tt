@@ -1,0 +1,35 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<style>html,body{margin:0;padding:0;background:#0B1320;overflow:hidden}svg{display:block}text{font-family:'Inter Display','Inter',sans-serif}</style>
+</head><body>
+<svg id="s" xmlns="http://www.w3.org/2000/svg" width="1080" height="1920" viewBox="0 0 1080 1920">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="40%" r="75%"><stop offset="0" stop-color="#18304F"/><stop offset="1" stop-color="#0B1320"/></radialGradient>
+    <radialGradient id="bodyGrad" cx="38%" cy="30%" r="80%"><stop id="bc1" offset="0"/><stop id="bc2" offset="1"/></radialGradient>
+    <linearGradient id="armGrad" x1="0" y1="0" x2="0" y2="1"><stop id="ac1" offset="0"/><stop id="ac2" offset="1"/></linearGradient>
+    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="7" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+    <filter id="soft" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="18"/></filter>
+    <clipPath id="cuerpoClip"><path id="cuerpoClipPath"/></clipPath>
+  </defs>
+  <rect width="1080" height="1920" fill="url(#bg)"/>
+  <rect id="tint" width="1080" height="1920" fill="#000" opacity="0"/>
+  <g id="fondoFx"></g>
+  <g id="bubbles"></g>
+  <g id="oct"></g>
+  <g id="overlay"></g>
+  <g id="marca"></g>
+  <g id="titleG"><text id="title" text-anchor="middle" font-weight="900" fill="#FFD23F" stroke="#0B1320" paint-order="stroke" stroke-linejoin="round"></text></g>
+</svg>
+<script src="base.js"></script>
+<script src="personaje.js"></script>
+<script src="efectos.js"></script>
+<script>
+  // carga el personaje (?personaje=pulpo) y, si existe, el js propio del tema (?js=ruta)
+  const q = new URLSearchParams(location.search);
+  const cargar = src => new Promise((ok, mal) => { const s = document.createElement('script'); s.src = src; s.onload = ok; s.onerror = () => mal(new Error('no se pudo cargar ' + src)); document.body.appendChild(s); });
+  window.LISTO = (async () => {
+    await cargar('../personajes/' + (q.get('personaje') || 'pulpo') + '.js');
+    if (q.get('js')) await cargar(q.get('js'));
+  })();
+</script>
+</body></html>
