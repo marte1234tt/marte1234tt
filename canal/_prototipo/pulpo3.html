@@ -1,0 +1,392 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<style>
+  html,body{margin:0;padding:0;background:#0B1320;overflow:hidden}
+  svg{display:block}
+  text{font-family:'Inter Display','Inter',sans-serif}
+</style></head>
+<body>
+<svg id="s" xmlns="http://www.w3.org/2000/svg" width="1080" height="1920" viewBox="0 0 1080 1920">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="40%" r="75%">
+      <stop offset="0" stop-color="#18304F"/><stop offset="1" stop-color="#0B1320"/>
+    </radialGradient>
+    <radialGradient id="bodyGrad" cx="38%" cy="30%" r="80%">
+      <stop id="bc1" offset="0" stop-color="#FF9EC0"/><stop id="bc2" offset="1" stop-color="#D9467F"/>
+    </radialGradient>
+    <linearGradient id="armGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop id="ac1" offset="0" stop-color="#F06A9C"/><stop id="ac2" offset="1" stop-color="#C93D74"/>
+    </linearGradient>
+    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="7" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="soft" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="18"/></filter>
+    <clipPath id="headClip"><path id="headClipPath"/></clipPath>
+  </defs>
+
+  <rect width="1080" height="1920" fill="url(#bg)"/>
+  <rect id="tint" width="1080" height="1920" fill="#FF7F50" opacity="0"/>
+  <g id="reef"></g>
+  <g id="bubbles"></g>
+
+  <!-- personaje -->
+  <g id="oct">
+    <ellipse id="shadow" cx="0" cy="420" rx="260" ry="34" fill="#000" opacity=".25" filter="url(#soft)"/>
+    <g id="arms"></g>
+    <g id="head">
+      <path id="headPath" fill="url(#bodyGrad)"/>
+      <g id="spots" fill="#C2386E" opacity=".35">
+        <circle cx="-120" cy="-260" r="18"/><circle cx="-60" cy="-320" r="11"/><circle cx="135" cy="-285" r="14"/>
+        <circle cx="160" cy="-200" r="9"/><circle cx="-165" cy="-180" r="10"/>
+      </g>
+      <ellipse cx="-95" cy="-290" rx="55" ry="32" fill="#fff" opacity=".28" transform="rotate(-25 -95 -290)"/>
+      <g id="xray" clip-path="url(#headClip)" opacity="0">
+        <rect x="-300" y="-450" width="600" height="560" fill="#2A0F3D" opacity=".55"/>
+        <g id="vessels" fill="none" stroke="#5AA2FF" stroke-width="9" stroke-linecap="round" opacity="0">
+          <path d="M0,-300 C -60,-295 -100,-280 -120,-262"/><path d="M0,-300 C 60,-295 100,-280 120,-262"/>
+          <path d="M0,-300 C 0,-180 -40,-60 -150,40"/><path d="M0,-300 C 0,-180 40,-60 150,40"/>
+          <path d="M0,-300 C -10,-150 -10,-50 -50,60"/><path d="M0,-300 C 10,-150 10,-50 50,60"/>
+        </g>
+        <g id="brain" opacity="0">
+          <path d="M-55,-300 C -80,-340 -20,-370 0,-345 C 20,-370 80,-340 55,-300 C 75,-270 30,-245 0,-262 C -30,-245 -75,-270 -55,-300 Z" fill="#FFB3C7" stroke="#fff" stroke-width="4"/>
+        </g>
+        <g id="hearts"></g>
+      </g>
+      <!-- ojos -->
+      <g id="eyeL" transform="translate(-80,-120)">
+        <g class="lid"><ellipse rx="56" ry="64" fill="#fff"/><circle class="pupil" r="31" fill="#1B1B2F"/><circle class="spark" r="10" fill="#fff"/></g>
+      </g>
+      <g id="eyeR" transform="translate(80,-120)">
+        <g class="lid"><ellipse rx="56" ry="64" fill="#fff"/><circle class="pupil" r="31" fill="#1B1B2F"/><circle class="spark" r="10" fill="#fff"/></g>
+      </g>
+      <ellipse cx="-150" cy="-45" rx="32" ry="18" fill="#FF5C8A" opacity=".55"/>
+      <ellipse cx="150" cy="-45" rx="32" ry="18" fill="#FF5C8A" opacity=".55"/>
+      <path id="mouth" d="M-30,-30 Q0,0 30,-30" fill="none" stroke="#7A1F45" stroke-width="9" stroke-linecap="round"/>
+      <g id="antennas">
+        <g id="antL"><line x1="-70" y1="-360" x2="-110" y2="-470" stroke="#7CFC9A" stroke-width="10" stroke-linecap="round"/><circle cx="-110" cy="-478" r="22" fill="#7CFC9A"/></g>
+        <g id="antR"><line x1="70" y1="-360" x2="110" y2="-470" stroke="#7CFC9A" stroke-width="10" stroke-linecap="round"/><circle cx="110" cy="-478" r="22" fill="#7CFC9A"/></g>
+      </g>
+    </g>
+  </g>
+
+  <g id="overlay"></g>
+
+  <!-- capa de marca -->
+  <rect x="0" y="0" width="1080" height="14" fill="#fff" opacity=".15"/>
+  <rect id="prog" x="0" y="0" width="0" height="14" fill="#FFD23F"/>
+  <g transform="translate(540,138)">
+    <rect x="-185" y="-32" width="370" height="64" rx="32" fill="#FFD23F"/>
+    <text y="14" text-anchor="middle" font-size="38" font-weight="900" fill="#0B1320">¿SABÍAS QUE…?</text>
+  </g>
+  <g id="titleG"><text id="title" x="0" y="0" text-anchor="middle" font-size="96" font-weight="900" fill="#FFD23F"
+     stroke="#0B1320" stroke-width="14" paint-order="stroke" stroke-linejoin="round"></text></g>
+</svg>
+
+<script>
+const NS = "http://www.w3.org/2000/svg";
+const $ = id => document.getElementById(id);
+const el = (tag, attrs = {}, parent) => { const e = document.createElementNS(NS, tag); for (const k in attrs) e.setAttribute(k, attrs[k]); if (parent) parent.appendChild(e); return e; };
+const clamp = (x, a = 0, b = 1) => Math.max(a, Math.min(b, x));
+const lerp = (a, b, k) => a + (b - a) * k;
+const easeOut = x => 1 - Math.pow(1 - clamp(x), 3);
+const easeInOut = x => { x = clamp(x); return x < .5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2; };
+const easeBack = x => { x = clamp(x); const c1 = 1.70158, c3 = c1 + 1; return 1 + c3 * Math.pow(x - 1, 3) + c1 * Math.pow(x - 1, 2); };
+// entra en a, sale en b (duración de transición d)
+const win = (t, a, b = 1e9, d = .35) => clamp((t - a) / d) * clamp((b - t) / d);
+const hex = h => [1, 3, 5].map(i => parseInt(h.slice(i, i + 2), 16));
+const mix = (c1, c2, k) => { const a = hex(c1), b = hex(c2); return "#" + a.map((v, i) => Math.round(lerp(v, b[i], k)).toString(16).padStart(2, "0")).join(""); };
+
+const HEAD_D = "M -215,-60 C -240,-300 -130,-385 0,-385 C 130,-385 240,-300 215,-60 C 200,20 120,62 0,62 C -120,62 -200,20 -215,-60 Z";
+$("headPath").setAttribute("d", HEAD_D); $("headClipPath").setAttribute("d", HEAD_D);
+
+let CFG = null;
+function init(cfg) {
+  CFG = cfg;
+  // burbujas
+  const B = $("bubbles"); window.BUB = [];
+  for (let i = 0; i < 22; i++) { const r = 6 + (i * 37 % 20); BUB.push({ x: (i * 197) % 1080, y: (i * 613) % 1920, r, v: 25 + (i * 13 % 45), c: el("circle", { r, fill: "none", stroke: "#fff", "stroke-opacity": .14, "stroke-width": 3 }, B) }); }
+  // brazos
+  const A = $("arms"); window.ARMS = [];
+  for (let i = 0; i < 8; i++) {
+    const g = el("g", {}, A);
+    const body = el("path", { fill: "url(#armGrad)" }, g);
+    const blood = el("path", { fill: "none", stroke: "#5AA2FF", "stroke-width": 8, "stroke-linecap": "round", "stroke-dasharray": "22 26", opacity: 0 }, g);
+    const suck = el("g", {}, g); const sc = [];
+    for (let k = 0; k < 9; k++) sc.push(el("circle", { fill: "#FFD3E2", stroke: "#E2789F", "stroke-width": 2 }, suck));
+    const neu = el("g", { filter: "url(#glow)" }, g); const nc = [];
+    for (let k = 0; k < 4; k++) nc.push(el("circle", { r: 9, fill: "#FFE66D" }, neu));
+    ARMS.push({ g, body, blood, sc, nc, neu, target: null, tw: 0 });
+  }
+  // corazones (en coordenadas del pulpo)
+  const H = $("hearts"); window.HEARTS = [[-120, -262, .8], [120, -262, .8], [0, -300, 1.15]].map(([x, y, s]) => {
+    const g = el("g", { transform: `translate(${x},${y})` }, H);
+    const p = el("path", { d: heartD(0, 0, 3.1 * s), fill: "#FF3B5C", stroke: "#fff", "stroke-width": 5, filter: "url(#glow)" }, g);
+    return { g, x, y, s };
+  });
+}
+function bob0(T) { return 10 * Math.sin(T * 1.6); }
+function heartD(cx, cy, s) { let d = ""; for (let i = 0; i <= 40; i++) { const t = i / 40 * 2 * Math.PI; const x = 16 * Math.pow(Math.sin(t), 3), y = 13 * Math.cos(t) - 5 * Math.cos(2 * t) - 2 * Math.cos(3 * t) - Math.cos(4 * t); d += (i ? "L" : "M") + (cx + x * s).toFixed(1) + "," + (cy - y * s).toFixed(1); } return d + "Z"; }
+
+// ---------------------------------------------------------------- brazos
+function armPoints(i, t, P) {
+  const N = 24, L = 330, seg = L / N;
+  const rootX = -165 + i * 47, rootY = 25;
+  const base = (90 + (3.5 - i) * 11.5) * Math.PI / 180;
+  const ph = i * 1.37, side = i < 4 ? 1 : -1;
+  let x = rootX, y = rootY; const pts = [[x, y]];
+  for (let k = 1; k <= N; k++) {
+    const s = k / N;
+    const th = base + P.wave * 0.55 * s * Math.sin(t * 2.1 + ph - 3.2 * s) + side * 0.9 * s * s * P.curl;
+    x += Math.cos(th) * seg; y += Math.sin(th) * seg; pts.push([x, y]);
+  }
+  const A = ARMS[i];
+  if (A.target && A.tw > 0) { // apunta/alcanza un objetivo
+    const [tx, ty] = A.target, w = A.tw;
+    for (let k = 1; k <= N; k++) {
+      const s = k / N, bx = lerp(rootX, tx, s), by = lerp(rootY, ty, s) - Math.sin(s * Math.PI) * 60;
+      pts[k][0] = lerp(pts[k][0], bx, w * Math.pow(s, .6)); pts[k][1] = lerp(pts[k][1], by, w * Math.pow(s, .6));
+    }
+  }
+  return pts;
+}
+function drawArm(i, t, P) {
+  const A = ARMS[i], pts = armPoints(i, t, P), N = pts.length - 1;
+  const W = s => 46 * Math.pow(1 - s, .85) + 7;
+  const L = [], R = [];
+  for (let k = 0; k <= N; k++) {
+    const a = pts[Math.max(0, k - 1)], b = pts[Math.min(N, k + 1)];
+    let nx = -(b[1] - a[1]), ny = b[0] - a[0]; const l = Math.hypot(nx, ny) || 1; nx /= l; ny /= l;
+    const w = W(k / N) / 2; L.push([pts[k][0] + nx * w, pts[k][1] + ny * w]); R.push([pts[k][0] - nx * w, pts[k][1] - ny * w]);
+    pts[k].n = [nx, ny];
+  }
+  let d = "M" + L.map(p => p[0].toFixed(1) + "," + p[1].toFixed(1)).join("L");
+  const tip = pts[N]; d += `A 4 4 0 0 1 ${R[N][0].toFixed(1)},${R[N][1].toFixed(1)}`;
+  d += "L" + R.reverse().map(p => p[0].toFixed(1) + "," + p[1].toFixed(1)).join("L") + "Z";
+  A.body.setAttribute("d", d);
+  A.blood.setAttribute("d", "M" + pts.slice(1, N - 2).map(p => p[0].toFixed(1) + "," + p[1].toFixed(1)).join("L"));
+  A.blood.setAttribute("opacity", P.blood); A.blood.setAttribute("stroke-dashoffset", (-t * 90).toFixed(1));
+  // ventosas en la cara interior
+  const side = i < 4 ? -1 : 1;
+  A.sc.forEach((c, j) => {
+    const k = 4 + j * 2, p = pts[k], w = W(k / N);
+    c.setAttribute("cx", (p[0] + p.n[0] * w * .22 * side).toFixed(1)); c.setAttribute("cy", (p[1] + p.n[1] * w * .22 * side).toFixed(1));
+    c.setAttribute("r", (w * .2).toFixed(1));
+    const g = P.taste * (A.tasting || 0) * (0.6 + 0.4 * Math.sin(t * 12 - j));
+    c.setAttribute("fill", g > 0.05 ? mix("#FFD3E2", "#FFE66D", clamp(g)) : "#FFD3E2");
+    c.setAttribute("filter", g > 0.3 ? "url(#glow)" : "");
+  });
+  A.nc.forEach((c, j) => {
+    const s = ((j / 4 + t * 0.35 + i * 0.13) % 1) * 0.85 + 0.08, k = Math.round(s * N), p = pts[k];
+    c.setAttribute("cx", p[0].toFixed(1)); c.setAttribute("cy", p[1].toFixed(1));
+    c.setAttribute("opacity", (P.neuro * (0.6 + 0.4 * Math.sin(t * 6 + j * 2 + i))).toFixed(2));
+  });
+  return pts;
+}
+
+// ---------------------------------------------------------------- overlay helpers
+let OV;
+function label(text, x, y, opts = {}) {
+  const a = opts.alpha ?? 1; if (a <= 0.01) return;
+  const fs = opts.size || 46, s = opts.scale ?? 1;
+  const g = el("g", { transform: `translate(${x},${y}) scale(${s})`, opacity: a }, OV);
+  const t = el("text", { "text-anchor": "middle", "font-size": fs, "font-weight": 900, fill: opts.color || "#0B1320", y: fs * .35 }, g);
+  t.textContent = text;
+  const w = t.getComputedTextLength() + fs * 1.0, h = fs * 1.5;
+  const r = el("rect", { x: -w / 2, y: -h / 2, width: w, height: h, rx: h / 2, fill: opts.bg || "#fff" }, g);
+  g.insertBefore(r, t);
+  return g;
+}
+function leader(x1, y1, x2, y2, a, color = "#fff") {
+  if (a <= 0.01) return;
+  const k = easeOut(a);
+  el("line", { x1, y1, x2: lerp(x1, x2, k), y2: lerp(y1, y2, k), stroke: color, "stroke-width": 5, "stroke-dasharray": "2 12", "stroke-linecap": "round", opacity: a }, OV);
+  el("circle", { cx: x1, cy: y1, r: 10, fill: color, opacity: a }, OV);
+}
+function drop(x, y, r, color, a, sc = 1) {
+  if (a <= 0.01) return;
+  const g = el("g", { transform: `translate(${x},${y}) scale(${sc})`, opacity: a }, OV);
+  el("path", { d: `M0,${-r * 2.1} C ${r * .6},${-r * 1.2} ${r},${-r * .6} ${r},0 A ${r} ${r} 0 0 1 ${-r},0 C ${-r},${-r * .6} ${-r * .6},${-r * 1.2} 0,${-r * 2.1} Z`, fill: color, stroke: "#fff", "stroke-width": 5 }, g);
+  return g;
+}
+function crab(x, y, a, scared) {
+  if (a <= 0.01) return;
+  const g = el("g", { transform: `translate(${x},${y})`, opacity: a }, OV);
+  for (const sx of [-1, 1]) {
+    for (let k = 0; k < 3; k++) el("line", { x1: sx * 40, y1: 10 + k * 14, x2: sx * 85, y2: 30 + k * 18, stroke: "#E85D3A", "stroke-width": 9, "stroke-linecap": "round" }, g);
+    el("circle", { cx: sx * 78, cy: -38, r: 26, fill: "#FF6B42" }, g);
+    el("path", { d: `M${sx * 70},-50 L${sx * 100},-62 L${sx * 92},-30 Z`, fill: "#0B1320" }, g);
+    el("line", { x1: sx * 20, y1: -30, x2: sx * 24, y2: -70, stroke: "#E85D3A", "stroke-width": 7 }, g);
+    el("circle", { cx: sx * 24, cy: -78, r: scared ? 15 : 12, fill: "#fff" }, g);
+    el("circle", { cx: sx * 24, cy: -78, r: scared ? 5 : 7, fill: "#111" }, g);
+  }
+  el("ellipse", { rx: 62, ry: 42, fill: "#FF6B42" }, g);
+  el("path", { d: scared ? "M-14,8 Q0,-4 14,8" : "M-14,2 Q0,14 14,2", fill: "none", stroke: "#7A1F10", "stroke-width": 6, "stroke-linecap": "round" }, g);
+}
+function bubbleSpeech(text, x, y, a) {
+  if (a <= 0.01) return;
+  const g = el("g", { transform: `translate(${x},${y}) scale(${lerp(.6, 1, easeBack(a))})`, opacity: clamp(a * 2) }, OV);
+  const t = el("text", { "text-anchor": "middle", "font-size": 48, "font-weight": 900, fill: "#0B1320", y: 17 }, g); t.textContent = text;
+  const w = t.getComputedTextLength() + 60;
+  g.insertBefore(el("path", { d: `M${-w / 2 + 30},-45 H${w / 2 - 30} Q${w / 2},-45 ${w / 2},-15 V15 Q${w / 2},45 ${w / 2 - 30},45 H-10 L-50,85 L-40,45 H${-w / 2 + 30} Q${-w / 2},45 ${-w / 2},15 V-15 Q${-w / 2},-45 ${-w / 2 + 30},-45 Z`, fill: "#fff" }), t);
+}
+
+// ---------------------------------------------------------------- render
+function render(T) {
+  const S = CFG.escenas; let si = 0; while (si < S.length - 1 && T >= S[si + 1].start) si++;
+  const sc = S[si], t = T - sc.start, cue = k => sc.cues[k] ?? 1e9;
+  OV = $("overlay"); OV.innerHTML = "";
+  $("prog").setAttribute("width", (1080 * T / CFG.total).toFixed(1));
+  // burbujas
+  BUB.forEach(b => { b.c.setAttribute("cx", (b.x + 12 * Math.sin(T * 1.3 + b.y)).toFixed(1)); b.c.setAttribute("cy", (((b.y - b.v * T) % 2000 + 2000) % 2000 - 40).toFixed(1)); });
+
+  // parámetros por defecto
+  const P = { sx: 1, sy: 1, wave: 1, curl: 1, xray: 0, blood: 0, neuro: 0, taste: 0, brain: 0, lookX: Math.sin(T * .7) * .4, lookY: .1, x: 540, y: 960, s: .95, color: null, hearts: [0, 0, 0], tint: 0 };
+  ARMS.forEach(A => { A.target = null; A.tw = 0; A.tasting = 0; });
+  let ant = 0;
+
+  // título de la escena
+  const tt = $("title"); tt.textContent = sc.titulo;
+  const ts = lerp(.5, 1, easeBack(t / .45)); $("titleG").setAttribute("transform", `translate(540,330) scale(${ts})`);
+  $("titleG").setAttribute("opacity", clamp(t / .15));
+  tt.setAttribute("font-size", sc.titulo.length > 16 ? 76 : 96);
+
+  if (sc.tipo === "intro") {
+    const k = easeBack(t / .8); P.y = lerp(1900, 960, k);
+    ant = 1 - easeOut((t - (cue("alien") + .45)) / .5);
+    P.lookX = Math.sin(t * 2.2) * .8;
+    // iconos que aparecen al nombrarlos
+    const ic = [[cue("corazones"), 200, 620], [cue("azul"), 880, 620], [cue("brazos"), 880, 1180]];
+    const a1 = win(t, ic[0][0]); for (let j = 0; j < 3; j++) { const g = el("g", { transform: `translate(${150 + j * 55},${560 + (j % 2) * 30}) scale(${easeBack((t - ic[0][0] - j * .12) / .4) * 1.3})`, opacity: a1 }, OV); el("path", { d: heartD(0, 0, 2.2), fill: "#FF3B5C", stroke: "#fff", "stroke-width": 4 }, g); }
+    drop(900, 640, 42, "#3A86FF", win(t, ic[1][0]), easeBack((t - ic[1][0]) / .4));
+    if (t > ic[2][0]) { ARMS[7].target = [330, 160]; ARMS[7].tw = .7 * easeInOut((t - ic[2][0]) / .5) * (1 - easeInOut((t - ic[2][0] - 1.6) / .5)); }
+    label("¡NO!", 540, 520, { alpha: win(t, (cue("alien") + .45) + .2), scale: easeBack((t - (cue("alien") + .45) - .2) / .4), bg: "#7CFC9A" });
+  }
+  if (sc.tipo === "corazones") {
+    label("EL PULPO", 540, 1360, { alpha: win(t, cue("pulpo"), cue("tres")), size: 54, bg: "#FFD23F" });
+    P.xray = easeOut((t - cue("tres") + .3) / .6);
+    P.hearts = [easeBack((t - cue("Dos")) / .5), easeBack((t - cue("Dos") - .25) / .5), easeBack((t - cue("tercero")) / .5)];
+    if (t < cue("Dos")) P.hearts[2] = 0;
+    const toG = (hx, hy) => [P.x + hx * P.s, P.y + hy * P.s];
+    const [l1x, l1y] = toG(-120, -262), [l2x, l2y] = toG(120, -262), [l3x, l3y] = toG(0, -300);
+    const aB = win(t, cue("branquias") - .3), aC = win(t, cue("tercero") + .1);
+    leader(l1x, l1y, 170, 520, aB); leader(l2x, l2y, 910, 520, aB); leader(l3x, l3y, 540, 470, aC, "#FFD23F");
+    label("BRANQUIA", 170, 500, { alpha: aB, size: 40 }); label("BRANQUIA", 910, 500, { alpha: aB, size: 40 });
+    label("CUERPO", 540, 450, { alpha: aC, size: 46, bg: "#FFD23F" });
+    P.lookY = -.6; P.lookX = 0;
+  }
+  if (sc.tipo === "sangre") {
+    P.xray = 1 - .4 * easeOut((t - cue("hemocianina")) / .6); P.hearts = [1, 1, 1];
+    P.blood = easeOut((t - cue("azul") + .2) / .6);
+    const aF = win(t, cue("hierro"), cue("oxígeno") + 1.2), aC = win(t, cue("cobre"), cue("oxígeno") + 1.2);
+    drop(170, 690, 60, "#E63946", aF, easeBack((t - cue("hierro")) / .45)); label("HIERRO · Fe", 170, 800, { alpha: aF, size: 38 }); label("TÚ", 170, 560, { alpha: aF, size: 38, bg: "#E63946", color: "#fff" });
+    drop(910, 690, 60, "#3A86FF", aC, easeBack((t - cue("cobre")) / .45)); label("COBRE · Cu", 910, 800, { alpha: aC, size: 38 }); label("PULPO", 910, 560, { alpha: aC, size: 38, bg: "#3A86FF", color: "#fff" });
+    label("HEMOCIANINA", 540, 1360, { alpha: win(t, cue("hemocianina"), cue("oxígeno") + 2.5), size: 48, bg: "#3A86FF", color: "#fff" });
+    // pulso de corazones más rápido al final
+    P.beat = t > cue("oxígeno") ? 2 : 1;
+  }
+  if (sc.tipo === "neuronas") {
+    P.xray = clamp(.6 - t / .6) + .8 * easeOut((t - cue("cabeza") + .2) / .5);
+    P.hearts = [0, 0, 0];
+    P.brain = easeOut((t - cue("cabeza") + .2) / .5);
+    P.neuro = easeOut((t - cue("neuronas")) / .6);
+    P.wave = 1 + .8 * easeOut((t - cue("explora")) / .6);
+    const aH = win(t, cue("cabeza") - .1);
+    const bx = P.x, by = P.y - 330 * P.s;
+    label("1/3 · CABEZA", 540, 500, { alpha: aH, size: 44 }); leader(bx, by, 540, 525, aH);
+    const aA = win(t, cue("ocho") - .2);
+    label("2/3 · BRAZOS", 540, 1380, { alpha: aA, size: 54, bg: "#FFE66D", scale: easeBack((t - cue("ocho") + .2) / .45) });
+  }
+  if (sc.tipo === "sabor") {
+    const cx = 900, cy = 1230;
+    crab(lerp(1250, cx, easeOut((t - .1) / .8)), cy, 1, t > cue("tocan"));
+    const reach = easeInOut((t - cue("ventosas")) / 1.0) * (1 - easeInOut((t - cue("comida") - 1.2) / .6));
+    ARMS[7].target = [(cx - 70 - P.x) / P.s, (cy - 30 - P.y) / P.s]; ARMS[7].tw = reach;
+    ARMS[7].tasting = 1; P.taste = easeOut((t - cue("saborean")) / .4);
+    ARMS.forEach((A, i) => { if (i !== 7) A.tasting = .35; });
+    P.lookX = .8; P.lookY = .7;
+    bubbleSpeech("¡Mmm… cangrejo!", 330, 560, clamp((t - cue("tocan")) / .4) * clamp((cue("comida") + 2 - t) / .3));
+    label("SABOR + TACTO", 540, 1390, { alpha: win(t, cue("comida")), size: 46, bg: "#FFE66D" });
+  }
+  if (sc.tipo === "huesos") {
+    P.s = .62; P.y = 880;
+    const t0 = t - cue("colarse") + .3;
+    P.x = t0 < 1.2 ? lerp(250, 540, easeInOut(t0 / 1.2)) : t0 < 2.0 ? 540 : lerp(540, 840, easeInOut((t0 - 2.0) / 1.0));
+    if (t0 >= 1.2 && t0 < 2.0) P.x += 6 * Math.sin(t0 * 40);
+    const dist = Math.abs(P.x - 540);
+    P.sy = lerp(.28, 1, clamp((dist - 60) / 220)); P.sx = 1 + (1 - P.sy) * .25;
+    P.lookX = 1; P.lookY = 0; P.wave = 1.4;
+    // pared de roca con una rendija
+    const a = clamp(t / .4);
+    for (const [y0, y1] of [[440, 835], [925, 1340]]) {
+      el("rect", { x: 495, y: y0, width: 90, height: y1 - y0, rx: 26, fill: "#5B6C7F", opacity: a }, OV);
+      for (let j = 0; j < 5; j++) el("circle", { cx: 520 + (j % 2) * 38, cy: y0 + 40 + j * (y1 - y0 - 80) / 4, r: 10, fill: "#46566A", opacity: a }, OV);
+    }
+    const aN = win(t, cue("huesos") - .1, cue("colarse") + .6);
+    label("0 HUESOS", 540, 1410, { alpha: aN, size: 54, bg: "#FFD23F", scale: easeBack((t - cue("huesos") + .1) / .4) });
+    const aP = win(t, cue("pico") - .1);
+    const mx = P.x, my = P.y + bob0(T) - 30 * P.s * P.sy;
+    leader(mx, my, 840, 560, aP, "#FFD23F"); label("PICO: LO ÚNICO DURO", 760, 520, { alpha: aP, size: 40 });
+  }
+  if (sc.tipo === "camuflaje") {
+    P.lookX = 0; P.lookY = 0;
+    const aE = win(t, cue("célula") - .2, cue("camuflaje"));
+    const [ex, ey] = [P.x + 80 * P.s, P.y - 120 * P.s];
+    leader(ex + 40, ey - 30, 860, 520, aE, "#FFD23F"); label("1 SOLO TIPO DE", 840, 470, { alpha: aE, size: 36 }); label("FOTORRECEPTOR", 840, 535, { alpha: aE, size: 36 });
+    // "no ve colores": el fondo pierde color
+    P.gray = win(t, cue("colores") - .4, cue("camuflaje"), .5);
+    // camuflaje: el fondo y el pulpo cambian de color juntos
+    const cols = ["#FF7F50", "#3BB273", "#E9C46A", "#9B5DE5", "#2EC4B6"];
+    const k = t - cue("camuflaje");
+    if (k > 0) { const f = k / 1.1, i0 = Math.floor(f) % cols.length, i1 = (i0 + 1) % cols.length, m = easeInOut(f % 1); P.color = mix(cols[i0], cols[i1], m); P.tint = .38 * clamp(k / .5); }
+    label("¿CÓMO LO HACE?", 540, 1390, { alpha: win(t, cue("científicos")), size: 52, bg: "#FFD23F", scale: easeBack((t - cue("científicos")) / .45) });
+  }
+  if (sc.tipo === "encuesta") {
+    const k = easeInOut(t / .7); P.x = 540; P.y = lerp(960, 690, k); P.s = lerp(.95, .48, k);
+    const ops = CFG.extra.opciones, L = "ABCD";
+    ops.forEach((o, j) => {
+      const a = easeOut((t - .5 - j * .25) / .45); if (a <= 0) return;
+      const y = 930 + j * 120, x = lerp(1400, 540, a);
+      const g = el("g", { transform: `translate(${x},${y})` }, OV);
+      el("rect", { x: -420, y: -48, width: 840, height: 96, rx: 48, fill: "#fff", "fill-opacity": .12, stroke: "#fff", "stroke-opacity": .4, "stroke-width": 3 }, g);
+      el("circle", { cx: -370, cy: 0, r: 34, fill: "#FFD23F" }, g);
+      const lt = el("text", { x: -370, y: 15, "text-anchor": "middle", "font-size": 40, "font-weight": 900, fill: "#0B1320" }, g); lt.textContent = L[j];
+      const ot = el("text", { x: -315, y: 16, "font-size": 46, "font-weight": 700, fill: "#fff" }, g); ot.textContent = o;
+    });
+    const pj = Math.floor(clamp((t - 2.2) / .9, 0, 3.99)); // señala cada opción
+    if (t > 2) { ARMS[7].target = [(1000 - P.x) / P.s, (930 + pj * 120 - P.y) / P.s]; ARMS[7].tw = .6; }
+    P.lookX = .7; P.lookY = .8;
+  }
+
+  // ---- aplica estado del personaje
+  const bob = bob0(T), breath = 1 + .02 * Math.sin(T * 2.3);
+  $("oct").setAttribute("transform", `translate(${P.x},${P.y + bob}) scale(${P.s * P.sx},${P.s * P.sy})`);
+  $("head").setAttribute("transform", `translate(0,62) scale(${1 / breath * 1.0},${breath}) translate(0,-62)`);
+  ARMS.forEach((A, i) => drawArm(i, T, P));
+  // colores del cuerpo
+  const c1 = P.color ? mix(P.color, "#ffffff", .3) : "#FF9EC0", c2 = P.color || "#D9467F";
+  $("bc1").setAttribute("stop-color", c1); $("bc2").setAttribute("stop-color", c2);
+  $("ac1").setAttribute("stop-color", P.color ? mix(P.color, "#ffffff", .15) : "#F06A9C"); $("ac2").setAttribute("stop-color", P.color ? mix(P.color, "#000000", .15) : "#C93D74");
+  $("tint").setAttribute("fill", P.color || "#000"); $("tint").setAttribute("opacity", P.tint);
+  document.getElementById("s").style.filter = P.gray ? `grayscale(${P.gray})` : "";
+  $("headPath").setAttribute("fill-opacity", 1 - .35 * P.xray);
+  $("xray").setAttribute("opacity", P.xray);
+  $("vessels").setAttribute("opacity", P.blood);
+  [...$("vessels").children].forEach(p => { p.setAttribute("stroke-dasharray", "18 18"); p.setAttribute("stroke-dashoffset", (-T * 70).toFixed(1)); });
+  $("brain").setAttribute("opacity", P.brain);
+  const beat = P.beat || 1;
+  HEARTS.forEach((h, j) => { const pulse = 1 + .13 * Math.pow(Math.max(0, Math.sin(T * 7 * beat + j * .6)), 6); const sc = clamp(P.hearts[j], 0, 1.4) * pulse; h.g.setAttribute("transform", `translate(${h.x},${h.y}) scale(${sc})`); });
+  // ojos: parpadeo y mirada
+  const bl = (T % 3.3) < .13 ? .1 : 1;
+  for (const id of ["eyeL", "eyeR"]) {
+    const e = $(id); e.querySelector(".lid").setAttribute("transform", `scale(1,${bl})`);
+    e.querySelector(".pupil").setAttribute("cx", P.lookX * 16); e.querySelector(".pupil").setAttribute("cy", P.lookY * 18);
+    e.querySelector(".spark").setAttribute("cx", P.lookX * 16 + 10); e.querySelector(".spark").setAttribute("cy", P.lookY * 18 - 12);
+  }
+  // antenas (gag de la intro)
+  const ag = $("antennas"); ag.setAttribute("opacity", ant);
+  ag.setAttribute("transform", `translate(0,${-(1 - ant) * 160}) rotate(${Math.sin(T * 9) * 6 * ant})`);
+  $("mouth").setAttribute("d", P.taste > .5 ? "M-34,-34 Q0,10 34,-34 Q0,-10 -34,-34" : "M-30,-30 Q0,0 30,-30");
+}
+window.init = init; window.render = render;
+</script>
+</body></html>

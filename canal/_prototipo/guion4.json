@@ -1,0 +1,113 @@
+{
+  "tema": "El pulpo",
+  "voz_edge": {
+    "voz": "es-ES-AlvaroNeural",
+    "velocidad": 10,
+    "pausa": 0.3
+  },
+  "voz_gemini": {
+    "voz": "Laomedeia",
+    "estilo": "Lee esto en español de España como una creadora de TikTok de curiosidades: con mucha energía, ritmo rápido, sorprendida y divertida, sin pausas largas, enfatizando las palabras clave."
+  },
+  "escenas": [
+    {
+      "anim": "intro",
+      "titulo": "¿EXTRATERRESTRE?",
+      "pistas": [
+        "corazones",
+        "azul",
+        "brazos",
+        "alien"
+      ],
+      "texto": "Este bicho tiene tres corazones. Sangre azul. ¡Y saborea con los brazos! ¿Un alien? Nooo."
+    },
+    {
+      "anim": "corazones",
+      "titulo": "3 CORAZONES",
+      "pistas": [
+        "pulpo",
+        "tres",
+        "Dos",
+        "branquias",
+        "tercero"
+      ],
+      "texto": "Es el pulpo. Y lo de los corazones va en serio: tiene tres. Dos bombean sangre a las branquias, y el tercero, a todo el cuerpo."
+    },
+    {
+      "anim": "sangre",
+      "titulo": "SANGRE AZUL",
+      "pistas": [
+        "azul",
+        "hierro",
+        "cobre",
+        "hemocianina",
+        "oxígeno"
+      ],
+      "texto": "¿Y por qué tantos? Porque su sangre es azul. Nosotros usamos hierro, él usa cobre: una proteína llamada hemocianina. Transporta peor el oxígeno. ¡Así que toca bombear el doble!"
+    },
+    {
+      "anim": "neuronas",
+      "titulo": "¿CEREBRO EN LOS BRAZOS?",
+      "pistas": [
+        "brazos",
+        "neuronas",
+        "cabeza",
+        "ocho",
+        "explora"
+      ],
+      "texto": "Pero lo más loco está en sus brazos. Dos tercios de sus neuronas no están en la cabeza. ¡Están repartidas por los ocho brazos! Cada brazo explora y reacciona casi por su cuenta."
+    },
+    {
+      "anim": "sabor",
+      "titulo": "SABOREA AL TOCAR",
+      "pistas": [
+        "ventosas",
+        "saborean",
+        "tocan",
+        "comida"
+      ],
+      "texto": "Y sus ventosas tienen receptores únicos: saborean todo lo que tocan. Literalmente, prueba la comida antes de llevársela a la boca."
+    },
+    {
+      "anim": "huesos",
+      "titulo": "SIN HUESOS",
+      "pistas": [
+        "huesos",
+        "colarse",
+        "pico",
+        "duro"
+      ],
+      "texto": "¿Y sabes qué más? No tiene huesos. Puede colarse por cualquier agujero por el que le quepa el pico, que es lo único duro de su cuerpo."
+    },
+    {
+      "anim": "camuflaje",
+      "titulo": "¿DALTÓNICO?",
+      "pistas": [
+        "ojos",
+        "célula",
+        "colores",
+        "camuflaje",
+        "científicos"
+      ],
+      "texto": "Y el remate: sus ojos solo tienen un tipo de célula para captar la luz. En teoría, no distingue colores. ¡Y aun así es un maestro del camuflaje! Los científicos aún investigan cómo lo hace."
+    },
+    {
+      "anim": "encuesta",
+      "titulo": "¿CUÁL ELIGES?",
+      "pistas": [
+        "poderes",
+        "elegirías",
+        "comentarios"
+      ],
+      "texto": "Si pudieras quedarte con uno de sus poderes, ¿cuál elegirías? Te leo en comentarios. ¡Y sígueme para más curiosidades!"
+    }
+  ],
+  "extra": {
+    "opciones": [
+      "3 corazones",
+      "Brazos que piensan",
+      "Saborear al tocar",
+      "Cuerpo sin huesos"
+    ]
+  }
+}

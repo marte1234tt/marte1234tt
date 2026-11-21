@@ -1,0 +1,8 @@
+{
+  "cuenta": "@nolosabias672",
+  "etiqueta": "¿NO LO SABÍAS?",
+  "voz": {"nombre": "es-ES-AlvaroNeural", "velocidad": 10, "pausa": 0.3},
+  "duracion": {"min": 61, "max": 80},
+  "drive_carpeta": "¿No lo sabías?",
+  "categorias": {"historia": 3, "ciencia_rara": 3, "cuerpo_humano": 1, "espacio": 1, "objetos": 1, "comida": 1, "animales": 1}
+}

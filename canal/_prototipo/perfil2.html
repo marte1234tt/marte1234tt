@@ -1,0 +1,46 @@
+<!doctype html><html><head><meta charset="utf-8"><style>html,body{margin:0}</style></head>
+<body>
+<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="1080" viewBox="0 0 1080 1080">
+  <defs>
+    <radialGradient id="bgN" cx="50%" cy="42%" r="75%"><stop offset="0" stop-color="#21416B"/><stop offset="1" stop-color="#0B1320"/></radialGradient>
+    <radialGradient id="glow" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#FFD23F" stop-opacity=".55"/><stop offset="1" stop-color="#FFD23F" stop-opacity="0"/></radialGradient>
+    <radialGradient id="bulb" cx="40%" cy="35%" r="70%"><stop offset="0" stop-color="#FFF3B0"/><stop offset=".55" stop-color="#FFD23F"/><stop offset="1" stop-color="#F4A900"/></radialGradient>
+    <linearGradient id="qg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFE27A"/><stop offset="1" stop-color="#FFB800"/></linearGradient>
+  </defs>
+  <rect width="1080" height="1080" fill="url(#bgN)"/>
+  <g id="rays" opacity=".07"></g>
+  <circle cx="540" cy="500" r="430" fill="url(#glow)"/>
+
+  <!-- VARIANTE A: bombilla -->
+  <g id="A" transform="translate(540,500)">
+    <path d="M -230,-20 C -230,-170 -120,-270 0,-270 C 120,-270 230,-170 230,-20 C 230,80 160,130 125,190 L 115,240 L -115,240 L -125,190 C -160,130 -230,80 -230,-20 Z" fill="url(#bulb)" stroke="#fff" stroke-width="10" stroke-opacity=".5"/>
+    <ellipse cx="-110" cy="-150" rx="55" ry="30" fill="#fff" opacity=".55" transform="rotate(-35 -110 -150)"/>
+    <g fill="#9AA7B8" stroke="#0B1320" stroke-width="0">
+      <rect x="-125" y="245" width="250" height="44" rx="20"/><rect x="-115" y="295" width="230" height="40" rx="18" fill="#7D8A9C"/>
+      <rect x="-100" y="340" width="200" height="38" rx="18"/><path d="M -60,384 H 60 L 30,420 H -30 Z" fill="#5C6878"/>
+    </g>
+    <g transform="translate(-72,-40)"><ellipse rx="44" ry="52" fill="#fff"/><circle cx="8" cy="-6" r="25" fill="#1B1B2F"/><circle cx="17" cy="-16" r="8" fill="#fff"/></g>
+    <g transform="translate(72,-40)"><ellipse rx="44" ry="52" fill="#fff"/><circle cx="8" cy="-6" r="25" fill="#1B1B2F"/><circle cx="17" cy="-16" r="8" fill="#fff"/></g>
+    <ellipse cx="-125" cy="40" rx="30" ry="16" fill="#FF8A3D" opacity=".55"/><ellipse cx="125" cy="40" rx="30" ry="16" fill="#FF8A3D" opacity=".55"/>
+    <path d="M-40,40 Q0,90 40,40 Q0,62 -40,40" fill="#7A3B00"/>
+    <g stroke="#FFD23F" stroke-width="22" stroke-linecap="round">
+      <line x1="0" y1="-330" x2="0" y2="-400"/><line x1="-215" y1="-245" x2="-265" y2="-295"/><line x1="215" y1="-245" x2="265" y2="-295"/>
+      <line x1="-300" y1="-60" x2="-370" y2="-70"/><line x1="300" y1="-60" x2="370" y2="-70"/>
+    </g>
+  </g>
+
+  <!-- VARIANTE B: interrogación con cara -->
+  <g id="B" transform="translate(540,520)" style="display:none">
+    <path d="M -150,-150 C -150,-330 170,-330 170,-150 C 170,-40 30,-20 30,90 L 30,130" fill="none" stroke="url(#qg)" stroke-width="120" stroke-linecap="round" stroke-linejoin="round"/>
+    <circle cx="30" cy="300" r="72" fill="url(#qg)"/>
+    <ellipse cx="-80" cy="-280" rx="40" ry="20" fill="#fff" opacity=".5" transform="rotate(-30 -80 -280)"/>
+    <g transform="translate(-20,-250)"><ellipse rx="34" ry="40" fill="#fff"/><circle cx="7" cy="-4" r="19" fill="#1B1B2F"/><circle cx="14" cy="-12" r="6" fill="#fff"/></g>
+    <g transform="translate(75,-245)"><ellipse rx="34" ry="40" fill="#fff"/><circle cx="7" cy="-4" r="19" fill="#1B1B2F"/><circle cx="14" cy="-12" r="6" fill="#fff"/></g>
+    <path d="M5,-195 Q30,-170 55,-195" fill="none" stroke="#7A3B00" stroke-width="10" stroke-linecap="round"/>
+  </g>
+</svg>
+<script>
+const NS="http://www.w3.org/2000/svg",R=document.getElementById("rays");
+for(let i=0;i<16;i++){const a=i/16*2*Math.PI,a2=a+Math.PI/32,e=document.createElementNS(NS,"path");e.setAttribute("d",`M540,520 L${540+900*Math.cos(a)},${520+900*Math.sin(a)} L${540+900*Math.cos(a2)},${520+900*Math.sin(a2)} Z`);e.setAttribute("fill","#fff");R.appendChild(e);}
+function variante(v){document.getElementById("A").style.display=v==="A"?"":"none";document.getElementById("B").style.display=v==="B"?"":"none";}
+</script></body></html>
