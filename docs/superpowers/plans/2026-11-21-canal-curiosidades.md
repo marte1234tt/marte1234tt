@@ -40,7 +40,7 @@ con `motor.py`, `prep3.py`, `pulpo3.html`, `render.js`, `perfil2.html` y `guion4
 
 ---
 
-### Tarea 1: Estructura, configuración y voz por frases
+### Task 1: Estructura, configuración y voz por frases
 
 **Archivos:**
 - Crear `canal/config.json`, `canal/.gitignore`, `canal/motor/__init__.py`, `canal/motor/voz.py` y `canal/tests/test_voz.py`.
@@ -73,7 +73,7 @@ con `motor.py`, `prep3.py`, `pulpo3.html`, `render.js`, `perfil2.html` y `guion4
 - [ ] **Paso 4:** ejecutar los tests. Esperado: PASS.
 - [ ] **Paso 5:** commit, `feat(canal): config y voz por frases con prosodia`.
 
-### Tarea 2: Preparar — guion → tiempos, subtítulos, música y config de animación
+### Task 2: Preparar — guion → tiempos, subtítulos, música y config de animación
 
 **Archivos:**
 - Crear `canal/motor/preparar.py`, `canal/motor/subtitulos.py`, `canal/motor/musica.py` y `canal/tests/test_preparar.py`.
@@ -115,7 +115,7 @@ con `motor.py`, `prep3.py`, `pulpo3.html`, `render.js`, `perfil2.html` y `guion4
 - [ ] **Paso 4:** ejecutar los tests (PASS). Después ejecutar `python3 -m motor.preparar ejemplos/pulpo/guion.json salida/pulpo` con la voz real. Esperado: total entre 70 y 73 s y ningún `AVISO`.
 - [ ] **Paso 5:** commit, `feat(canal): preparar guion → tiempos, subtítulos, música y config`.
 
-### Tarea 3: Caja de efectos y personaje pulpo
+### Task 3: Caja de efectos y personaje pulpo
 
 **Archivos:**
 - Crear `canal/efectos/pagina.html`. Solo contiene el `<svg>` raíz y carga los scripts siguientes, más `personajes/<nombre>.js`, por medio de `?personaje=`.
@@ -175,7 +175,7 @@ con `motor.py`, `prep3.py`, `pulpo3.html`, `render.js`, `perfil2.html` y `guion4
 - [ ] **Paso 4: regresión visual.** Pasar `canal/ejemplos/pulpo/guion.json` (Tarea 2) a la nueva lista de efectos. Capturar fotogramas fijos en los mismos instantes que el prototipo y compararlos a ojo con la muestra 4. Tiene que verse el mismo contenido: corazones, sangre, neuronas, cangrejo, rendija, camuflaje y encuesta.
 - [ ] **Paso 5:** commit, `feat(canal): caja de efectos declarativa y personaje pulpo`.
 
-### Tarea 4: Render, montaje y portada
+### Task 4: Render, montaje y portada
 
 **Archivos:**
 - Crear `canal/motor/render.js`, portado de `_prototipo/render.js`. Recibe `config.json`, `pagina.html`, el personaje y el directorio de salida.
@@ -202,7 +202,7 @@ con `motor.py`, `prep3.py`, `pulpo3.html`, `render.js`, `perfil2.html` y `guion4
 - [ ] **Paso 4:** ejecutar el test (PASS). Después, mirar 4 fotogramas de `fotogramas/`.
 - [ ] **Paso 5:** commit, `feat(canal): render paralelo, montaje, portada y script hacer.sh`.
 
-### Tarea 5: Skill `hacer-video` y datos de temas
+### Task 5: Skill `hacer-video` y datos de temas
 
 **Archivos:**
 - Crear `.claude/skills/hacer-video/SKILL.md`, `canal/temas/usados.json` (con `[{"fecha":"2026-11-21","tema":"El pulpo","categoria":"animales"}]`), `canal/temas/cola.txt` (vacío) y `canal/musica/LEEME.md`.
@@ -237,7 +237,7 @@ con `motor.py`, `prep3.py`, `pulpo3.html`, `render.js`, `perfil2.html` y `guion4
   - hay un archivo nuevo en `personajes/`.
 - [ ] **Paso 3:** enviar el vídeo al usuario. Commit, `feat(canal): skill hacer-video y segundo personaje`.
 
-### Tarea 6: Automatización diaria y limpieza
+### Task 6: Automatización diaria y limpieza
 
 **Archivos:**
 - Borrar `canal/_prototipo/`.
