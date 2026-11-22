@@ -33,8 +33,9 @@ const Base = {
     this.prog.setAttribute("width", (1080 * clamp(T / this.cfg.total)).toFixed(1));
     this.bub.forEach(b => { b.c.setAttribute("cx", (b.x + 12 * Math.sin(T * 1.3 + b.y)).toFixed(1)); b.c.setAttribute("cy", (((b.y - b.v * T) % 2000 + 2000) % 2000 - 40).toFixed(1)); });
     const tt = $("title"); tt.textContent = esc.titulo || "";
-    let fs = 96; tt.setAttribute("font-size", fs); tt.setAttribute("stroke-width", 14);
-    while (fs > 40 && tt.getComputedTextLength() > 980) { fs -= 4; tt.setAttribute("font-size", fs); }
+    tt.setAttribute("font-size", 96); tt.setAttribute("stroke-width", 14);
+    const w = tt.getComputedTextLength();
+    if (w > 960) { const fs = Math.floor(96 * 960 / w); tt.setAttribute("font-size", fs); tt.setAttribute("stroke-width", Math.max(6, fs * .146)); }
     $("titleG").setAttribute("transform", `translate(540,330) scale(${lerp(.5, 1, easeBack(t / .45))})`);
     $("titleG").setAttribute("opacity", clamp(t / .15));
   },

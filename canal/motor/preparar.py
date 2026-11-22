@@ -50,7 +50,7 @@ def alinear(toks, recon):
     return tiempos
 
 
-def _resolver(valor, idx, toks, tiempos, start):
+def _resolver(valor, idx, toks, tiempos, start, campo="desde"):
     """'palabra', 'palabra+0.5' o número → segundos desde el inicio de la escena."""
     if isinstance(valor, (int, float)):
         return float(valor)
@@ -59,7 +59,7 @@ def _resolver(valor, idx, toks, tiempos, start):
     k = next((k for k in idx if norm(toks[k][0]).startswith(norm(clave))), None)
     if k is None:
         print(f"AVISO pista no encontrada: {clave}")
-        return INICIO_DEFECTO + desfase
+        return INICIO_DEFECTO + desfase if campo == "desde" else None
     return tiempos[k][0] - start + desfase
 
 
@@ -82,7 +82,8 @@ def preparar(guion_path: str, salida_dir: str, synth=None) -> dict:
             if isinstance(x, list):
                 return [resolver_todo(v) for v in x]
             if isinstance(x, dict):
-                return {k: (_resolver(v, idx, toks, tiempos, start) if k in CAMPOS_TIEMPO else resolver_todo(v)) for k, v in x.items()}
+                out = {k: (_resolver(v, idx, toks, tiempos, start, k) if k in CAMPOS_TIEMPO else resolver_todo(v)) for k, v in x.items()}
+                return {k: v for k, v in out.items() if v is not None}
             return x
         for ef in e.get("efectos", []):
             ef = resolver_todo(ef)

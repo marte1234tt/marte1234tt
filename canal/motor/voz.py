@@ -11,7 +11,9 @@ def cargar_config() -> dict:
 
 
 def frases(texto: str) -> list[str]:
-    return [f.strip() for f in re.findall(r"[^.!?]*[.!?]", texto) if f.strip()]
+    """Corta en . ! ? seguidos de espacio (así «2.500» o «¿¡Cómo!?» no se parten) y conserva el final sin punto."""
+    trozos = re.split(r"(?<=[.!?…])\s+", texto.strip())
+    return [t.strip() for t in trozos if re.search(r"\w", t)]
 
 
 def prosodia(frase: str, i: int, base: int) -> tuple[str, str]:

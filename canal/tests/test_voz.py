@@ -42,3 +42,15 @@ def test_sintetizar_reintenta(tmp_path, monkeypatch):
     synth, estado = _synth_falso(fallos=2)
     wav, palabras = asyncio.run(voz.sintetizar(["Hola."], "x", 10, 0.3, str(tmp_path), synth=synth))
     assert estado["n"] == 3 and len(palabras) == 1
+
+
+def test_frases_no_corta_numeros_con_punto():
+    assert voz.frases("Murió hace más de 2.500 años. Y en 1.969 no.") == ["Murió hace más de 2.500 años.", "Y en 1.969 no."]
+
+
+def test_frases_puntuacion_doble_no_crea_frases_vacias():
+    assert voz.frases("¿¡Cómo!? Increíble!! Pues... sí.") == ["¿¡Cómo!?", "Increíble!!", "Pues...", "sí."]
+
+
+def test_frases_conserva_texto_sin_punto_final():
+    assert voz.frases("Hola. Hace 2.500 años") == ["Hola.", "Hace 2.500 años"]

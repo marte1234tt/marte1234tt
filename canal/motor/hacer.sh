@@ -3,8 +3,9 @@
 # Uso: bash motor/hacer.sh <guion.json>   (desde canal/)
 # Códigos: 0 = listo · 3 = duración corta (añadir un dato) · 4 = el vídeo no cumple los requisitos
 set -uo pipefail
+[ -f "${1:-}" ] || { echo "No encuentro el guion: ${1:-}"; exit 2; }
+GUION="$(realpath "$1")"
 cd "$(dirname "$0")/.."
-GUION="$1"
 TEMA=$(python3 -c "import json,sys,unicodedata,re; t=json.load(open(sys.argv[1]))['tema']; t=unicodedata.normalize('NFD',t.lower()); t=''.join(c for c in t if unicodedata.category(c)!='Mn'); print(re.sub(r'[^a-z0-9]+','-',t).strip('-'))" "$GUION")
 OUT="salida/$(date +%Y-%m-%d)-$TEMA"
 mkdir -p "$OUT"

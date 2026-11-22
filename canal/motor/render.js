@@ -15,7 +15,9 @@ function url(cfg) {
 
 async function abrir(browser, cfg) {
   const p = await browser.newPage({ viewport: { width: 1080, height: 1920 }, deviceScaleFactor: 1 });
+  p.avisos = [];
   p.on('pageerror', e => { console.error('ERROR DE PÁGINA', e); process.exit(1); });
+  p.on('console', m => { if (m.type() === 'warning' || m.type() === 'error') { if (!p.avisos.includes(m.text())) { p.avisos.push(m.text()); console.error('AVISO_PAGINA ' + m.text()); } } });
   await p.goto(url(cfg));
   await p.evaluate(() => window.LISTO);
   await p.evaluate(c => init(c), cfg);

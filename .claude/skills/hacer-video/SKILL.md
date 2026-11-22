@@ -37,8 +37,8 @@ Elige el tema evitando los de `canal/ejemplos/` y cualquier tema que te parezca 
 
 ## 3. Escribir el guion
 Crea `canal/temas/AAAA-MM-DD-<slug>/guion.json` con el formato del ejemplo:
-- `tema`, `categoria`, `personaje`, `escenas[]` (`titulo` en MAYÚSCULAS y corto, `texto`, `efectos[]`),
-  `encuesta` (4 opciones cortas), `publicacion` (`instagram` con gancho + encuesta A/B/C/D + "Síguenos…" + **5 hashtags**,
+- `tema`, `categoria`, `personaje`, `escenas[]` (`titulo` en MAYÚSCULAS, **máx. 24 caracteres**, `texto`, `efectos[]`),
+  `encuesta` (4 opciones de **máx. 22 caracteres**), `publicacion` (`instagram` con gancho + encuesta A/B/C/D + "Síguenos…" + **5 hashtags**,
   `tiktok` corto con 6 hashtags, `youtube_titulo` con `#shorts #curiosidades`), `fuentes`, `portada`
   (`escena`, `t`, `linea1`, `linea2`, `color2`, `banda`, `color_banda`).
 - **Ritmo**: frases cortas, gancho de golpes en la primera escena, 5–6 datos, penúltima escena con el dato más loco,
@@ -70,6 +70,10 @@ cd canal && bash motor/hacer.sh temas/<carpeta>/guion.json
 ```
 - Código **3** (`DURACION_CORTA`): añade un dato (otra escena) y repite.
 - Código **4** (`NO_CUMPLE`): corrige lo que diga (p. ej. si dura > 80 s, recorta texto) y repite.
+- Código **1**: mira el mensaje. «La voz falló…» suele ser texto raro en una frase (solo signos, símbolos) o red caída:
+  revisa el `texto` de las escenas y reintenta una vez. «ERROR DE PÁGINA» = fallo en un efecto o personaje: arréglalo.
+- Si la salida muestra líneas `AVISO_PAGINA` (efecto o ancla desconocidos) o `AVISO pista no encontrada`, corrige el guion y repite:
+  esos efectos no se verían bien.
 - Al acabar imprime `LISTO <carpeta>`.
 
 ## 6. Revisar (obligatorio)
@@ -92,6 +96,6 @@ Corrige y repite como mucho 2 veces. Si sigue mal, entrega igualmente con " (rev
 
 ## 8. Cerrar
 - El historial ya quedó en Drive (la subcarpeta del paso 7). No hace falta tocar git en la ejecución diaria.
-- Si trabajas en una sesión con el repositorio y has mejorado la caja de efectos o el motor, haz commit y push
-  (nunca `salida/` ni `.mp4`).
+- En la ejecución diaria **no hagas commit ni push** (el código es de solo lectura). Solo si el usuario te pide mejorar
+  el motor en una sesión normal, haz commit y push a la rama de esa sesión (nunca `salida/` ni `.mp4`).
 - Termina con una línea: tema · duración · enlace a la subcarpeta de Drive (el vídeo ya va en el aviso de la app).

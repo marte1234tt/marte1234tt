@@ -21,7 +21,7 @@ const { abrir } = require('./render.js');
     marca.children[2].setAttribute('transform', 'translate(540,300)');
     const P = Personaje.estadoInicial(T); P.s = (P.s || .95) * 1.3; P.y = 1130;
     document.getElementById('oct').setAttribute('transform', `translate(540,1130) scale(${P.s})`);
-    const texto = (txt, y, size, fill) => { if (!txt) return; const t = el('text', { x: 540, y, 'text-anchor': 'middle', 'font-size': size, 'font-weight': 900, fill, stroke: '#0B1320', 'stroke-width': size * .16, 'paint-order': 'stroke', 'stroke-linejoin': 'round' }, svg); t.textContent = txt; while (t.getComputedTextLength() > 1000 && size > 50) { size -= 6; t.setAttribute('font-size', size); t.setAttribute('stroke-width', size * .16); } };
+    const texto = (txt, y, size, fill) => { if (!txt) return; const t = el('text', { x: 540, y, 'text-anchor': 'middle', 'font-size': size, 'font-weight': 900, fill, stroke: '#0B1320', 'stroke-width': size * .16, 'paint-order': 'stroke', 'stroke-linejoin': 'round' }, svg); t.textContent = txt; const w = t.getComputedTextLength(); if (w > 980) { size = Math.floor(size * 980 / w); t.setAttribute('font-size', size); t.setAttribute('stroke-width', size * .16); } };
     const l1 = por.linea1 || (escenaEn(T).titulo || '');
     texto(l1, 480, 150, '#FFFFFF');
     texto(por.linea2, 630, 150, por.color2 || '#FFD23F');

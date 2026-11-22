@@ -111,3 +111,21 @@ test('dos objetos en la misma escena se dibujan cada uno en su sitio', async () 
   assert.deepEqual(xs, [200, 880]);
   await p.close();
 });
+
+test('título muy largo también cabe', async () => {
+  const largo = '¿POR QUÉ LOS FLAMENCOS SON ROSAS SI NACEN GRISES? ¡INCREÍBLE PERO CIERTO!';
+  const { p } = await pagina(cfgBase([{ titulo: largo, start: 0, dur: 10, efectos: [] }]));
+  await p.evaluate(() => render(2));
+  const w = await p.evaluate(() => document.getElementById('title').getBBox().width);
+  assert.ok(w <= 1000, `ancho ${w}`);
+  await p.close();
+});
+
+test('abrir() de render.js recoge los avisos de la página', async () => {
+  const { abrir } = require(path.join(RAIZ, 'motor', 'render.js'));
+  const cfg = cfgBase([{ titulo: 'X', start: 0, dur: 10, efectos: [{ tipo: 'zzz' }] }]);
+  const p = await abrir(browser, cfg);
+  await p.evaluate(() => render(1));
+  assert.ok(p.avisos.some(a => a.includes('zzz')), JSON.stringify(p.avisos));
+  await p.close();
+});

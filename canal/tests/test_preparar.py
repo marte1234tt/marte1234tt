@@ -100,3 +100,21 @@ def test_resuelve_tiempos_anidados(tmp_path):
     e = cfg["escenas"][1]["efectos"][0]
     assert isinstance(e["puntos"][0]["desde"], float)
     assert e["tramos"][0]["desde"] == pytest.approx(e["puntos"][0]["desde"] + 0.5)
+
+
+def test_hasta_no_encontrado_dura_hasta_el_final(tmp_path, capsys):
+    cfg = _prep(tmp_path, [{"tipo": "organo", "desde": "Dos", "hasta": "zzz"}])
+    e = cfg["escenas"][1]["efectos"][0]
+    assert "hasta" not in e and e["desde"] > 0.5
+    assert "AVISO pista no encontrada: zzz" in capsys.readouterr().out
+
+
+def test_ruta_del_guion_relativa_a_la_raiz_del_repo(tmp_path):
+    g = {"tema": "Ruta", "personaje": "pulpo", "escenas": [{"titulo": "A", "texto": "Hola.", "efectos": []}]}
+    d = os.path.join(RAIZ, "salida", "_test_ruta"); os.makedirs(d, exist_ok=True)
+    p = os.path.join(d, "guion.json"); open(p, "w").write(json.dumps(g))
+    env = dict(os.environ, CANAL_SYNTH_FALSO="1")
+    r = subprocess.run(["bash", "canal/motor/hacer.sh", "canal/salida/_test_ruta/guion.json"],
+                       cwd=os.path.dirname(RAIZ), env=env, capture_output=True, text=True)
+    assert "No such file" not in r.stderr and "FileNotFoundError" not in r.stderr, r.stderr[-800:]
+    assert r.returncode == 3  # corto, pero encontró el guion
