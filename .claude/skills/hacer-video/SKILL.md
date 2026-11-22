@@ -43,9 +43,7 @@ Crea `canal/temas/AAAA-MM-DD-<slug>/guion.json` con el formato del ejemplo:
   `EFECTOS.mi_efecto = {estado(c,e,td,t){...}, dibujo(c,e,td,t){...}}` (mira `canal/efectos/efectos.js`).
 
 ## 4. Personaje
-- Si ya existe en `canal/personajes/` o en la carpeta `personajes/` de Drive, reutilízalo. Si no, créalo siguiendo
-  `canal/personajes/LEEME.md` y **súbelo a Drive** (`personajes/<nombre>.js`, `text/plain`,
-  `disableConversionToGoogleType: true`) para que los próximos días lo encuentren.
+- Si ya existe en `canal/personajes/`, reutilízalo. Si no, créalo siguiendo `canal/personajes/LEEME.md`.
 - Comprueba 3 capturas antes de seguir (`node -e` con `abrir` de `motor/render.js`, o fabrica y mira `fotogramas/`).
 
 ## 5. Fabricar
@@ -65,7 +63,7 @@ Mira las 10 imágenes de `<carpeta>/fotogramas/` y `portada.png`:
 - ningún texto encima de otro, cortado o fuera de pantalla; nada tapando los subtítulos;
 - el personaje se ve entero y bien; cada efecto encaja con lo que se dice;
 - la portada se entiende en pequeño.
-Corrige y repite como mucho 2 veces. Si sigue mal, entrega igualmente con " (revisar)" en el nombre de la carpeta de Drive.
+Corrige y repite como mucho 2 veces. Si sigue mal, entrégalo igualmente y di qué falla.
 
 ## 7. Entregar (todo por la conversación; nada de Drive)
 Envía con `SendUserFile` (`status: "normal"`) los tres archivos de la carpeta de salida:
