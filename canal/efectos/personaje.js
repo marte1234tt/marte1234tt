@@ -31,7 +31,7 @@ const Personaje = {
       const g = el("g", {}, A);
       const body = el("path", { fill: "url(#armGrad)" }, g);
       const blood = el("path", { fill: "none", "stroke-width": 8, "stroke-linecap": "round", "stroke-dasharray": "22 26", opacity: 0 }, g);
-      const mano = e.mano ? el("circle", { fill: "url(#armGrad)" }, g) : null;
+      const mano = e.mano ? el("circle", { fill: e.manoColor || def.colores?.mano || "url(#armGrad)" }, g) : null;
       const sc = e.ventosas ? [...Array(9)].map(() => el("circle", { fill: "#FFD3E2", stroke: "#E2789F", "stroke-width": 2 }, g)) : [];
       const ng = el("g", { filter: "url(#glow)" }, g), nc = [...Array(4)].map(() => el("circle", { r: 9, fill: "#FFE66D" }, ng));
       return { body, blood, mano, sc, nc };

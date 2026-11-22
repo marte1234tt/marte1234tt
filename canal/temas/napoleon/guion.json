@@ -1,0 +1,285 @@
+{
+ "tema": "Napoleón no era bajito",
+ "categoria": "historia",
+ "personaje": "napoleon",
+ "escenas": [
+  {
+   "titulo": "¿BAJITO?",
+   "texto": "Napoleón no era bajito. Medía lo normal para su época. ¿Entonces por qué todos lo imaginamos enano? Y no es una opinión: son matemáticas.",
+   "efectos": [
+    {
+     "tipo": "entrada"
+    },
+    {
+     "tipo": "mirar",
+     "x": "vaiven"
+    },
+    {
+     "tipo": "sello",
+     "texto": "MITO",
+     "pos": [
+      540,
+      520
+     ],
+     "desde": "bajito+0.3",
+     "hasta": "enano"
+    },
+    {
+     "tipo": "bocadillo",
+     "texto": "¡Oye!",
+     "pos": [
+      740,
+      500
+     ],
+     "desde": "enano"
+    }
+   ]
+  },
+  {
+   "titulo": "1,69 METROS",
+   "texto": "Medía unos 1,69 metros. Y en su época, la mayoría de los franceses medía entre 1,58 y 1,68. O sea: normal, o incluso algo más alto que la media.",
+   "efectos": [
+    {
+     "tipo": "objeto",
+     "forma": "svg",
+     "svg": "<g><rect x=\"-22\" y=\"-330\" width=\"44\" height=\"660\" rx=\"8\" fill=\"#FFD23F\" stroke=\"#0B1320\" stroke-width=\"4\"/><line x1=\"-22\" y1=\"-330\" x2=\"10\" y2=\"-330\" stroke=\"#0B1320\" stroke-width=\"4\"/><line x1=\"-22\" y1=\"-297\" x2=\"0\" y2=\"-297\" stroke=\"#0B1320\" stroke-width=\"4\"/><line x1=\"-22\" y1=\"-264\" x2=\"10\" y2=\"-264\" stroke=\"#0B1320\" stroke-width=\"4\"/><line x1=\"-22\" y1=\"-231\" x2=\"0\" y2=\"-231\" stroke=\"#0B1320\" stroke-width=\"4\"/><line x1=\"-22\" y1=\"-198\" x2=\"10\" y2=\"-198\" stroke=\"#0B1320\" stroke-width=\"4\"/><line x1=\"-22\" y1=\"-165\" x2=\"0\" y2=\"-165\" stroke=\"#0B1320\" stroke-width=\"4\"/><line x1=\"-22\" y1=\"-132\" x2=\"10\" y2=\"-132\" stroke=\"#0B1320\" stroke-width=\"4\"/><line x1=\"-22\" y1=\"-99\" x2=\"0\" y2=\"-99\" stroke=\"#0B1320\" stroke-width=\"4\"/><line x1=\"-22\" y1=\"-66\" x2=\"10\" y2=\"-66\" stroke=\"#0B1320\" stroke-width=\"4\"/><line x1=\"-22\" y1=\"-33\" x2=\"0\" y2=\"-33\" stroke=\"#0B1320\" stroke-width=\"4\"/><line x1=\"-22\" y1=\"0\" x2=\"10\" y2=\"0\" stroke=\"#0B1320\" stroke-width=\"4\"/><line x1=\"-22\" y1=\"33\" x2=\"0\" y2=\"33\" stroke=\"#0B1320\" stroke-width=\"4\"/><line x1=\"-22\" y1=\"66\" x2=\"10\" y2=\"66\" stroke=\"#0B1320\" stroke-width=\"4\"/><line x1=\"-22\" y1=\"99\" x2=\"0\" y2=\"99\" stroke=\"#0B1320\" stroke-width=\"4\"/><line x1=\"-22\" y1=\"132\" x2=\"10\" y2=\"132\" stroke=\"#0B1320\" stroke-width=\"4\"/><line x1=\"-22\" y1=\"165\" x2=\"0\" y2=\"165\" stroke=\"#0B1320\" stroke-width=\"4\"/><line x1=\"-22\" y1=\"198\" x2=\"10\" y2=\"198\" stroke=\"#0B1320\" stroke-width=\"4\"/><line x1=\"-22\" y1=\"231\" x2=\"0\" y2=\"231\" stroke=\"#0B1320\" stroke-width=\"4\"/><line x1=\"-22\" y1=\"264\" x2=\"10\" y2=\"264\" stroke=\"#0B1320\" stroke-width=\"4\"/><line x1=\"-22\" y1=\"297\" x2=\"0\" y2=\"297\" stroke=\"#0B1320\" stroke-width=\"4\"/><line x1=\"-22\" y1=\"330\" x2=\"10\" y2=\"330\" stroke=\"#0B1320\" stroke-width=\"4\"/></g>",
+     "pos": [
+      880,
+      940
+     ],
+     "entra": "derecha",
+     "desde": 0.2
+    },
+    {
+     "tipo": "etiqueta",
+     "texto": "≈ 1,69 m",
+     "ancla": "cabeza",
+     "pos": [
+      880,
+      520
+     ],
+     "fondo": "#FFD23F",
+     "desde": "metros-0.3"
+    },
+    {
+     "tipo": "etiqueta",
+     "texto": "FRANCÉS MEDIO:\n1,58 – 1,68 m",
+     "pos": [
+      540,
+      1360
+     ],
+     "desde": "mayoría"
+    },
+    {
+     "tipo": "mirar",
+     "x": 0.8,
+     "y": 0
+    }
+   ]
+  },
+  {
+   "titulo": "PULGADAS TRAMPOSAS",
+   "texto": "El lío vino de las pulgadas. Se anotó que medía cinco pies y dos pulgadas, pero francesas, que eran más largas que las inglesas. Leído en medidas inglesas, parecía mucho más bajito.",
+   "efectos": [
+    {
+     "tipo": "posicion",
+     "y": 1030,
+     "escala": 0.8,
+     "desde": 0
+    },
+    {
+     "tipo": "comparacion",
+     "izq": {
+      "forma": "estrella",
+      "color": "#3A86FF",
+      "texto": "≈ 2,7 cm",
+      "sub": "FRANCESA"
+     },
+     "der": {
+      "forma": "estrella",
+      "color": "#E63946",
+      "texto": "2,54 cm",
+      "sub": "INGLESA"
+     },
+     "desde": "francesas",
+     "desde_der": "inglesas"
+    },
+    {
+     "tipo": "sello",
+     "texto": "¡ERROR!",
+     "pos": [
+      540,
+      560
+     ],
+     "desde": "bajito"
+    }
+   ]
+  },
+  {
+   "titulo": "PROPAGANDA",
+   "texto": "Y luego llegó la propaganda. El caricaturista británico James Gillray lo dibujaba como un niño enano y rabioso: el pequeño Boney. Y esa imagen se quedó para siempre.",
+   "efectos": [
+    {
+     "tipo": "posicion",
+     "y": 1080,
+     "escala": 0.55,
+     "desde": "enano",
+     "duracion": 0.4
+    },
+    {
+     "tipo": "bocadillo",
+     "texto": "¡No soy bajito!",
+     "pos": [
+      700,
+      640
+     ],
+     "desde": "rabioso",
+     "hasta": "siempre"
+    },
+    {
+     "tipo": "etiqueta",
+     "texto": "«LITTLE BONEY»",
+     "pos": [
+      540,
+      1385
+     ],
+     "fondo": "#E63946",
+     "color": "#FFFFFF",
+     "desde": "Boney"
+    },
+    {
+     "tipo": "etiqueta",
+     "texto": "JAMES GILLRAY · 1803",
+     "pos": [
+      540,
+      520
+     ],
+     "desde": "Gillray",
+     "hasta": "siempre"
+    }
+   ]
+  },
+  {
+   "titulo": "EL PEQUEÑO CABO",
+   "texto": "¿Y su apodo, el pequeño cabo? Era un mote cariñoso de sus soldados, no una burla por su altura. Eso sí: solía estar rodeado de tropas más altas que él.",
+   "efectos": [
+    {
+     "tipo": "etiqueta",
+     "texto": "«LE PETIT CAPORAL»",
+     "pos": [
+      540,
+      520
+     ],
+     "fondo": "#FFD23F",
+     "desde": "cabo"
+    },
+    {
+     "tipo": "iconos",
+     "forma": "corazon",
+     "n": 3,
+     "pos": [
+      880,
+      700
+     ],
+     "desde": "cariñoso"
+    },
+    {
+     "tipo": "etiqueta",
+     "texto": "CARIÑO, NO ALTURA",
+     "pos": [
+      540,
+      1385
+     ],
+     "fondo": "#FFE66D",
+     "desde": "burla"
+    },
+    {
+     "tipo": "mirar",
+     "x": 0,
+     "y": -0.6
+    }
+   ]
+  },
+  {
+   "titulo": "LA IRONÍA",
+   "texto": "Y lo mejor: hoy hablamos del complejo de Napoleón, la idea de que los bajitos son más agresivos. Lleva su nombre, y él ni siquiera era bajito.",
+   "efectos": [
+    {
+     "tipo": "etiqueta",
+     "texto": "«COMPLEJO DE NAPOLEÓN»",
+     "pos": [
+      540,
+      520
+     ],
+     "fondo": "#FFD23F",
+     "desde": "complejo"
+    },
+    {
+     "tipo": "agitar",
+     "intensidad": 1.6,
+     "desde": "agresivos"
+    },
+    {
+     "tipo": "bocadillo",
+     "texto": "¡Pero si mido 1,69!",
+     "pos": [
+      720,
+      640
+     ],
+     "desde": "ni"
+    },
+    {
+     "tipo": "sello",
+     "texto": "IRONÍA",
+     "color": "#9B5DE5",
+     "pos": [
+      540,
+      1150
+     ],
+     "desde": "bajito"
+    }
+   ]
+  },
+  {
+   "titulo": "¿TÚ LO SABÍAS?",
+   "texto": "¿Tú también creías que era bajito? Dímelo en comentarios. ¡Y síguenos para más curiosidades!",
+   "efectos": [
+    {
+     "tipo": "encuesta",
+     "desde": 0
+    },
+    {
+     "tipo": "cierre",
+     "desde": "síguenos"
+    }
+   ]
+  }
+ ],
+ "encuesta": [
+  "Sí, enano total",
+  "No, ya lo sabía",
+  "Creía que medía 1,50",
+  "Ni idea"
+ ],
+ "publicacion": {
+  "instagram": "Napoleón NO era bajito 😳 Medía unos 1,69 m, lo normal (o más) para un francés de su época.\n\nEntonces… ¿por qué lo imaginamos enano? Unas pulgadas tramposas y una caricatura británica que se hizo viral hace 200 años 📏🖍️\n\n👇 ¿Tú también creías que era bajito?\nA) Sí, enano total\nB) No, ya lo sabía\nC) Creía que medía 1,50\nD) Ni idea\n\nSíguenos para una curiosidad nueva cada día 🔔\n\n#curiosidades #historia #napoleon #mitos #sabiasque",
+  "tiktok": "¿Napoleón bajito? MITO 😳📏 Medía lo normal para su época. ¿Tú lo sabías? 👇\n#curiosidades #historia #napoleon #mitos #datoscuriosos #aprendeentiktok",
+  "youtube_titulo": "Napoleón NO era bajito (y la culpa es de unas pulgadas) 📏 #shorts #curiosidades"
+ },
+ "fuentes": [
+  "Britannica — Was Napoleon short?: https://www.britannica.com/story/was-napoleon-short",
+  "History.com — Napoleon complex: https://www.history.com/articles/napoleon-complex-short",
+  "HowStuffWorks — How tall was Napoleon?: https://history.howstuffworks.com/history-vs-myth/napoleon-short.htm",
+  "Fondation Napoléon — La taille de Napoléon: https://www.napoleon.org/histoire-des-2-empires/articles/la-taille-de-napoleon",
+  "National Geographic — Was Napoleon even short?: https://www.nationalgeographic.com/history/article/napoleon-complex-height-discrimination-men-history"
+ ],
+ "portada": {
+  "escena": 0,
+  "t": "enano",
+  "linea1": "NAPOLEÓN",
+  "linea2": "NO ERA BAJITO",
+  "color2": "#FFD23F",
+  "banda": "¡TODO FUE UN ERROR!",
+  "color_banda": "#E63946"
+ }
+}
