@@ -41,6 +41,16 @@ const Personaje = {
     this.cuerpo = el("path", { d: def.cuerpo, fill: "url(#bodyGrad)" }, C);
     if (def.manchas) { const m = el("g", { fill: def.colores?.mancha || "#000", opacity: .18 }, C); def.manchas.forEach(([x, y, r]) => el("circle", { cx: x, cy: y, r }, m)); }
     if (def.brillo) { const [x, y, rx, ry, rot] = def.brillo; el("ellipse", { cx: x, cy: y, rx, ry, fill: "#fff", opacity: .28, transform: `rotate(${rot || 0} ${x} ${y})` }, C); }
+    if (def.foto) {  // cabeza con foto recortada en óvalo
+      const f = def.foto, s = (f.alto || 150) / f.ry, cy = f.centroY ?? -240;
+      const cp = el("clipPath", { id: "fotoClip" }, $("s").querySelector("defs"));
+      el("ellipse", { cx: 0, cy, rx: f.rx * s, ry: f.ry * s }, cp);
+      this.fotoG = el("g", {}, C);
+      el("ellipse", { cx: 0, cy: cy + 6, rx: f.rx * s + 10, ry: f.ry * s + 10, fill: "#000", opacity: .25 }, this.fotoG);
+      el("image", { href: f.href, x: -f.cx * s, y: cy - f.cy * s, width: f.ancho * s, height: f.alto_img * s, "clip-path": "url(#fotoClip)", preserveAspectRatio: "none" }, this.fotoG);
+      el("ellipse", { cx: 0, cy, rx: f.rx * s, ry: f.ry * s, fill: "none", stroke: "#fff", "stroke-width": 8 }, this.fotoG);
+      this.fotoCy = cy;
+    }
     if (def.detalles) { const g = el("g", {}, C); g.innerHTML = def.detalles; }
     const X = el("g", { "clip-path": "url(#cuerpoClip)", opacity: 0 }, C); this.X = X;
     el("rect", { x: -600, y: -900, width: 1200, height: 1400, fill: "#2A0F3D", opacity: .55 }, X);
@@ -62,7 +72,7 @@ const Personaje = {
       return { lid, pu, sp };
     });
     (def.mejillas || []).forEach(([x, y]) => el("ellipse", { cx: x, cy: y, rx: 32, ry: 18, fill: "#FF5C8A", opacity: .55 }, C));
-    this.boca = el("path", { fill: "none", stroke: def.colores?.boca || "#7A1F45", "stroke-width": 9, "stroke-linecap": "round" }, C);
+    this.boca = el("path", { fill: "none", stroke: def.colores?.boca || "#7A1F45", "stroke-width": 9, "stroke-linecap": "round", opacity: def.boca === null ? 0 : 1 }, C);
     this.fx = el("g", { id: "octFx" }, O);
     if (def.extra) def.extra(C);
   },
@@ -154,6 +164,7 @@ const Personaje = {
       o.pu.setAttribute("cx", P.lookX * r * .5); o.pu.setAttribute("cy", P.lookY * r * .58);
       o.sp.setAttribute("cx", P.lookX * r * .5 + r * .32); o.sp.setAttribute("cy", P.lookY * r * .58 - r * .38);
     });
+    if (this.fotoG) this.fotoG.setAttribute("transform", `rotate(${(Math.sin(T * 2.6) * 3).toFixed(2)} 0 ${this.fotoCy + 140})`);
     const [mx, my] = d.boca || [0, -30], mw = d.bocaAncho || 30;
     this.boca.setAttribute("d", P.boca === "abierta" ? `M${mx - mw - 4},${my - 4} Q${mx},${my + 40} ${mx + mw + 4},${my - 4} Q${mx},${my + 20} ${mx - mw - 4},${my - 4}` : `M${mx - mw},${my} Q${mx},${my + 30} ${mx + mw},${my}`);
     this.boca.setAttribute("fill", P.boca === "abierta" ? (d.colores?.boca || "#7A1F45") : "none");

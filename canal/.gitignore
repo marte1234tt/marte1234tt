@@ -3,3 +3,4 @@ salida/
 __pycache__/
 .pytest_cache/
 whisper_models/
+personajes/privado/

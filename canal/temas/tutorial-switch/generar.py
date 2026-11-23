@@ -19,7 +19,7 @@ def tutorial(nombre, escenas, portada):
             efectos = [ROBOT, {"tipo": "terminal", "desde": 0, "y1": 1110, "titulo": "s1 · CLI  (Packet Tracer)", "lineas": viejas + nuevas}] + efectos
             hist += nuevas
         out.append({"titulo": e["titulo"], "texto": e["texto"], "efectos": efectos})
-    g = {"tema": nombre, "categoria": "tutorial", "personaje": "robot", "etiqueta": "TUTORIAL · PACKET TRACER",
+    g = {"tema": nombre, "categoria": "tutorial", "personaje": "profe", "etiqueta": "TUTORIAL · PACKET TRACER",
          "duracion": {"min": 30, "max": 300}, "escenas": out, "encuesta": [], "portada": portada,
          "publicacion": {}, "fuentes": ["Cheat sheet Xarxes locals (MP0225, AEA2)"]}
     json.dump(g, open(os.path.join(D, nombre.split()[0].lower() + ".json"), "w"), ensure_ascii=False, indent=1)
