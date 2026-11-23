@@ -7,6 +7,8 @@ def tutorial(nombre, escenas, portada):
     hist, out = [], []
     for e in escenas:
         efectos = list(e.get("efectos", []))
+        if e.get("topo") is not None:
+            efectos = [ROBOT, dict({"tipo": "topologia", "desde": 0}, **e["topo"])] + efectos
         if e.get("lineas") is not None:
             nuevas = [dict(zip(("prompt", "cmd", "desde", "salida"), l + ([] if len(l) > 3 else [[]]))) for l in e["lineas"]]
             for l in nuevas:
@@ -24,10 +26,10 @@ def tutorial(nombre, escenas, portada):
 
 # ---------------------------------------------------------------- 1. configuración básica
 tutorial("Basica configuración del switch", [
- {"titulo": "CONFIGURAR UN SWITCH", "texto": "Vamos a configurar un switch Cisco desde cero en Packet Tracer. Los cables ya los sabes poner, así que vamos directos a la terminal. Haz clic en el switch, abre la pestaña CLI y pulsa Enter.",
-  "efectos": [{"tipo": "entrada"}, {"tipo": "mirar", "x": "vaiven"},
-              {"tipo": "etiqueta", "texto": "PESTAÑA «CLI»", "pos": [540, 520], "fondo": "#FFD23F", "desde": "CLI"},
-              {"tipo": "etiqueta", "texto": "PULSA ENTER ⏎", "pos": [540, 640], "desde": "Enter"}]},
+ {"titulo": "CONFIGURAR UN SWITCH", "texto": "Vamos a configurar un switch Cisco desde cero en Packet Tracer. Los cables ya los sabes poner, así que vamos directos a lo importante.",
+  "efectos": [{"tipo": "entrada"}, {"tipo": "mirar", "x": "vaiven"}]},
+ {"titulo": "NUESTRA RED", "texto": "Esta es la red: un switch en el centro y seis PCs conectados con cable directo. Cuando las luces del cable se ponen verdes, hay enlace. Haz clic en el switch, abre la pestaña CLI y pulsa Enter.",
+  "topo": {"puertos": ["Fa0/1", "Fa0/2", "Fa0/3", "Fa0/4", "Fa0/5", "Fa0/6"], "clic": "clic"}},
  {"titulo": "USUARIO → PRIVILEGIADO", "texto": "Verás Switch y el símbolo mayor que: es el modo usuario, el más limitado. Escribe enable y el símbolo cambia a almohadilla. Ya estás en modo privilegiado.", "aparece": 0.2,
   "lineas": [["Switch>", "enable", "enable"], ["Switch#", "", "almohadilla"]]},
  {"titulo": "CONFIGURACIÓN GLOBAL", "texto": "Ahora escribe configure terminal, o en corto, conf t. Entras en la configuración global: fíjate en el paréntesis config del prompt.",
@@ -46,30 +48,44 @@ tutorial("Basica configuración del switch", [
  {"titulo": "COMPRUEBA", "texto": "Para comprobarlo todo, escribe show running-config. ¡Y listo! Switch configurado. En el siguiente vídeo, las VLAN.",
   "lineas": [["s1#", "show running-config", "show", ["hostname s1", "enable secret 5 $1$mERr$9cTjUIEqNGurQiFU.ZeCi1", "banner motd ^CAccés només per a personal autoritzat^C", "line con 0", " password 7 0822455D0A16", " login"]]],
   "efectos": [{"tipo": "sello", "texto": "¡LISTO!", "color": "#27C93F", "pos": [360, 1250], "size": 90, "desde": "listo"}]},
-], {"escena": 0, "t": "terminal", "linea1": "CONFIGURACIÓN", "linea2": "BÁSICA DEL SWITCH", "color2": "#FFD23F", "banda": "PACKET TRACER · PASO A PASO", "color_banda": "#3A86FF"})
+], {"escena": 1, "t": "verdes", "linea1": "CONFIGURACIÓN", "linea2": "BÁSICA DEL SWITCH", "color2": "#FFD23F", "banda": "PACKET TRACER · PASO A PASO", "color_banda": "#3A86FF"})
 
-# ---------------------------------------------------------------- 2. VLANs
-TABLA = ["VLAN Name      Status    Ports", "---- --------- --------- ------------------",
-         "1    default   active    Fa0/6, Fa0/7, Fa0/8 ...", "10   Vendes    active    Fa0/1, Fa0/2, Fa0/3,", "                         Fa0/4, Fa0/5"]
-tutorial("Vlans configurar VLANs en el switch", [
- {"titulo": "¿QUÉ ES UNA VLAN?", "texto": "Una VLAN divide un switch en varias redes separadas. Los equipos solo se ven con los de su misma VLAN, como si estuvieran en switches distintos. Vamos a crear la VLAN 10, Vendes.",
+# ---------------------------------------------------------------- 2. VLANs (3 VLAN)
+V = [{"num": 10, "nombre": "VENDES", "color": "#3A86FF"}, {"num": 20, "nombre": "COMPRES", "color": "#FF7F50"}, {"num": 30, "nombre": "DIRECCIO", "color": "#9B5DE5"}]
+PUERTOS = ["Fa0/1", "Fa0/2", "Fa0/9", "Fa0/10", "Fa0/17", "Fa0/18"]
+TABLA = ["VLAN Name      Status    Ports", "---- --------- --------- -----------------",
+         "1    default   active    Gig0/1, Gig0/2",
+         "10   Vendes    active    Fa0/1, Fa0/2 ... Fa0/8", "20   Compres   active    Fa0/9, Fa0/10 ... Fa0/16",
+         "30   Direccio  active    Fa0/17 ... Fa0/24"]
+tutorial("Vlans configurar 3 VLANs en el switch", [
+ {"titulo": "¿QUÉ ES UNA VLAN?", "texto": "Una VLAN divide un switch en varias redes separadas. Los equipos solo se ven con los de su misma VLAN, como si estuvieran en switches distintos.",
   "efectos": [{"tipo": "entrada"}, {"tipo": "mirar", "x": "vaiven"},
-              {"tipo": "etiqueta", "texto": "VLAN 10 · VENDES", "pos": [260, 560], "fondo": "#3A86FF", "color": "#FFFFFF", "desde": "divide"},
-              {"tipo": "etiqueta", "texto": "VLAN 20 · COMPRES", "pos": [820, 560], "fondo": "#FF7F50", "color": "#FFFFFF", "desde": "separadas"},
+              {"tipo": "etiqueta", "texto": "VLAN 10", "pos": [230, 560], "fondo": "#3A86FF", "color": "#FFFFFF", "desde": "divide"},
+              {"tipo": "etiqueta", "texto": "VLAN 20", "pos": [540, 470], "fondo": "#FF7F50", "color": "#FFFFFF", "desde": "varias"},
+              {"tipo": "etiqueta", "texto": "VLAN 30", "pos": [850, 560], "fondo": "#9B5DE5", "color": "#FFFFFF", "desde": "separadas"},
               {"tipo": "sello", "texto": "NO SE VEN", "color": "#E63946", "pos": [540, 700], "size": 80, "desde": "solo"}]},
- {"titulo": "ENTRA A CONFIGURAR", "texto": "Partimos del switch del vídeo anterior. Escribe enable, pon la contraseña, y luego configure terminal.", "aparece": 0.2,
+ {"titulo": "EL EJERCICIO", "texto": "Este es el ejercicio: seis PCs, dos por departamento. Vendes en la VLAN 10, Compres en la VLAN 20 y Direcció en la VLAN 30. Cada VLAN tendrá ocho puertos del switch.",
+  "topo": {"puertos": PUERTOS, "vlans": [dict(V[0], desde="Vendes"), dict(V[1], desde="Compres"), dict(V[2], desde="Direcció")]}},
+ {"titulo": "ENTRA A CONFIGURAR", "texto": "En el switch, escribe enable, pon la contraseña, y luego configure terminal.", "aparece": 0.2,
   "lineas": [["s1>", "enable", "enable", ["Password:"]], ["s1#", "configure terminal", "configure"], ["s1(config)#", "", "configure+1.6"]]},
- {"titulo": "CREA LA VLAN", "texto": "Escribe vlan 10. Si no existe, se crea y entras en su modo. Ponle nombre con name Vendes, y sal con exit.",
-  "lineas": [["s1(config)#", "vlan 10", "vlan"], ["s1(config-vlan)#", "name Vendes", "name"], ["s1(config-vlan)#", "exit", "exit"], ["s1(config)#", "", "exit+1.2"]]},
- {"titulo": "ASIGNA EL PUERTO", "texto": "Ahora el puerto donde está el PC: interface fa0/1. Lo ponemos en modo acceso, para un solo equipo, con switchport mode access. Y lo metemos en la VLAN con switchport access vlan 10.",
-  "lineas": [["s1(config)#", "interface fa0/1", "interface"], ["s1(config-if)#", "switchport mode access", "switchport"], ["s1(config-if)#", "switchport access vlan 10", "metemos+1.0"]]},
- {"titulo": "VARIOS PUERTOS A LA VEZ", "texto": "Truco: con interface range configuras varios puertos de golpe. Por ejemplo, del fa0/2 al fa0/5, y repites los dos switchport.",
-  "lineas": [["s1(config-if)#", "exit", "Truco"], ["s1(config)#", "interface range fa0/2 - 5", "interface"], ["s1(config-if-range)#", "switchport mode access", "repites"], ["s1(config-if-range)#", "switchport access vlan 10", "repites+1.7"]]},
- {"titulo": "COMPRUEBA", "texto": "Vuelve con end y escribe show vlan brief. Es el comando más útil: verás la VLAN 10, Vendes, con todos sus puertos.",
+ {"titulo": "CREA LAS 3 VLAN", "texto": "Creamos las tres. Primero vlan 10 y name Vendes. Luego vlan 20 y name Compres. Y por último, vlan 30 y name Direccio. Sal de cada una con exit.",
+  "lineas": [["s1(config)#", "vlan 10", "10"], ["s1(config-vlan)#", "name Vendes", "Vendes"], ["s1(config-vlan)#", "exit", "Luego-0.4"],
+             ["s1(config)#", "vlan 20", "20"], ["s1(config-vlan)#", "name Compres", "Compres"], ["s1(config-vlan)#", "exit", "último-0.6"],
+             ["s1(config)#", "vlan 30", "30"], ["s1(config-vlan)#", "name Direccio", "Direccio"], ["s1(config-vlan)#", "exit", "exit"], ["s1(config)#", "", "exit+1.2"]]},
+ {"titulo": "PUERTOS DE VENDES", "texto": "Ahora los puertos. Con interface range cogemos del fa0/1 al fa0/8, los ponemos en modo acceso, y los metemos en la VLAN 10.",
+  "lineas": [["s1(config)#", "interface range fa0/1 - 8", "interface"], ["s1(config-if-range)#", "switchport mode access", "acceso"],
+             ["s1(config-if-range)#", "switchport access vlan 10", "metemos"], ["s1(config-if-range)#", "exit", "metemos+2.4"]]},
+ {"titulo": "COMPRES Y DIRECCIÓ", "texto": "Lo mismo para Compres, del fa0/9 al fa0/16, en la VLAN 20. Y para Direcció, del fa0/17 al fa0/24, en la VLAN 30.",
+  "lineas": [["s1(config)#", "interface range fa0/9 - 16", "Compres"], ["s1(config-if-range)#", "switchport mode access", "Compres+1.4"],
+             ["s1(config-if-range)#", "switchport access vlan 20", "20"], ["s1(config-if-range)#", "exit", "Direcció-0.6"],
+             ["s1(config)#", "interface range fa0/17 - 24", "Direcció"], ["s1(config-if-range)#", "switchport mode access", "Direcció+1.4"],
+             ["s1(config-if-range)#", "switchport access vlan 30", "30"]]},
+ {"titulo": "COMPRUEBA", "texto": "Vuelve con end y escribe show vlan brief: verás las tres VLAN, cada una con sus ocho puertos.",
   "lineas": [["s1(config-if-range)#", "end", "end"], ["s1#", "show vlan brief", "show", TABLA]]},
- {"titulo": "GUARDA Y PRUEBA", "texto": "Guarda con copy running-config startup-config. Y la prueba de fuego: los PCs de la misma VLAN se hacen ping; los de VLANs distintas, no.",
-  "lineas": [["s1#", "copy running-config startup-config", "copy", ["Building configuration...", "[OK]"]]],
-  "efectos": [{"tipo": "sello", "texto": "MISMA VLAN: PING ✓", "color": "#27C93F", "pos": [390, 1210], "size": 50, "rot": -6, "desde": "misma"},
-              {"tipo": "sello", "texto": "DISTINTA: PING ✗", "color": "#E63946", "pos": [390, 1340], "size": 50, "rot": 4, "desde": "distintas"}]},
-], {"escena": 0, "t": "separadas", "linea1": "VLANs EN EL", "linea2": "SWITCH CISCO", "color2": "#FFD23F", "banda": "PACKET TRACER · PASO A PASO", "color_banda": "#9B5DE5"})
+ {"titulo": "GUARDA", "texto": "Y no te olvides de guardar con copy running-config startup-config.",
+  "lineas": [["s1#", "copy running-config startup-config", "copy", ["Building configuration...", "[OK]"]], ["s1#", "", "copy+3"]]},
+ {"titulo": "PRUEBA CON PING", "texto": "Ahora la prueba. Pon a cada PC una IP de la misma red. El PC0 hace ping a su compañero de Vendes y responde. Pero si hace ping a uno de Compres, nada: están en VLANs distintas.",
+  "topo": {"puertos": PUERTOS, "vlans": [dict(V[0], desde=-1), dict(V[1], desde=-1), dict(V[2], desde=-1)],
+           "pings": [{"de": 0, "a": 1, "ok": True, "desde": "compañero"}, {"de": 0, "a": 2, "ok": False, "desde": "Compres"}]}},
+], {"escena": 1, "t": "Direcció+1", "linea1": "3 VLANs EN EL", "linea2": "SWITCH CISCO", "color2": "#FFD23F", "banda": "PACKET TRACER · PASO A PASO", "color_banda": "#9B5DE5"})
 print("ok")

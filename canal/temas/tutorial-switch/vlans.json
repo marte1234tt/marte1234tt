@@ -1,5 +1,5 @@
 {
- "tema": "Vlans configurar VLANs en el switch",
+ "tema": "Vlans configurar 3 VLANs en el switch",
  "categoria": "tutorial",
  "personaje": "robot",
  "etiqueta": "TUTORIAL · PACKET TRACER",
@@ -10,7 +10,7 @@
  "escenas": [
   {
    "titulo": "¿QUÉ ES UNA VLAN?",
-   "texto": "Una VLAN divide un switch en varias redes separadas. Los equipos solo se ven con los de su misma VLAN, como si estuvieran en switches distintos. Vamos a crear la VLAN 10, Vendes.",
+   "texto": "Una VLAN divide un switch en varias redes separadas. Los equipos solo se ven con los de su misma VLAN, como si estuvieran en switches distintos.",
    "efectos": [
     {
      "tipo": "entrada"
@@ -21,9 +21,9 @@
     },
     {
      "tipo": "etiqueta",
-     "texto": "VLAN 10 · VENDES",
+     "texto": "VLAN 10",
      "pos": [
-      260,
+      230,
       560
      ],
      "fondo": "#3A86FF",
@@ -32,12 +32,23 @@
     },
     {
      "tipo": "etiqueta",
-     "texto": "VLAN 20 · COMPRES",
+     "texto": "VLAN 20",
      "pos": [
-      820,
-      560
+      540,
+      470
      ],
      "fondo": "#FF7F50",
+     "color": "#FFFFFF",
+     "desde": "varias"
+    },
+    {
+     "tipo": "etiqueta",
+     "texto": "VLAN 30",
+     "pos": [
+      850,
+      560
+     ],
+     "fondo": "#9B5DE5",
      "color": "#FFFFFF",
      "desde": "separadas"
     },
@@ -55,8 +66,53 @@
    ]
   },
   {
+   "titulo": "EL EJERCICIO",
+   "texto": "Este es el ejercicio: seis PCs, dos por departamento. Vendes en la VLAN 10, Compres en la VLAN 20 y Direcció en la VLAN 30. Cada VLAN tendrá ocho puertos del switch.",
+   "efectos": [
+    {
+     "tipo": "posicion",
+     "x": 905,
+     "y": 1335,
+     "escala": 0.4,
+     "desde": -1
+    },
+    {
+     "tipo": "topologia",
+     "desde": 0,
+     "puertos": [
+      "Fa0/1",
+      "Fa0/2",
+      "Fa0/9",
+      "Fa0/10",
+      "Fa0/17",
+      "Fa0/18"
+     ],
+     "vlans": [
+      {
+       "num": 10,
+       "nombre": "VENDES",
+       "color": "#3A86FF",
+       "desde": "Vendes"
+      },
+      {
+       "num": 20,
+       "nombre": "COMPRES",
+       "color": "#FF7F50",
+       "desde": "Compres"
+      },
+      {
+       "num": 30,
+       "nombre": "DIRECCIO",
+       "color": "#9B5DE5",
+       "desde": "Direcció"
+      }
+     ]
+    }
+   ]
+  },
+  {
    "titulo": "ENTRA A CONFIGURAR",
-   "texto": "Partimos del switch del vídeo anterior. Escribe enable, pon la contraseña, y luego configure terminal.",
+   "texto": "En el switch, escribe enable, pon la contraseña, y luego configure terminal.",
    "efectos": [
     {
      "tipo": "posicion",
@@ -95,8 +151,8 @@
    ]
   },
   {
-   "titulo": "CREA LA VLAN",
-   "texto": "Escribe vlan 10. Si no existe, se crea y entras en su modo. Ponle nombre con name Vendes, y sal con exit.",
+   "titulo": "CREA LAS 3 VLAN",
+   "texto": "Creamos las tres. Primero vlan 10 y name Vendes. Luego vlan 20 y name Compres. Y por último, vlan 30 y name Direccio. Sal de cada una con exit.",
    "efectos": [
     {
      "tipo": "posicion",
@@ -129,12 +185,42 @@
       {
        "prompt": "s1(config)#",
        "cmd": "vlan 10",
-       "desde": "vlan"
+       "desde": "10"
       },
       {
        "prompt": "s1(config-vlan)#",
        "cmd": "name Vendes",
-       "desde": "name"
+       "desde": "Vendes"
+      },
+      {
+       "prompt": "s1(config-vlan)#",
+       "cmd": "exit",
+       "desde": "Luego-0.4"
+      },
+      {
+       "prompt": "s1(config)#",
+       "cmd": "vlan 20",
+       "desde": "20"
+      },
+      {
+       "prompt": "s1(config-vlan)#",
+       "cmd": "name Compres",
+       "desde": "Compres"
+      },
+      {
+       "prompt": "s1(config-vlan)#",
+       "cmd": "exit",
+       "desde": "último-0.6"
+      },
+      {
+       "prompt": "s1(config)#",
+       "cmd": "vlan 30",
+       "desde": "30"
+      },
+      {
+       "prompt": "s1(config-vlan)#",
+       "cmd": "name Direccio",
+       "desde": "Direccio"
       },
       {
        "prompt": "s1(config-vlan)#",
@@ -151,8 +237,8 @@
    ]
   },
   {
-   "titulo": "ASIGNA EL PUERTO",
-   "texto": "Ahora el puerto donde está el PC: interface fa0/1. Lo ponemos en modo acceso, para un solo equipo, con switchport mode access. Y lo metemos en la VLAN con switchport access vlan 10.",
+   "titulo": "PUERTOS DE VENDES",
+   "texto": "Ahora los puertos. Con interface range cogemos del fa0/1 al fa0/8, los ponemos en modo acceso, y los metemos en la VLAN 10.",
    "efectos": [
     {
      "tipo": "posicion",
@@ -167,21 +253,6 @@
      "y1": 1110,
      "titulo": "s1 · CLI  (Packet Tracer)",
      "lineas": [
-      {
-       "prompt": "s1>",
-       "cmd": "enable",
-       "desde": -10,
-       "salida": [
-        "Password:"
-       ],
-       "aparece": -10
-      },
-      {
-       "prompt": "s1#",
-       "cmd": "configure terminal",
-       "desde": -10,
-       "aparece": -10
-      },
       {
        "prompt": "s1(config)#",
        "cmd": "vlan 10",
@@ -202,26 +273,67 @@
       },
       {
        "prompt": "s1(config)#",
-       "cmd": "interface fa0/1",
+       "cmd": "vlan 20",
+       "desde": -10,
+       "aparece": -10
+      },
+      {
+       "prompt": "s1(config-vlan)#",
+       "cmd": "name Compres",
+       "desde": -10,
+       "aparece": -10
+      },
+      {
+       "prompt": "s1(config-vlan)#",
+       "cmd": "exit",
+       "desde": -10,
+       "aparece": -10
+      },
+      {
+       "prompt": "s1(config)#",
+       "cmd": "vlan 30",
+       "desde": -10,
+       "aparece": -10
+      },
+      {
+       "prompt": "s1(config-vlan)#",
+       "cmd": "name Direccio",
+       "desde": -10,
+       "aparece": -10
+      },
+      {
+       "prompt": "s1(config-vlan)#",
+       "cmd": "exit",
+       "desde": -10,
+       "aparece": -10
+      },
+      {
+       "prompt": "s1(config)#",
+       "cmd": "interface range fa0/1 - 8",
        "desde": "interface"
       },
       {
-       "prompt": "s1(config-if)#",
+       "prompt": "s1(config-if-range)#",
        "cmd": "switchport mode access",
-       "desde": "switchport"
+       "desde": "acceso"
       },
       {
-       "prompt": "s1(config-if)#",
+       "prompt": "s1(config-if-range)#",
        "cmd": "switchport access vlan 10",
-       "desde": "metemos+1.0"
+       "desde": "metemos"
+      },
+      {
+       "prompt": "s1(config-if-range)#",
+       "cmd": "exit",
+       "desde": "metemos+2.4"
       }
      ]
     }
    ]
   },
   {
-   "titulo": "VARIOS PUERTOS A LA VEZ",
-   "texto": "Truco: con interface range configuras varios puertos de golpe. Por ejemplo, del fa0/2 al fa0/5, y repites los dos switchport.",
+   "titulo": "COMPRES Y DIRECCIÓ",
+   "texto": "Lo mismo para Compres, del fa0/9 al fa0/16, en la VLAN 20. Y para Direcció, del fa0/17 al fa0/24, en la VLAN 30.",
    "efectos": [
     {
      "tipo": "posicion",
@@ -237,29 +349,14 @@
      "titulo": "s1 · CLI  (Packet Tracer)",
      "lineas": [
       {
-       "prompt": "s1>",
-       "cmd": "enable",
-       "desde": -10,
-       "salida": [
-        "Password:"
-       ],
-       "aparece": -10
-      },
-      {
-       "prompt": "s1#",
-       "cmd": "configure terminal",
-       "desde": -10,
-       "aparece": -10
-      },
-      {
        "prompt": "s1(config)#",
-       "cmd": "vlan 10",
+       "cmd": "vlan 20",
        "desde": -10,
        "aparece": -10
       },
       {
        "prompt": "s1(config-vlan)#",
-       "cmd": "name Vendes",
+       "cmd": "name Compres",
        "desde": -10,
        "aparece": -10
       },
@@ -271,41 +368,80 @@
       },
       {
        "prompt": "s1(config)#",
-       "cmd": "interface fa0/1",
+       "cmd": "vlan 30",
        "desde": -10,
        "aparece": -10
       },
       {
-       "prompt": "s1(config-if)#",
-       "cmd": "switchport mode access",
+       "prompt": "s1(config-vlan)#",
+       "cmd": "name Direccio",
        "desde": -10,
        "aparece": -10
       },
       {
-       "prompt": "s1(config-if)#",
-       "cmd": "switchport access vlan 10",
-       "desde": -10,
-       "aparece": -10
-      },
-      {
-       "prompt": "s1(config-if)#",
+       "prompt": "s1(config-vlan)#",
        "cmd": "exit",
-       "desde": "Truco"
+       "desde": -10,
+       "aparece": -10
       },
       {
        "prompt": "s1(config)#",
-       "cmd": "interface range fa0/2 - 5",
-       "desde": "interface"
+       "cmd": "interface range fa0/1 - 8",
+       "desde": -10,
+       "aparece": -10
       },
       {
        "prompt": "s1(config-if-range)#",
        "cmd": "switchport mode access",
-       "desde": "repites"
+       "desde": -10,
+       "aparece": -10
       },
       {
        "prompt": "s1(config-if-range)#",
        "cmd": "switchport access vlan 10",
-       "desde": "repites+1.7"
+       "desde": -10,
+       "aparece": -10
+      },
+      {
+       "prompt": "s1(config-if-range)#",
+       "cmd": "exit",
+       "desde": -10,
+       "aparece": -10
+      },
+      {
+       "prompt": "s1(config)#",
+       "cmd": "interface range fa0/9 - 16",
+       "desde": "Compres"
+      },
+      {
+       "prompt": "s1(config-if-range)#",
+       "cmd": "switchport mode access",
+       "desde": "Compres+1.4"
+      },
+      {
+       "prompt": "s1(config-if-range)#",
+       "cmd": "switchport access vlan 20",
+       "desde": "20"
+      },
+      {
+       "prompt": "s1(config-if-range)#",
+       "cmd": "exit",
+       "desde": "Direcció-0.6"
+      },
+      {
+       "prompt": "s1(config)#",
+       "cmd": "interface range fa0/17 - 24",
+       "desde": "Direcció"
+      },
+      {
+       "prompt": "s1(config-if-range)#",
+       "cmd": "switchport mode access",
+       "desde": "Direcció+1.4"
+      },
+      {
+       "prompt": "s1(config-if-range)#",
+       "cmd": "switchport access vlan 30",
+       "desde": "30"
       }
      ]
     }
@@ -313,7 +449,7 @@
   },
   {
    "titulo": "COMPRUEBA",
-   "texto": "Vuelve con end y escribe show vlan brief. Es el comando más útil: verás la VLAN 10, Vendes, con todos sus puertos.",
+   "texto": "Vuelve con end y escribe show vlan brief: verás las tres VLAN, cada una con sus ocho puertos.",
    "efectos": [
     {
      "tipo": "posicion",
@@ -329,50 +465,26 @@
      "titulo": "s1 · CLI  (Packet Tracer)",
      "lineas": [
       {
-       "prompt": "s1(config)#",
-       "cmd": "vlan 10",
-       "desde": -10,
-       "aparece": -10
-      },
-      {
-       "prompt": "s1(config-vlan)#",
-       "cmd": "name Vendes",
-       "desde": -10,
-       "aparece": -10
-      },
-      {
-       "prompt": "s1(config-vlan)#",
-       "cmd": "exit",
-       "desde": -10,
-       "aparece": -10
-      },
-      {
-       "prompt": "s1(config)#",
-       "cmd": "interface fa0/1",
-       "desde": -10,
-       "aparece": -10
-      },
-      {
-       "prompt": "s1(config-if)#",
+       "prompt": "s1(config-if-range)#",
        "cmd": "switchport mode access",
        "desde": -10,
        "aparece": -10
       },
       {
-       "prompt": "s1(config-if)#",
+       "prompt": "s1(config-if-range)#",
        "cmd": "switchport access vlan 10",
        "desde": -10,
        "aparece": -10
       },
       {
-       "prompt": "s1(config-if)#",
+       "prompt": "s1(config-if-range)#",
        "cmd": "exit",
        "desde": -10,
        "aparece": -10
       },
       {
        "prompt": "s1(config)#",
-       "cmd": "interface range fa0/2 - 5",
+       "cmd": "interface range fa0/9 - 16",
        "desde": -10,
        "aparece": -10
       },
@@ -384,7 +496,31 @@
       },
       {
        "prompt": "s1(config-if-range)#",
-       "cmd": "switchport access vlan 10",
+       "cmd": "switchport access vlan 20",
+       "desde": -10,
+       "aparece": -10
+      },
+      {
+       "prompt": "s1(config-if-range)#",
+       "cmd": "exit",
+       "desde": -10,
+       "aparece": -10
+      },
+      {
+       "prompt": "s1(config)#",
+       "cmd": "interface range fa0/17 - 24",
+       "desde": -10,
+       "aparece": -10
+      },
+      {
+       "prompt": "s1(config-if-range)#",
+       "cmd": "switchport mode access",
+       "desde": -10,
+       "aparece": -10
+      },
+      {
+       "prompt": "s1(config-if-range)#",
+       "cmd": "switchport access vlan 30",
        "desde": -10,
        "aparece": -10
       },
@@ -399,10 +535,11 @@
        "desde": "show",
        "salida": [
         "VLAN Name      Status    Ports",
-        "---- --------- --------- ------------------",
-        "1    default   active    Fa0/6, Fa0/7, Fa0/8 ...",
-        "10   Vendes    active    Fa0/1, Fa0/2, Fa0/3,",
-        "                         Fa0/4, Fa0/5"
+        "---- --------- --------- -----------------",
+        "1    default   active    Gig0/1, Gig0/2",
+        "10   Vendes    active    Fa0/1, Fa0/2 ... Fa0/8",
+        "20   Compres   active    Fa0/9, Fa0/10 ... Fa0/16",
+        "30   Direccio  active    Fa0/17 ... Fa0/24"
        ]
       }
      ]
@@ -410,8 +547,8 @@
    ]
   },
   {
-   "titulo": "GUARDA Y PRUEBA",
-   "texto": "Guarda con copy running-config startup-config. Y la prueba de fuego: los PCs de la misma VLAN se hacen ping; los de VLANs distintas, no.",
+   "titulo": "GUARDA",
+   "texto": "Y no te olvides de guardar con copy running-config startup-config.",
    "efectos": [
     {
      "tipo": "posicion",
@@ -427,38 +564,14 @@
      "titulo": "s1 · CLI  (Packet Tracer)",
      "lineas": [
       {
-       "prompt": "s1(config-vlan)#",
+       "prompt": "s1(config-if-range)#",
        "cmd": "exit",
        "desde": -10,
        "aparece": -10
       },
       {
        "prompt": "s1(config)#",
-       "cmd": "interface fa0/1",
-       "desde": -10,
-       "aparece": -10
-      },
-      {
-       "prompt": "s1(config-if)#",
-       "cmd": "switchport mode access",
-       "desde": -10,
-       "aparece": -10
-      },
-      {
-       "prompt": "s1(config-if)#",
-       "cmd": "switchport access vlan 10",
-       "desde": -10,
-       "aparece": -10
-      },
-      {
-       "prompt": "s1(config-if)#",
-       "cmd": "exit",
-       "desde": -10,
-       "aparece": -10
-      },
-      {
-       "prompt": "s1(config)#",
-       "cmd": "interface range fa0/2 - 5",
+       "cmd": "interface range fa0/9 - 16",
        "desde": -10,
        "aparece": -10
       },
@@ -470,7 +583,31 @@
       },
       {
        "prompt": "s1(config-if-range)#",
-       "cmd": "switchport access vlan 10",
+       "cmd": "switchport access vlan 20",
+       "desde": -10,
+       "aparece": -10
+      },
+      {
+       "prompt": "s1(config-if-range)#",
+       "cmd": "exit",
+       "desde": -10,
+       "aparece": -10
+      },
+      {
+       "prompt": "s1(config)#",
+       "cmd": "interface range fa0/17 - 24",
+       "desde": -10,
+       "aparece": -10
+      },
+      {
+       "prompt": "s1(config-if-range)#",
+       "cmd": "switchport mode access",
+       "desde": -10,
+       "aparece": -10
+      },
+      {
+       "prompt": "s1(config-if-range)#",
+       "cmd": "switchport access vlan 30",
        "desde": -10,
        "aparece": -10
       },
@@ -486,10 +623,11 @@
        "desde": -10,
        "salida": [
         "VLAN Name      Status    Ports",
-        "---- --------- --------- ------------------",
-        "1    default   active    Fa0/6, Fa0/7, Fa0/8 ...",
-        "10   Vendes    active    Fa0/1, Fa0/2, Fa0/3,",
-        "                         Fa0/4, Fa0/5"
+        "---- --------- --------- -----------------",
+        "1    default   active    Gig0/1, Gig0/2",
+        "10   Vendes    active    Fa0/1, Fa0/2 ... Fa0/8",
+        "20   Compres   active    Fa0/9, Fa0/10 ... Fa0/16",
+        "30   Direccio  active    Fa0/17 ... Fa0/24"
        ],
        "aparece": -10
       },
@@ -501,41 +639,81 @@
         "Building configuration...",
         "[OK]"
        ]
+      },
+      {
+       "prompt": "s1#",
+       "cmd": "",
+       "desde": "copy+3"
       }
      ]
+    }
+   ]
+  },
+  {
+   "titulo": "PRUEBA CON PING",
+   "texto": "Ahora la prueba. Pon a cada PC una IP de la misma red. El PC0 hace ping a su compañero de Vendes y responde. Pero si hace ping a uno de Compres, nada: están en VLANs distintas.",
+   "efectos": [
+    {
+     "tipo": "posicion",
+     "x": 905,
+     "y": 1335,
+     "escala": 0.4,
+     "desde": -1
     },
     {
-     "tipo": "sello",
-     "texto": "MISMA VLAN: PING ✓",
-     "color": "#27C93F",
-     "pos": [
-      390,
-      1210
+     "tipo": "topologia",
+     "desde": 0,
+     "puertos": [
+      "Fa0/1",
+      "Fa0/2",
+      "Fa0/9",
+      "Fa0/10",
+      "Fa0/17",
+      "Fa0/18"
      ],
-     "size": 50,
-     "rot": -6,
-     "desde": "misma"
-    },
-    {
-     "tipo": "sello",
-     "texto": "DISTINTA: PING ✗",
-     "color": "#E63946",
-     "pos": [
-      390,
-      1340
+     "vlans": [
+      {
+       "num": 10,
+       "nombre": "VENDES",
+       "color": "#3A86FF",
+       "desde": -1
+      },
+      {
+       "num": 20,
+       "nombre": "COMPRES",
+       "color": "#FF7F50",
+       "desde": -1
+      },
+      {
+       "num": 30,
+       "nombre": "DIRECCIO",
+       "color": "#9B5DE5",
+       "desde": -1
+      }
      ],
-     "size": 50,
-     "rot": 4,
-     "desde": "distintas"
+     "pings": [
+      {
+       "de": 0,
+       "a": 1,
+       "ok": true,
+       "desde": "compañero"
+      },
+      {
+       "de": 0,
+       "a": 2,
+       "ok": false,
+       "desde": "Compres"
+      }
+     ]
     }
    ]
   }
  ],
  "encuesta": [],
  "portada": {
-  "escena": 0,
-  "t": "separadas",
-  "linea1": "VLANs EN EL",
+  "escena": 1,
+  "t": "Direcció+1",
+  "linea1": "3 VLANs EN EL",
   "linea2": "SWITCH CISCO",
   "color2": "#FFD23F",
   "banda": "PACKET TRACER · PASO A PASO",

@@ -10,7 +10,7 @@
  "escenas": [
   {
    "titulo": "CONFIGURAR UN SWITCH",
-   "texto": "Vamos a configurar un switch Cisco desde cero en Packet Tracer. Los cables ya los sabes poner, así que vamos directos a la terminal. Haz clic en el switch, abre la pestaña CLI y pulsa Enter.",
+   "texto": "Vamos a configurar un switch Cisco desde cero en Packet Tracer. Los cables ya los sabes poner, así que vamos directos a lo importante.",
    "efectos": [
     {
      "tipo": "entrada"
@@ -18,25 +18,32 @@
     {
      "tipo": "mirar",
      "x": "vaiven"
+    }
+   ]
+  },
+  {
+   "titulo": "NUESTRA RED",
+   "texto": "Esta es la red: un switch en el centro y seis PCs conectados con cable directo. Cuando las luces del cable se ponen verdes, hay enlace. Haz clic en el switch, abre la pestaña CLI y pulsa Enter.",
+   "efectos": [
+    {
+     "tipo": "posicion",
+     "x": 905,
+     "y": 1335,
+     "escala": 0.4,
+     "desde": -1
     },
     {
-     "tipo": "etiqueta",
-     "texto": "PESTAÑA «CLI»",
-     "pos": [
-      540,
-      520
+     "tipo": "topologia",
+     "desde": 0,
+     "puertos": [
+      "Fa0/1",
+      "Fa0/2",
+      "Fa0/3",
+      "Fa0/4",
+      "Fa0/5",
+      "Fa0/6"
      ],
-     "fondo": "#FFD23F",
-     "desde": "CLI"
-    },
-    {
-     "tipo": "etiqueta",
-     "texto": "PULSA ENTER ⏎",
-     "pos": [
-      540,
-      640
-     ],
-     "desde": "Enter"
+     "clic": "clic"
     }
    ]
   },
@@ -575,8 +582,8 @@
  ],
  "encuesta": [],
  "portada": {
-  "escena": 0,
-  "t": "terminal",
+  "escena": 1,
+  "t": "verdes",
   "linea1": "CONFIGURACIÓN",
   "linea2": "BÁSICA DEL SWITCH",
   "color2": "#FFD23F",

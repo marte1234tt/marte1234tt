@@ -11,7 +11,7 @@ from motor.musica import musica
 
 COLA = 1.4          # segundos extra al final
 INICIO_DEFECTO = 0.3  # si una pista no aparece
-CAMPOS_TIEMPO = ("desde", "hasta", "desde_der", "asustado", "aparece")  # campos de efectos que se dan como pista
+CAMPOS_TIEMPO = ("desde", "hasta", "desde_der", "asustado", "aparece", "clic")  # campos de efectos que se dan como pista
 
 
 def norm(s: str) -> str:

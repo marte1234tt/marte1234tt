@@ -262,6 +262,94 @@ const EFECTOS = {
       });
     },
   },
+  topologia: {
+    // Pantalla tipo Packet Tracer: switch en el centro y 6 PCs (2 izquierda, 2 centro, 2 derecha).
+    POS: [[190, 650], [190, 960], [540, 585], [540, 1000], [890, 650], [890, 960]], SW: [540, 792],
+    estado(c, e, td) { if (e.senala && td > 0) c.P.objetivos[e.extremidad ?? 0] = { g: [600, 800], w: .97 }; },
+    dibujo(c, e, td, t) {
+      const a = vis(e, t); if (a <= .01) return;
+      const { POS, SW } = EFECTOS.topologia, OV = c.OV, X0 = 60, X1 = 1020, Y0 = 430, Y1 = 1110;
+      const g = el("g", { opacity: a }, OV);
+      el("rect", { x: X0 + 8, y: Y0 + 12, width: X1 - X0, height: Y1 - Y0, rx: 20, fill: "#000", opacity: .35 }, g);
+      el("rect", { x: X0, y: Y0, width: X1 - X0, height: Y1 - Y0, rx: 20, fill: "#EEF1F5", stroke: "#2F3B4A", "stroke-width": 4 }, g);
+      el("rect", { x: X0, y: Y0, width: X1 - X0, height: 52, rx: 20, fill: "#2F3B4A" }, g); el("rect", { x: X0, y: Y0 + 30, width: X1 - X0, height: 22, fill: "#2F3B4A" }, g);
+      el("text", { x: X0 + 28, y: Y0 + 35, "font-size": 26, "font-weight": 700, fill: "#fff" }, g).textContent = "Cisco Packet Tracer";
+      el("text", { x: X1 - 28, y: Y0 + 35, "font-size": 22, "font-weight": 700, fill: "#9FB3C8", "text-anchor": "end" }, g).textContent = "Logical";
+      const vlanDe = i => { const v = (e.vlans || [])[Math.floor(i / 2)]; return v && t >= (v.desde ?? 0) ? v : null; };
+      const k = j => easeBack((td - .2 - j * .12) / .45);
+      // cables
+      POS.forEach(([x, y], i) => {
+        const kc = clamp((td - .9 - i * .08) / .4); if (kc <= 0) return;
+        const sx = SW[0] + (i % 2 ? 1 : -1) * 0 + [-80, -50, -20, 20, 50, 80][i], sy = SW[1] + (y < SW[1] ? -35 : 35);
+        const py = y + (y < SW[1] ? 55 : -55), v = vlanDe(i);
+        el("line", { "data-cable": i, x1: x, y1: py, x2: lerp(x, sx, kc), y2: lerp(py, sy, kc), stroke: v ? v.color : "#1B1B1B", "stroke-width": v ? 6 : 4 }, g);
+        const verde = td > 2.2 + i * .1;
+        for (const [lx, ly] of [[lerp(x, sx, .12), lerp(py, sy, .12)], [lerp(x, sx, .88), lerp(py, sy, .88)]])
+          if (kc >= 1) el("polygon", { points: `${lx - 9},${ly + 7} ${lx + 9},${ly + 7} ${lx},${ly - 9}`, fill: verde ? "#27C93F" : "#FF9F1C" }, g);
+        if (kc >= 1 && e.puertos) el("text", { x: lerp(x, sx, .7) + (x < SW[0] ? -6 : x > SW[0] ? 6 : 34), y: lerp(py, sy, .7), "font-size": 22, "font-weight": 700, fill: "#2F3B4A", "text-anchor": x < SW[0] ? "end" : "start" }, g).textContent = e.puertos[i];
+      });
+      // switch
+      const ks = easeBack((td - .05) / .45);
+      if (ks > 0) {
+        const sg = el("g", { "data-switch": 1, transform: `translate(${SW[0]},${SW[1]}) scale(${ks})` }, g);
+        el("rect", { x: -120, y: -38, width: 240, height: 76, rx: 12, fill: "#4A6FA5", stroke: "#1F3A5F", "stroke-width": 4 }, sg);
+        for (let j = 0; j < 12; j++) el("rect", { x: -100 + j * 17, y: -14, width: 12, height: 12, rx: 2, fill: "#1F3A5F" }, sg);
+        for (let j = 0; j < 12; j++) el("rect", { x: -100 + j * 17, y: 4, width: 12, height: 12, rx: 2, fill: "#1F3A5F" }, sg);
+        el("text", { x: 145, y: 10, "font-size": 24, "font-weight": 800, fill: "#2F3B4A" }, sg).textContent = "Switch0";
+      }
+      // PCs
+      POS.forEach(([x, y], i) => {
+        const kp = k(i); if (kp <= 0) return; const v = vlanDe(i);
+        const pg = el("g", { "data-pc": i, transform: `translate(${x},${y}) scale(${kp})` }, g);
+        el("rect", { x: -58, y: -45, width: 116, height: 78, rx: 8, fill: "#DDE3EA", stroke: "#2F3B4A", "stroke-width": 4 }, pg);
+        el("rect", { "data-pantalla": 1, x: -48, y: -36, width: 96, height: 58, rx: 4, fill: v ? v.color : "#7FB3E6" }, pg);
+        el("rect", { x: -10, y: 33, width: 20, height: 14, fill: "#2F3B4A" }, pg); el("rect", { x: -34, y: 45, width: 68, height: 9, rx: 4, fill: "#2F3B4A" }, pg);
+        const arriba = y < SW[1] && i % 2 === 0 && x !== SW[0] ? true : y < SW[1];
+        el("text", { x: 0, y: arriba ? -58 : 84, "text-anchor": "middle", "font-size": 24, "font-weight": 800, fill: "#2F3B4A" }, pg).textContent = "PC" + i;
+        if (v) el("text", { x: 0, y: 2, "text-anchor": "middle", "font-size": 21, "font-weight": 900, fill: "#fff" }, pg).textContent = "VLAN " + v.num;
+      });
+      // leyenda de VLAN
+      (e.vlans || []).forEach((v, j) => {
+        if (t < (v.desde ?? 0)) return; const x = X0 + 30 + j * 310, y = Y1 - 50;
+        const lg = el("g", { opacity: clamp((t - (v.desde ?? 0)) / .3) }, g);
+        el("rect", { x, y, width: 290, height: 38, rx: 19, fill: v.color }, lg);
+        el("text", { x: x + 145, y: y + 27, "text-anchor": "middle", "font-size": 22, "font-weight": 900, fill: "#fff" }, lg).textContent = `VLAN ${v.num} · ${v.nombre || ""}`;
+      });
+      // ping animado
+      (e.pings || []).forEach(pi => {
+        const tp = t - (pi.desde ?? 0); if (tp < 0 || tp > 4.5) return;
+        const A = POS[pi.de], B = POS[pi.a];
+        let pt = null;
+        if (tp < .8) pt = [lerp(A[0], SW[0], tp / .8), lerp(A[1], SW[1], tp / .8)];
+        else if (pi.ok && tp < 1.6) pt = [lerp(SW[0], B[0], (tp - .8) / .8), lerp(SW[1], B[1], (tp - .8) / .8)];
+        if (pt) { const sg = el("g", { "data-paquete": 1, transform: `translate(${pt[0]},${pt[1]})` }, g);
+          el("rect", { x: -26, y: -18, width: 52, height: 36, rx: 4, fill: "#fff", stroke: "#2F3B4A", "stroke-width": 3 }, sg);
+          el("path", { d: "M-26,-18 L0,4 L26,-18", fill: "none", stroke: "#2F3B4A", "stroke-width": 3 }, sg); }
+        const fin = pi.ok ? (tp > 1.6 ? B : null) : (tp > .8 ? SW : null);
+        if (fin) { const m = el("text", { x: fin[0] + (pi.ok ? 0 : 0), y: fin[1] - (pi.ok ? 70 : 60), "text-anchor": "middle", "font-size": 64, "font-weight": 900,
+          fill: pi.ok ? "#27C93F" : "#E63946", stroke: "#fff", "stroke-width": 8, "paint-order": "stroke" }, g); m.textContent = pi.ok ? "✓ ping" : "✗ ping"; }
+      });
+      // cursor que hace clic en el switch y abre la pestaña CLI
+      if (e.clic != null) {
+        const tc = t - e.clic, kk = easeInOut((tc + 1) / 1);
+        if (tc > -1 && tc < 6) {
+          const cx = lerp(990, SW[0] + 30, kk), cy = lerp(1090, SW[1] + 10, kk);
+          if (tc > 0 && tc < .5) el("circle", { cx: SW[0] + 30, cy: SW[1] + 10, r: 20 + tc * 80, fill: "none", stroke: "#FFD23F", "stroke-width": 6, opacity: 1 - tc * 2 }, g);
+          if (tc > .3) {
+            const pg = el("g", { transform: `translate(540,590) scale(${easeBack((tc - .3) / .35)})` }, g);
+            el("rect", { x: -260, y: -70, width: 520, height: 140, rx: 14, fill: "#fff", stroke: "#2F3B4A", "stroke-width": 4 }, pg);
+            el("text", { x: -240, y: -32, "font-size": 24, "font-weight": 800, fill: "#2F3B4A" }, pg).textContent = "Switch0";
+            [["Physical", -150], ["Config", 0], ["CLI", 150]].forEach(([n, x]) => {
+              const on = n === "CLI" && tc > .9;
+              el("rect", { x: x - 65, y: -8, width: 130, height: 54, rx: 8, fill: on ? "#3A86FF" : "#E3E8EE", stroke: on ? "#1F3A93" : "#B8C2CE", "stroke-width": 3 }, pg);
+              el("text", { x, y: 28, "text-anchor": "middle", "font-size": 26, "font-weight": 800, fill: on ? "#fff" : "#2F3B4A" }, pg).textContent = n;
+            });
+          }
+          el("path", { d: `M${cx},${cy} l0,46 l12,-12 l10,22 l9,-4 l-10,-22 l17,0 Z`, fill: "#fff", stroke: "#111", "stroke-width": 3 }, g);
+        }
+      }
+    },
+  },
   contador: {
     dibujo(c, e, td, t) {
       const a = vis(e, t); if (a <= .01) return; const [x, y] = e.pos || [540, 560];

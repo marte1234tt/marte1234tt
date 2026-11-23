@@ -153,3 +153,27 @@ test('terminal: escribe comandos, corta líneas largas y muestra el modo', async
   assert.deepEqual(errores, []);
   await p.close();
 });
+
+test('topología: switch, 6 PCs cableados, colores de VLAN y ping animado', async () => {
+  const topo = { tipo: 'topologia', desde: 0, vlans: [{ num: 10, color: '#3A86FF', desde: 0 }, { num: 20, color: '#FF7F50', desde: 0 }, { num: 30, color: '#9B5DE5', desde: 0 }],
+    puertos: ['Fa0/1', 'Fa0/2', 'Fa0/9', 'Fa0/10', 'Fa0/17', 'Fa0/18'], clic: 1,
+    pings: [{ de: 0, a: 1, ok: true, desde: 3 }, { de: 0, a: 2, ok: false, desde: 6 }] };
+  const { p, errores } = await pagina(cfgBase([{ titulo: 'X', start: 0, dur: 10, efectos: [topo] }]));
+  await p.evaluate(() => render(3.6));
+  const n = await p.evaluate(() => ({ pcs: document.querySelectorAll('#overlay [data-pc]').length,
+    cables: document.querySelectorAll('#overlay [data-cable]').length, sw: document.querySelectorAll('#overlay [data-switch]').length,
+    sobre: document.querySelectorAll('#overlay [data-paquete]').length,
+    fill0: document.querySelector('#overlay [data-pc="0"] [data-pantalla]').getAttribute('fill'),
+    fill2: document.querySelector('#overlay [data-pc="2"] [data-pantalla]').getAttribute('fill') }));
+  assert.deepEqual([n.pcs, n.cables, n.sw, n.sobre], [6, 6, 1, 1]);
+  assert.equal(n.fill0, '#3A86FF'); assert.equal(n.fill2, '#FF7F50');
+  const pos = await p.evaluate(() => [...document.querySelectorAll('#overlay [data-pc]')].map(g => { const r = g.getBoundingClientRect(); return [Math.round(r.x + r.width / 2), Math.round(r.y + r.height / 2)]; }));
+  // izquierda: dos apilados; centro: uno encima y otro debajo del switch; derecha: dos apilados
+  assert.ok(pos[0][0] === pos[1][0] && pos[0][1] < pos[1][1]);
+  assert.ok(pos[2][0] === pos[3][0] && pos[2][1] < pos[3][1] && pos[0][0] < pos[2][0] && pos[2][0] < pos[4][0]);
+  assert.ok(pos[4][0] === pos[5][0]);
+  await p.evaluate(() => render(8));
+  const fallo = await p.evaluate(() => [...document.querySelectorAll('#overlay text')].some(t => t.textContent.includes('✗')));
+  assert.ok(fallo); assert.deepEqual(errores, []);
+  await p.close();
+});
