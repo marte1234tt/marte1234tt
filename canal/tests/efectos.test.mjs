@@ -129,3 +129,27 @@ test('abrir() de render.js recoge los avisos de la página', async () => {
   assert.ok(p.avisos.some(a => a.includes('zzz')), JSON.stringify(p.avisos));
   await p.close();
 });
+
+test('terminal: escribe comandos, corta líneas largas y muestra el modo', async () => {
+  const term = { tipo: 'terminal', desde: 0, lineas: [
+    { prompt: 'Switch>', cmd: 'enable', desde: 0.5 },
+    { prompt: 'Switch#', cmd: 'configure terminal', desde: 1.5 },
+    { prompt: 's1(config)#', cmd: 'banner motd #Acces nomes per a personal autoritzat del departament#', desde: 3 },
+    { prompt: 's1(config)#', cmd: 'end', desde: 6, salida: ['Building configuration...', '[OK]'] }] };
+  const { p, errores } = await pagina(cfgBase([{ titulo: 'X', start: 0, dur: 10, efectos: [term] }]));
+  await p.evaluate(() => render(9));
+  const filas = await p.evaluate(() => [...document.querySelectorAll('#overlay [data-fila]')].map(t => t.textContent));
+  assert.ok(filas.some(f => f.includes('Switch> enable')), JSON.stringify(filas));
+  assert.ok(filas.some(f => f.includes('[OK]')));
+  assert.ok(filas.every(f => f.length <= 52), 'línea sin cortar');
+  const estilo = await p.evaluate(() => { const s = getComputedStyle(document.querySelector('#overlay [data-fila]')); return [s.fontFamily, s.whiteSpace]; });
+  assert.match(estilo[0], /Mono/); assert.equal(estilo[1], 'pre');
+  const modo = await p.evaluate(() => document.querySelector('#overlay [data-modo]').textContent);
+  assert.equal(modo, 'CONFIG. GLOBAL');
+  // a mitad de escribir: el comando aparece a medias
+  await p.evaluate(() => render(1.6));
+  const parcial = await p.evaluate(() => [...document.querySelectorAll('#overlay [data-fila]')].map(t => t.textContent).join('|'));
+  assert.ok(!parcial.includes('configure terminal'), parcial);
+  assert.deepEqual(errores, []);
+  await p.close();
+});

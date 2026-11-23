@@ -1,0 +1,590 @@
+{
+ "tema": "Basica configuración del switch",
+ "categoria": "tutorial",
+ "personaje": "robot",
+ "etiqueta": "TUTORIAL · PACKET TRACER",
+ "duracion": {
+  "min": 30,
+  "max": 300
+ },
+ "escenas": [
+  {
+   "titulo": "CONFIGURAR UN SWITCH",
+   "texto": "Vamos a configurar un switch Cisco desde cero en Packet Tracer. Los cables ya los sabes poner, así que vamos directos a la terminal. Haz clic en el switch, abre la pestaña CLI y pulsa Enter.",
+   "efectos": [
+    {
+     "tipo": "entrada"
+    },
+    {
+     "tipo": "mirar",
+     "x": "vaiven"
+    },
+    {
+     "tipo": "etiqueta",
+     "texto": "PESTAÑA «CLI»",
+     "pos": [
+      540,
+      520
+     ],
+     "fondo": "#FFD23F",
+     "desde": "CLI"
+    },
+    {
+     "tipo": "etiqueta",
+     "texto": "PULSA ENTER ⏎",
+     "pos": [
+      540,
+      640
+     ],
+     "desde": "Enter"
+    }
+   ]
+  },
+  {
+   "titulo": "USUARIO → PRIVILEGIADO",
+   "texto": "Verás Switch y el símbolo mayor que: es el modo usuario, el más limitado. Escribe enable y el símbolo cambia a almohadilla. Ya estás en modo privilegiado.",
+   "efectos": [
+    {
+     "tipo": "posicion",
+     "x": 905,
+     "y": 1335,
+     "escala": 0.4,
+     "desde": -1
+    },
+    {
+     "tipo": "terminal",
+     "desde": 0,
+     "y1": 1110,
+     "titulo": "s1 · CLI  (Packet Tracer)",
+     "lineas": [
+      {
+       "prompt": "Switch>",
+       "cmd": "enable",
+       "desde": "enable",
+       "aparece": 0.2
+      },
+      {
+       "prompt": "Switch#",
+       "cmd": "",
+       "desde": "almohadilla"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "titulo": "CONFIGURACIÓN GLOBAL",
+   "texto": "Ahora escribe configure terminal, o en corto, conf t. Entras en la configuración global: fíjate en el paréntesis config del prompt.",
+   "efectos": [
+    {
+     "tipo": "posicion",
+     "x": 905,
+     "y": 1335,
+     "escala": 0.4,
+     "desde": -1
+    },
+    {
+     "tipo": "terminal",
+     "desde": 0,
+     "y1": 1110,
+     "titulo": "s1 · CLI  (Packet Tracer)",
+     "lineas": [
+      {
+       "prompt": "Switch>",
+       "cmd": "enable",
+       "desde": -10,
+       "aparece": -10
+      },
+      {
+       "prompt": "Switch#",
+       "cmd": "configure terminal",
+       "desde": "configure"
+      },
+      {
+       "prompt": "Switch(config)#",
+       "cmd": "",
+       "desde": "global"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "titulo": "PONLE NOMBRE",
+   "texto": "Lo primero, el nombre: hostname s1. Mira el prompt: ya no pone Switch, ahora pone s1.",
+   "efectos": [
+    {
+     "tipo": "posicion",
+     "x": 905,
+     "y": 1335,
+     "escala": 0.4,
+     "desde": -1
+    },
+    {
+     "tipo": "terminal",
+     "desde": 0,
+     "y1": 1110,
+     "titulo": "s1 · CLI  (Packet Tracer)",
+     "lineas": [
+      {
+       "prompt": "Switch>",
+       "cmd": "enable",
+       "desde": -10,
+       "aparece": -10
+      },
+      {
+       "prompt": "Switch#",
+       "cmd": "configure terminal",
+       "desde": -10,
+       "aparece": -10
+      },
+      {
+       "prompt": "Switch(config)#",
+       "cmd": "hostname s1",
+       "desde": "hostname"
+      },
+      {
+       "prompt": "s1(config)#",
+       "cmd": "",
+       "desde": "Mira"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "titulo": "CONTRASEÑA DE CONSOLA",
+   "texto": "Protegemos la consola. Escribe line console 0. Luego password y la contraseña, por ejemplo Clau consola 1. Y muy importante, login: sin login, la contraseña no se pide. Sal con exit.",
+   "efectos": [
+    {
+     "tipo": "posicion",
+     "x": 905,
+     "y": 1335,
+     "escala": 0.4,
+     "desde": -1
+    },
+    {
+     "tipo": "terminal",
+     "desde": 0,
+     "y1": 1110,
+     "titulo": "s1 · CLI  (Packet Tracer)",
+     "lineas": [
+      {
+       "prompt": "Switch>",
+       "cmd": "enable",
+       "desde": -10,
+       "aparece": -10
+      },
+      {
+       "prompt": "Switch#",
+       "cmd": "configure terminal",
+       "desde": -10,
+       "aparece": -10
+      },
+      {
+       "prompt": "Switch(config)#",
+       "cmd": "hostname s1",
+       "desde": -10,
+       "aparece": -10
+      },
+      {
+       "prompt": "s1(config)#",
+       "cmd": "line console 0",
+       "desde": "line"
+      },
+      {
+       "prompt": "s1(config-line)#",
+       "cmd": "password Clau_consola1",
+       "desde": "password"
+      },
+      {
+       "prompt": "s1(config-line)#",
+       "cmd": "login",
+       "desde": "login"
+      },
+      {
+       "prompt": "s1(config-line)#",
+       "cmd": "exit",
+       "desde": "exit"
+      },
+      {
+       "prompt": "s1(config)#",
+       "cmd": "",
+       "desde": "exit+1.4"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "titulo": "MENSAJE DE AVISO",
+   "texto": "Ahora, un aviso para quien se conecte: banner motd, y el texto entre almohadillas.",
+   "efectos": [
+    {
+     "tipo": "posicion",
+     "x": 905,
+     "y": 1335,
+     "escala": 0.4,
+     "desde": -1
+    },
+    {
+     "tipo": "terminal",
+     "desde": 0,
+     "y1": 1110,
+     "titulo": "s1 · CLI  (Packet Tracer)",
+     "lineas": [
+      {
+       "prompt": "Switch>",
+       "cmd": "enable",
+       "desde": -10,
+       "aparece": -10
+      },
+      {
+       "prompt": "Switch#",
+       "cmd": "configure terminal",
+       "desde": -10,
+       "aparece": -10
+      },
+      {
+       "prompt": "Switch(config)#",
+       "cmd": "hostname s1",
+       "desde": -10,
+       "aparece": -10
+      },
+      {
+       "prompt": "s1(config)#",
+       "cmd": "line console 0",
+       "desde": -10,
+       "aparece": -10
+      },
+      {
+       "prompt": "s1(config-line)#",
+       "cmd": "password Clau_consola1",
+       "desde": -10,
+       "aparece": -10
+      },
+      {
+       "prompt": "s1(config-line)#",
+       "cmd": "login",
+       "desde": -10,
+       "aparece": -10
+      },
+      {
+       "prompt": "s1(config-line)#",
+       "cmd": "exit",
+       "desde": -10,
+       "aparece": -10
+      },
+      {
+       "prompt": "s1(config)#",
+       "cmd": "banner motd #Accés només per a personal autoritzat#",
+       "desde": "banner"
+      },
+      {
+       "prompt": "s1(config)#",
+       "cmd": "",
+       "desde": "almohadillas+0.6"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "titulo": "CIFRAR CONTRASEÑAS",
+   "texto": "Con service password-encryption, las contraseñas que estaban a la vista se guardan cifradas. Y con enable secret, más la clave, proteges el modo privilegiado.",
+   "efectos": [
+    {
+     "tipo": "posicion",
+     "x": 905,
+     "y": 1335,
+     "escala": 0.4,
+     "desde": -1
+    },
+    {
+     "tipo": "terminal",
+     "desde": 0,
+     "y1": 1110,
+     "titulo": "s1 · CLI  (Packet Tracer)",
+     "lineas": [
+      {
+       "prompt": "Switch>",
+       "cmd": "enable",
+       "desde": -10,
+       "aparece": -10
+      },
+      {
+       "prompt": "Switch#",
+       "cmd": "configure terminal",
+       "desde": -10,
+       "aparece": -10
+      },
+      {
+       "prompt": "Switch(config)#",
+       "cmd": "hostname s1",
+       "desde": -10,
+       "aparece": -10
+      },
+      {
+       "prompt": "s1(config)#",
+       "cmd": "line console 0",
+       "desde": -10,
+       "aparece": -10
+      },
+      {
+       "prompt": "s1(config-line)#",
+       "cmd": "password Clau_consola1",
+       "desde": -10,
+       "aparece": -10
+      },
+      {
+       "prompt": "s1(config-line)#",
+       "cmd": "login",
+       "desde": -10,
+       "aparece": -10
+      },
+      {
+       "prompt": "s1(config-line)#",
+       "cmd": "exit",
+       "desde": -10,
+       "aparece": -10
+      },
+      {
+       "prompt": "s1(config)#",
+       "cmd": "banner motd #Accés només per a personal autoritzat#",
+       "desde": -10,
+       "aparece": -10
+      },
+      {
+       "prompt": "s1(config)#",
+       "cmd": "service password-encryption",
+       "desde": "service"
+      },
+      {
+       "prompt": "s1(config)#",
+       "cmd": "enable secret Clau_admin1",
+       "desde": "enable"
+      },
+      {
+       "prompt": "s1(config)#",
+       "cmd": "",
+       "desde": "proteges"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "titulo": "¡GUARDA!",
+   "texto": "Ya casi está. Escribe end para volver al modo privilegiado, y después copy running-config startup-config para guardar. Si no guardas, al reiniciar se pierde todo.",
+   "efectos": [
+    {
+     "tipo": "posicion",
+     "x": 905,
+     "y": 1335,
+     "escala": 0.4,
+     "desde": -1
+    },
+    {
+     "tipo": "terminal",
+     "desde": 0,
+     "y1": 1110,
+     "titulo": "s1 · CLI  (Packet Tracer)",
+     "lineas": [
+      {
+       "prompt": "Switch#",
+       "cmd": "configure terminal",
+       "desde": -10,
+       "aparece": -10
+      },
+      {
+       "prompt": "Switch(config)#",
+       "cmd": "hostname s1",
+       "desde": -10,
+       "aparece": -10
+      },
+      {
+       "prompt": "s1(config)#",
+       "cmd": "line console 0",
+       "desde": -10,
+       "aparece": -10
+      },
+      {
+       "prompt": "s1(config-line)#",
+       "cmd": "password Clau_consola1",
+       "desde": -10,
+       "aparece": -10
+      },
+      {
+       "prompt": "s1(config-line)#",
+       "cmd": "login",
+       "desde": -10,
+       "aparece": -10
+      },
+      {
+       "prompt": "s1(config-line)#",
+       "cmd": "exit",
+       "desde": -10,
+       "aparece": -10
+      },
+      {
+       "prompt": "s1(config)#",
+       "cmd": "banner motd #Accés només per a personal autoritzat#",
+       "desde": -10,
+       "aparece": -10
+      },
+      {
+       "prompt": "s1(config)#",
+       "cmd": "service password-encryption",
+       "desde": -10,
+       "aparece": -10
+      },
+      {
+       "prompt": "s1(config)#",
+       "cmd": "enable secret Clau_admin1",
+       "desde": -10,
+       "aparece": -10
+      },
+      {
+       "prompt": "s1(config)#",
+       "cmd": "end",
+       "desde": "end"
+      },
+      {
+       "prompt": "s1#",
+       "cmd": "copy running-config startup-config",
+       "desde": "copy",
+       "salida": [
+        "Destination filename [startup-config]? ⏎",
+        "Building configuration...",
+        "[OK]"
+       ]
+      },
+      {
+       "prompt": "s1#",
+       "cmd": "",
+       "desde": "reiniciar"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "titulo": "COMPRUEBA",
+   "texto": "Para comprobarlo todo, escribe show running-config. ¡Y listo! Switch configurado. En el siguiente vídeo, las VLAN.",
+   "efectos": [
+    {
+     "tipo": "posicion",
+     "x": 905,
+     "y": 1335,
+     "escala": 0.4,
+     "desde": -1
+    },
+    {
+     "tipo": "terminal",
+     "desde": 0,
+     "y1": 1110,
+     "titulo": "s1 · CLI  (Packet Tracer)",
+     "lineas": [
+      {
+       "prompt": "s1(config)#",
+       "cmd": "line console 0",
+       "desde": -10,
+       "aparece": -10
+      },
+      {
+       "prompt": "s1(config-line)#",
+       "cmd": "password Clau_consola1",
+       "desde": -10,
+       "aparece": -10
+      },
+      {
+       "prompt": "s1(config-line)#",
+       "cmd": "login",
+       "desde": -10,
+       "aparece": -10
+      },
+      {
+       "prompt": "s1(config-line)#",
+       "cmd": "exit",
+       "desde": -10,
+       "aparece": -10
+      },
+      {
+       "prompt": "s1(config)#",
+       "cmd": "banner motd #Accés només per a personal autoritzat#",
+       "desde": -10,
+       "aparece": -10
+      },
+      {
+       "prompt": "s1(config)#",
+       "cmd": "service password-encryption",
+       "desde": -10,
+       "aparece": -10
+      },
+      {
+       "prompt": "s1(config)#",
+       "cmd": "enable secret Clau_admin1",
+       "desde": -10,
+       "aparece": -10
+      },
+      {
+       "prompt": "s1(config)#",
+       "cmd": "end",
+       "desde": -10,
+       "aparece": -10
+      },
+      {
+       "prompt": "s1#",
+       "cmd": "copy running-config startup-config",
+       "desde": -10,
+       "salida": [
+        "Destination filename [startup-config]? ⏎",
+        "Building configuration...",
+        "[OK]"
+       ],
+       "aparece": -10
+      },
+      {
+       "prompt": "s1#",
+       "cmd": "show running-config",
+       "desde": "show",
+       "salida": [
+        "hostname s1",
+        "enable secret 5 $1$mERr$9cTjUIEqNGurQiFU.ZeCi1",
+        "banner motd ^CAccés només per a personal autoritzat^C",
+        "line con 0",
+        " password 7 0822455D0A16",
+        " login"
+       ]
+      }
+     ]
+    },
+    {
+     "tipo": "sello",
+     "texto": "¡LISTO!",
+     "color": "#27C93F",
+     "pos": [
+      360,
+      1250
+     ],
+     "size": 90,
+     "desde": "listo"
+    }
+   ]
+  }
+ ],
+ "encuesta": [],
+ "portada": {
+  "escena": 0,
+  "t": "terminal",
+  "linea1": "CONFIGURACIÓN",
+  "linea2": "BÁSICA DEL SWITCH",
+  "color2": "#FFD23F",
+  "banda": "PACKET TRACER · PASO A PASO",
+  "color_banda": "#3A86FF"
+ },
+ "publicacion": {},
+ "fuentes": [
+  "Cheat sheet Xarxes locals (MP0225, AEA2)"
+ ]
+}

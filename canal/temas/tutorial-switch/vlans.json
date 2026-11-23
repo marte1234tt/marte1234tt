@@ -1,0 +1,548 @@
+{
+ "tema": "Vlans configurar VLANs en el switch",
+ "categoria": "tutorial",
+ "personaje": "robot",
+ "etiqueta": "TUTORIAL · PACKET TRACER",
+ "duracion": {
+  "min": 30,
+  "max": 300
+ },
+ "escenas": [
+  {
+   "titulo": "¿QUÉ ES UNA VLAN?",
+   "texto": "Una VLAN divide un switch en varias redes separadas. Los equipos solo se ven con los de su misma VLAN, como si estuvieran en switches distintos. Vamos a crear la VLAN 10, Vendes.",
+   "efectos": [
+    {
+     "tipo": "entrada"
+    },
+    {
+     "tipo": "mirar",
+     "x": "vaiven"
+    },
+    {
+     "tipo": "etiqueta",
+     "texto": "VLAN 10 · VENDES",
+     "pos": [
+      260,
+      560
+     ],
+     "fondo": "#3A86FF",
+     "color": "#FFFFFF",
+     "desde": "divide"
+    },
+    {
+     "tipo": "etiqueta",
+     "texto": "VLAN 20 · COMPRES",
+     "pos": [
+      820,
+      560
+     ],
+     "fondo": "#FF7F50",
+     "color": "#FFFFFF",
+     "desde": "separadas"
+    },
+    {
+     "tipo": "sello",
+     "texto": "NO SE VEN",
+     "color": "#E63946",
+     "pos": [
+      540,
+      700
+     ],
+     "size": 80,
+     "desde": "solo"
+    }
+   ]
+  },
+  {
+   "titulo": "ENTRA A CONFIGURAR",
+   "texto": "Partimos del switch del vídeo anterior. Escribe enable, pon la contraseña, y luego configure terminal.",
+   "efectos": [
+    {
+     "tipo": "posicion",
+     "x": 905,
+     "y": 1335,
+     "escala": 0.4,
+     "desde": -1
+    },
+    {
+     "tipo": "terminal",
+     "desde": 0,
+     "y1": 1110,
+     "titulo": "s1 · CLI  (Packet Tracer)",
+     "lineas": [
+      {
+       "prompt": "s1>",
+       "cmd": "enable",
+       "desde": "enable",
+       "salida": [
+        "Password:"
+       ],
+       "aparece": 0.2
+      },
+      {
+       "prompt": "s1#",
+       "cmd": "configure terminal",
+       "desde": "configure"
+      },
+      {
+       "prompt": "s1(config)#",
+       "cmd": "",
+       "desde": "configure+1.6"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "titulo": "CREA LA VLAN",
+   "texto": "Escribe vlan 10. Si no existe, se crea y entras en su modo. Ponle nombre con name Vendes, y sal con exit.",
+   "efectos": [
+    {
+     "tipo": "posicion",
+     "x": 905,
+     "y": 1335,
+     "escala": 0.4,
+     "desde": -1
+    },
+    {
+     "tipo": "terminal",
+     "desde": 0,
+     "y1": 1110,
+     "titulo": "s1 · CLI  (Packet Tracer)",
+     "lineas": [
+      {
+       "prompt": "s1>",
+       "cmd": "enable",
+       "desde": -10,
+       "salida": [
+        "Password:"
+       ],
+       "aparece": -10
+      },
+      {
+       "prompt": "s1#",
+       "cmd": "configure terminal",
+       "desde": -10,
+       "aparece": -10
+      },
+      {
+       "prompt": "s1(config)#",
+       "cmd": "vlan 10",
+       "desde": "vlan"
+      },
+      {
+       "prompt": "s1(config-vlan)#",
+       "cmd": "name Vendes",
+       "desde": "name"
+      },
+      {
+       "prompt": "s1(config-vlan)#",
+       "cmd": "exit",
+       "desde": "exit"
+      },
+      {
+       "prompt": "s1(config)#",
+       "cmd": "",
+       "desde": "exit+1.2"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "titulo": "ASIGNA EL PUERTO",
+   "texto": "Ahora el puerto donde está el PC: interface fa0/1. Lo ponemos en modo acceso, para un solo equipo, con switchport mode access. Y lo metemos en la VLAN con switchport access vlan 10.",
+   "efectos": [
+    {
+     "tipo": "posicion",
+     "x": 905,
+     "y": 1335,
+     "escala": 0.4,
+     "desde": -1
+    },
+    {
+     "tipo": "terminal",
+     "desde": 0,
+     "y1": 1110,
+     "titulo": "s1 · CLI  (Packet Tracer)",
+     "lineas": [
+      {
+       "prompt": "s1>",
+       "cmd": "enable",
+       "desde": -10,
+       "salida": [
+        "Password:"
+       ],
+       "aparece": -10
+      },
+      {
+       "prompt": "s1#",
+       "cmd": "configure terminal",
+       "desde": -10,
+       "aparece": -10
+      },
+      {
+       "prompt": "s1(config)#",
+       "cmd": "vlan 10",
+       "desde": -10,
+       "aparece": -10
+      },
+      {
+       "prompt": "s1(config-vlan)#",
+       "cmd": "name Vendes",
+       "desde": -10,
+       "aparece": -10
+      },
+      {
+       "prompt": "s1(config-vlan)#",
+       "cmd": "exit",
+       "desde": -10,
+       "aparece": -10
+      },
+      {
+       "prompt": "s1(config)#",
+       "cmd": "interface fa0/1",
+       "desde": "interface"
+      },
+      {
+       "prompt": "s1(config-if)#",
+       "cmd": "switchport mode access",
+       "desde": "switchport"
+      },
+      {
+       "prompt": "s1(config-if)#",
+       "cmd": "switchport access vlan 10",
+       "desde": "metemos+1.0"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "titulo": "VARIOS PUERTOS A LA VEZ",
+   "texto": "Truco: con interface range configuras varios puertos de golpe. Por ejemplo, del fa0/2 al fa0/5, y repites los dos switchport.",
+   "efectos": [
+    {
+     "tipo": "posicion",
+     "x": 905,
+     "y": 1335,
+     "escala": 0.4,
+     "desde": -1
+    },
+    {
+     "tipo": "terminal",
+     "desde": 0,
+     "y1": 1110,
+     "titulo": "s1 · CLI  (Packet Tracer)",
+     "lineas": [
+      {
+       "prompt": "s1>",
+       "cmd": "enable",
+       "desde": -10,
+       "salida": [
+        "Password:"
+       ],
+       "aparece": -10
+      },
+      {
+       "prompt": "s1#",
+       "cmd": "configure terminal",
+       "desde": -10,
+       "aparece": -10
+      },
+      {
+       "prompt": "s1(config)#",
+       "cmd": "vlan 10",
+       "desde": -10,
+       "aparece": -10
+      },
+      {
+       "prompt": "s1(config-vlan)#",
+       "cmd": "name Vendes",
+       "desde": -10,
+       "aparece": -10
+      },
+      {
+       "prompt": "s1(config-vlan)#",
+       "cmd": "exit",
+       "desde": -10,
+       "aparece": -10
+      },
+      {
+       "prompt": "s1(config)#",
+       "cmd": "interface fa0/1",
+       "desde": -10,
+       "aparece": -10
+      },
+      {
+       "prompt": "s1(config-if)#",
+       "cmd": "switchport mode access",
+       "desde": -10,
+       "aparece": -10
+      },
+      {
+       "prompt": "s1(config-if)#",
+       "cmd": "switchport access vlan 10",
+       "desde": -10,
+       "aparece": -10
+      },
+      {
+       "prompt": "s1(config-if)#",
+       "cmd": "exit",
+       "desde": "Truco"
+      },
+      {
+       "prompt": "s1(config)#",
+       "cmd": "interface range fa0/2 - 5",
+       "desde": "interface"
+      },
+      {
+       "prompt": "s1(config-if-range)#",
+       "cmd": "switchport mode access",
+       "desde": "repites"
+      },
+      {
+       "prompt": "s1(config-if-range)#",
+       "cmd": "switchport access vlan 10",
+       "desde": "repites+1.7"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "titulo": "COMPRUEBA",
+   "texto": "Vuelve con end y escribe show vlan brief. Es el comando más útil: verás la VLAN 10, Vendes, con todos sus puertos.",
+   "efectos": [
+    {
+     "tipo": "posicion",
+     "x": 905,
+     "y": 1335,
+     "escala": 0.4,
+     "desde": -1
+    },
+    {
+     "tipo": "terminal",
+     "desde": 0,
+     "y1": 1110,
+     "titulo": "s1 · CLI  (Packet Tracer)",
+     "lineas": [
+      {
+       "prompt": "s1(config)#",
+       "cmd": "vlan 10",
+       "desde": -10,
+       "aparece": -10
+      },
+      {
+       "prompt": "s1(config-vlan)#",
+       "cmd": "name Vendes",
+       "desde": -10,
+       "aparece": -10
+      },
+      {
+       "prompt": "s1(config-vlan)#",
+       "cmd": "exit",
+       "desde": -10,
+       "aparece": -10
+      },
+      {
+       "prompt": "s1(config)#",
+       "cmd": "interface fa0/1",
+       "desde": -10,
+       "aparece": -10
+      },
+      {
+       "prompt": "s1(config-if)#",
+       "cmd": "switchport mode access",
+       "desde": -10,
+       "aparece": -10
+      },
+      {
+       "prompt": "s1(config-if)#",
+       "cmd": "switchport access vlan 10",
+       "desde": -10,
+       "aparece": -10
+      },
+      {
+       "prompt": "s1(config-if)#",
+       "cmd": "exit",
+       "desde": -10,
+       "aparece": -10
+      },
+      {
+       "prompt": "s1(config)#",
+       "cmd": "interface range fa0/2 - 5",
+       "desde": -10,
+       "aparece": -10
+      },
+      {
+       "prompt": "s1(config-if-range)#",
+       "cmd": "switchport mode access",
+       "desde": -10,
+       "aparece": -10
+      },
+      {
+       "prompt": "s1(config-if-range)#",
+       "cmd": "switchport access vlan 10",
+       "desde": -10,
+       "aparece": -10
+      },
+      {
+       "prompt": "s1(config-if-range)#",
+       "cmd": "end",
+       "desde": "end"
+      },
+      {
+       "prompt": "s1#",
+       "cmd": "show vlan brief",
+       "desde": "show",
+       "salida": [
+        "VLAN Name      Status    Ports",
+        "---- --------- --------- ------------------",
+        "1    default   active    Fa0/6, Fa0/7, Fa0/8 ...",
+        "10   Vendes    active    Fa0/1, Fa0/2, Fa0/3,",
+        "                         Fa0/4, Fa0/5"
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "titulo": "GUARDA Y PRUEBA",
+   "texto": "Guarda con copy running-config startup-config. Y la prueba de fuego: los PCs de la misma VLAN se hacen ping; los de VLANs distintas, no.",
+   "efectos": [
+    {
+     "tipo": "posicion",
+     "x": 905,
+     "y": 1335,
+     "escala": 0.4,
+     "desde": -1
+    },
+    {
+     "tipo": "terminal",
+     "desde": 0,
+     "y1": 1110,
+     "titulo": "s1 · CLI  (Packet Tracer)",
+     "lineas": [
+      {
+       "prompt": "s1(config-vlan)#",
+       "cmd": "exit",
+       "desde": -10,
+       "aparece": -10
+      },
+      {
+       "prompt": "s1(config)#",
+       "cmd": "interface fa0/1",
+       "desde": -10,
+       "aparece": -10
+      },
+      {
+       "prompt": "s1(config-if)#",
+       "cmd": "switchport mode access",
+       "desde": -10,
+       "aparece": -10
+      },
+      {
+       "prompt": "s1(config-if)#",
+       "cmd": "switchport access vlan 10",
+       "desde": -10,
+       "aparece": -10
+      },
+      {
+       "prompt": "s1(config-if)#",
+       "cmd": "exit",
+       "desde": -10,
+       "aparece": -10
+      },
+      {
+       "prompt": "s1(config)#",
+       "cmd": "interface range fa0/2 - 5",
+       "desde": -10,
+       "aparece": -10
+      },
+      {
+       "prompt": "s1(config-if-range)#",
+       "cmd": "switchport mode access",
+       "desde": -10,
+       "aparece": -10
+      },
+      {
+       "prompt": "s1(config-if-range)#",
+       "cmd": "switchport access vlan 10",
+       "desde": -10,
+       "aparece": -10
+      },
+      {
+       "prompt": "s1(config-if-range)#",
+       "cmd": "end",
+       "desde": -10,
+       "aparece": -10
+      },
+      {
+       "prompt": "s1#",
+       "cmd": "show vlan brief",
+       "desde": -10,
+       "salida": [
+        "VLAN Name      Status    Ports",
+        "---- --------- --------- ------------------",
+        "1    default   active    Fa0/6, Fa0/7, Fa0/8 ...",
+        "10   Vendes    active    Fa0/1, Fa0/2, Fa0/3,",
+        "                         Fa0/4, Fa0/5"
+       ],
+       "aparece": -10
+      },
+      {
+       "prompt": "s1#",
+       "cmd": "copy running-config startup-config",
+       "desde": "copy",
+       "salida": [
+        "Building configuration...",
+        "[OK]"
+       ]
+      }
+     ]
+    },
+    {
+     "tipo": "sello",
+     "texto": "MISMA VLAN: PING ✓",
+     "color": "#27C93F",
+     "pos": [
+      390,
+      1210
+     ],
+     "size": 50,
+     "rot": -6,
+     "desde": "misma"
+    },
+    {
+     "tipo": "sello",
+     "texto": "DISTINTA: PING ✗",
+     "color": "#E63946",
+     "pos": [
+      390,
+      1340
+     ],
+     "size": 50,
+     "rot": 4,
+     "desde": "distintas"
+    }
+   ]
+  }
+ ],
+ "encuesta": [],
+ "portada": {
+  "escena": 0,
+  "t": "separadas",
+  "linea1": "VLANs EN EL",
+  "linea2": "SWITCH CISCO",
+  "color2": "#FFD23F",
+  "banda": "PACKET TRACER · PASO A PASO",
+  "color_banda": "#9B5DE5"
+ },
+ "publicacion": {},
+ "fuentes": [
+  "Cheat sheet Xarxes locals (MP0225, AEA2)"
+ ]
+}

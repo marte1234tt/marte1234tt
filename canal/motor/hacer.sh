@@ -21,9 +21,9 @@ for i in $(seq 0 9); do
   T=$(python3 -c "print(round($DUR*($i+0.5)/10,2))")
   ffmpeg -loglevel error -y -ss "$T" -i "$OUT/video.mp4" -frames:v 1 -vf scale=540:-1 "$OUT/fotogramas/$(printf %02d $i)_${T}s.png"
 done
-python3 - "$OUT/video.mp4" <<'PY' || exit 4
+python3 - "$OUT/video.mp4" "$OUT/tmp/config.json" <<'PY' || exit 4
 import json, subprocess, sys
-cfg = json.load(open("config.json"))
+cfg = json.load(open(sys.argv[2]))
 info = json.loads(subprocess.check_output(["ffprobe", "-v", "error", "-select_streams", "v:0", "-show_entries",
       "stream=width,height,r_frame_rate:format=duration,size", "-of", "json", sys.argv[1]]))
 v, f = info["streams"][0], info["format"]

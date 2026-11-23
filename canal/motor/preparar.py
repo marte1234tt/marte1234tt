@@ -11,7 +11,7 @@ from motor.musica import musica
 
 COLA = 1.4          # segundos extra al final
 INICIO_DEFECTO = 0.3  # si una pista no aparece
-CAMPOS_TIEMPO = ("desde", "hasta", "desde_der", "asustado")  # campos de efectos que se dan como pista
+CAMPOS_TIEMPO = ("desde", "hasta", "desde_der", "asustado", "aparece")  # campos de efectos que se dan como pista
 
 
 def norm(s: str) -> str:
@@ -95,7 +95,8 @@ def preparar(guion_path: str, salida_dir: str, synth=None) -> dict:
         e["dur"] = (escenas[i + 1]["start"] if i + 1 < len(escenas) else total) - e["start"]
     subtitulos([(t[0], t[1], w) for (w, _), t in zip(toks, tiempos)], os.path.join(tmp, "subs.ass"))
     musica(total, os.path.join(tmp, "musica.wav"))
-    cfg = {"total": total, "cuenta": cfg_canal["cuenta"], "etiqueta": cfg_canal["etiqueta"],
+    cfg = {"total": total, "cuenta": g.get("cuenta", cfg_canal["cuenta"]), "etiqueta": g.get("etiqueta", cfg_canal["etiqueta"]),
+           "duracion": g.get("duracion", cfg_canal["duracion"]),
            "personaje": g.get("personaje"), "encuesta": g.get("encuesta", []),
            "js": os.path.join(os.path.dirname(os.path.abspath(guion_path)), g["js"]) if g.get("js") else None,
            "escenas": escenas}
@@ -114,7 +115,7 @@ def main(argv):
     if os.environ.get("CANAL_SYNTH_FALSO"):
         from motor.synth_falso import synth_falso as synth
     cfg = preparar(argv[0], argv[1], synth=synth)
-    minimo = cargar_config()["duracion"]["min"]
+    minimo = cfg["duracion"]["min"]
     print(f"total {cfg['total']:.1f}s, {len(cfg['escenas'])} escenas")
     if cfg["total"] < minimo:
         print(f"DURACION_CORTA {cfg['total']:.1f}")

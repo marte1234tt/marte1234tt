@@ -211,6 +211,57 @@ const EFECTOS = {
       });
     },
   },
+  terminal: {
+    // Ventana de CLI de un switch: escribe cada comando cuando la voz lo dice.
+    estado(c, e, td, t) {
+      const X0 = 70, X1 = 1010, Y0 = e.y0 ?? 430, Y1 = e.y1 ?? 1150, LH = 40, COLS = Math.floor((X1 - X0 - 40) / 18);
+      const corta = s => { const out = []; let r = s; while (r.length > COLS) { out.push(r.slice(0, COLS)); r = r.slice(COLS); } out.push(r); return out; };
+      const filas = []; let actual = null, promptActual = null;
+      (e.lineas || []).forEach((l, i) => {
+        const prev = e.lineas[i - 1], vel = .045, durPrev = prev ? Math.min(1.2, (prev.cmd || "").length * vel) : 0;
+        const aparece = l.aparece ?? (i === 0 ? (l.desde ?? 0) - .5 : Math.min((l.desde ?? 0) - .2, (prev.desde ?? 0) + durPrev + .4));
+        if (t < aparece) return;
+        const dur = Math.min(1.2, (l.cmd || "").length * vel), k = clamp((t - (l.desde ?? 0)) / Math.max(dur, .01));
+        const n = Math.round((l.cmd || "").length * k), escrito = (l.cmd || "").slice(0, n);
+        corta(l.prompt + " " + escrito).forEach((f, j) => filas.push({ txt: f, prompt: j === 0 ? l.prompt : "", actual: false, cursor: false }));
+        filas[filas.length - 1].cursor = k < 1;
+        if (k >= 1) (l.salida || []).forEach((s, j) => { if (t >= (l.desde ?? 0) + dur + .25 + j * .15) corta(s).forEach(f => filas.push({ txt: f, salida: true })); });
+        actual = filas.length - 1; promptActual = l.prompt;
+        if (k < 1 || t < (l.desde ?? 0) + dur + 1.5) filas.forEach(f => f.actual = false);
+      });
+      const max = Math.floor((Y1 - Y0 - 70) / LH), vis = filas.slice(-max);
+      e._t = { X0, X1, Y0, Y1, LH, vis, promptActual };
+      const ultimo = vis.length - 1;
+      if (ultimo >= 0 && e.senala !== false) c.P.objetivos[e.extremidad ?? 0] = { g: [X0 + 40 + Math.min(40, vis[ultimo].txt.length) * 18, Y0 + 90 + ultimo * LH], w: .97 };
+    },
+    dibujo(c, e, td, t) {
+      const a = vis(e, t); if (a <= .01 || !e._t) return;
+      const { X0, X1, Y0, Y1, LH, vis: filas, promptActual } = e._t, OV = c.OV;
+      const g = el("g", { opacity: a }, OV);
+      el("rect", { x: X0 + 8, y: Y0 + 12, width: X1 - X0, height: Y1 - Y0, rx: 22, fill: "#000", opacity: .35 }, g);
+      el("rect", { x: X0, y: Y0, width: X1 - X0, height: Y1 - Y0, rx: 22, fill: "#0D1117", stroke: "#30363D", "stroke-width": 4 }, g);
+      el("rect", { x: X0, y: Y0, width: X1 - X0, height: 54, rx: 22, fill: "#21262D" }, g);
+      el("rect", { x: X0, y: Y0 + 30, width: X1 - X0, height: 24, fill: "#21262D" }, g);
+      ["#FF5F56", "#FFBD2E", "#27C93F"].forEach((col, i) => el("circle", { cx: X0 + 32 + i * 30, cy: Y0 + 27, r: 9, fill: col }, g));
+      el("text", { x: X0 + 130, y: Y0 + 36, "font-size": 26, "font-weight": 700, fill: "#C9D1D9" }, g).textContent = e.titulo || "Switch · CLI";
+      const modos = [[/\(config-vlan\)/, "CONFIG. VLAN", "#9B5DE5"], [/\(config-if/, "CONFIG. INTERFAZ", "#FF7F50"], [/\(config-line\)/, "CONFIG. LÍNEA", "#2EC4B6"],
+        [/\(config\)/, "CONFIG. GLOBAL", "#3A86FF"], [/#$/, "MODO PRIVILEGIADO", "#E63946"], [/>$/, "MODO USUARIO", "#3BB273"]];
+      const m = promptActual && modos.find(([re]) => re.test(promptActual));
+      if (m) {
+        const tx = el("text", { "data-modo": 1, x: X1 - 30, y: Y0 + 36, "text-anchor": "end", "font-size": 24, "font-weight": 900, fill: "#fff" }, g); tx.textContent = m[1];
+        const w = tx.getComputedTextLength() + 30; g.insertBefore(el("rect", { x: X1 - 15 - w, y: Y0 + 10, width: w, height: 36, rx: 18, fill: m[2] }), tx);
+      }
+      filas.forEach((f, i) => {
+        const y = Y0 + 100 + i * LH, ult = i === filas.length - 1;
+        const tx = el("text", { "data-fila": 1, x: X0 + 30, y, "font-size": 30, style: "font-family:'DejaVu Sans Mono',monospace;white-space:pre", fill: f.salida ? "#8B949E" : "#E6EDF3" }, g);
+        if (f.prompt && !f.salida) {
+          const sp = el("tspan", { fill: "#7EE787" }, tx); sp.textContent = f.prompt;
+          const sc = el("tspan", { fill: ult ? "#FFD23F" : "#E6EDF3", "font-weight": ult ? 700 : 400 }, tx); sc.textContent = f.txt.slice(f.prompt.length);
+        } else tx.textContent = f.txt;
+        if (ult && (f.cursor || Math.floor(c.T * 2) % 2 === 0) && !f.salida) el("rect", { x: X0 + 32 + f.txt.length * 18.06, y: y - 26, width: 16, height: 32, fill: "#E6EDF3" }, g);
+      });
+    },
+  },
   contador: {
     dibujo(c, e, td, t) {
       const a = vis(e, t); if (a <= .01) return; const [x, y] = e.pos || [540, 560];

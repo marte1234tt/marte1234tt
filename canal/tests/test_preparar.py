@@ -118,3 +118,11 @@ def test_ruta_del_guion_relativa_a_la_raiz_del_repo(tmp_path):
                        cwd=os.path.dirname(RAIZ), env=env, capture_output=True, text=True)
     assert "No such file" not in r.stderr and "FileNotFoundError" not in r.stderr, r.stderr[-800:]
     assert r.returncode == 3  # corto, pero encontró el guion
+
+
+def test_guion_puede_cambiar_etiqueta_y_duracion(tmp_path):
+    g = json.loads(open(_guion(tmp_path, [])).read())
+    g["etiqueta"] = "TUTORIAL"; g["duracion"] = {"min": 1, "max": 600}
+    p = tmp_path / "g3.json"; p.write_text(json.dumps(g, ensure_ascii=False))
+    cfg = P.preparar(str(p), str(tmp_path / "o3"), synth=synth_falso)
+    assert cfg["etiqueta"] == "TUTORIAL" and cfg["duracion"] == {"min": 1, "max": 600}
