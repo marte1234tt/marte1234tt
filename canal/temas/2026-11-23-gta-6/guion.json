@@ -1,0 +1,364 @@
+{
+ "tema": "GTA 6",
+ "categoria": "videojuegos",
+ "personaje": "mando",
+ "escenas": [
+  {
+   "titulo": "¿EL MÁS RICO?",
+   "texto": "GTA 6 hizo 3.790 millones de dólares en su primer día. Ninguna película, disco ni videojuego había ganado tanto tan rápido. Pero lo más loco es cómo llegó hasta aquí.",
+   "efectos": [
+    {
+     "tipo": "entrada"
+    },
+    {
+     "tipo": "mirar",
+     "x": "vaiven"
+    },
+    {
+     "tipo": "sello",
+     "texto": "$3.790 M",
+     "color": "#27C93F",
+     "pos": [
+      540,
+      480
+     ],
+     "size": 100,
+     "desde": "3.790"
+    },
+    {
+     "tipo": "etiqueta",
+     "texto": "EN 1 SOLO DÍA",
+     "pos": [
+      540,
+      600
+     ],
+     "fondo": "#FFD23F",
+     "desde": "primer"
+    },
+    {
+     "tipo": "agitar",
+     "intensidad": 1.8,
+     "desde": "loco"
+    }
+   ]
+  },
+  {
+   "titulo": "RÉCORD EN YOUTUBE",
+   "texto": "Su primer tráiler hizo 90 millones de visitas en YouTube en solo 24 horas. Récord mundial para un vídeo que no es de música. Le quitó el récord a MrBeast.",
+   "efectos": [
+    {
+     "tipo": "posicion",
+     "y": 1130,
+     "escala": 0.75,
+     "desde": -1
+    },
+    {
+     "tipo": "contador",
+     "numero": 90,
+     "etiqueta": "MILLONES EN 24 H",
+     "pos": [
+      540,
+      640
+     ],
+     "desde": "90"
+    },
+    {
+     "tipo": "sello",
+     "texto": "RÉCORD",
+     "color": "#E63946",
+     "pos": [
+      830,
+      480
+     ],
+     "size": 60,
+     "desde": "Récord",
+     "rot": 10
+    },
+    {
+     "tipo": "bocadillo",
+     "texto": "¡Toma ya!",
+     "pos": [
+      760,
+      980
+     ],
+     "desde": "MrBeast"
+    }
+   ]
+  },
+  {
+   "titulo": "DOS RETRASOS",
+   "texto": "Y casi no llega. Iba a salir en otoño de 2025. Lo retrasaron a mayo de 2026. Y luego otra vez, hasta el 19 de noviembre.",
+   "efectos": [
+    {
+     "tipo": "posicion",
+     "y": 720,
+     "escala": 0.55,
+     "desde": 0
+    },
+    {
+     "tipo": "mirar",
+     "x": 0,
+     "y": 0.8
+    },
+    {
+     "tipo": "linea_tiempo",
+     "rango": [
+      2025.3,
+      2027.1
+     ],
+     "y": 1170,
+     "desde": 0.3,
+     "puntos": [
+      {
+       "anio": 2025.75,
+       "etiqueta": "OTOÑO 2025",
+       "icono": "📅",
+       "desde": "otoño"
+      },
+      {
+       "anio": 2026.4,
+       "etiqueta": "MAYO 2026",
+       "icono": "📅",
+       "desde": "mayo"
+      },
+      {
+       "anio": 2026.88,
+       "etiqueta": "19 NOV 2026",
+       "icono": "🎮",
+       "desde": "19"
+      }
+     ],
+     "tramos": [
+      {
+       "de": 2025.75,
+       "a": 2026.4,
+       "texto": "RETRASO 1",
+       "desde": "retrasaron",
+       "color": "#FF7F50"
+      },
+      {
+       "de": 2026.4,
+       "a": 2026.88,
+       "texto": "RETRASO 2",
+       "desde": "otra",
+       "color": "#E63946"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "titulo": "¿POR QUÉ LEONIDA?",
+   "texto": "El mapa es Leonida, una Florida inventada. Y el nombre tiene truco: se cree que mezcla a Ponce de León, el explorador que llegó a Florida, con la propia palabra Florida.",
+   "efectos": [
+    {
+     "tipo": "objeto",
+     "forma": "svg",
+     "svg": "<text font-size=\"170\" text-anchor=\"middle\" y=\"59\">🌴</text>",
+     "pos": [
+      890,
+      1150
+     ],
+     "entra": "derecha",
+     "desde": 0.2
+    },
+    {
+     "tipo": "objeto",
+     "forma": "svg",
+     "svg": "<text font-size=\"150\" text-anchor=\"middle\" y=\"52\">🐊</text>",
+     "pos": [
+      190,
+      1170
+     ],
+     "entra": "izquierda",
+     "desde": "inventada"
+    },
+    {
+     "tipo": "etiqueta",
+     "texto": "PONCE DE LEÓN",
+     "pos": [
+      290,
+      520
+     ],
+     "fondo": "#FFD23F",
+     "desde": "Ponce"
+    },
+    {
+     "tipo": "etiqueta",
+     "texto": "FLORIDA",
+     "pos": [
+      820,
+      520
+     ],
+     "fondo": "#2EC4B6",
+     "color": "#FFFFFF",
+     "desde": "propia"
+    },
+    {
+     "tipo": "sello",
+     "texto": "= LEONIDA",
+     "color": "#C2378A",
+     "pos": [
+      540,
+      650
+     ],
+     "size": 80,
+     "desde": "propia+1.2"
+    }
+   ]
+  },
+  {
+   "titulo": "PROTAGONISTA",
+   "texto": "Y por primera vez desde el GTA de 1997, una de las protagonistas es una mujer: Lucía, que comparte la historia con Jason.",
+   "efectos": [
+    {
+     "tipo": "sello",
+     "texto": "¡DESDE 1997!",
+     "color": "#9B5DE5",
+     "pos": [
+      540,
+      540
+     ],
+     "size": 80,
+     "desde": "1997"
+    },
+    {
+     "tipo": "etiqueta",
+     "texto": "LUCÍA + JASON",
+     "pos": [
+      540,
+      690
+     ],
+     "fondo": "#FF7F50",
+     "color": "#FFFFFF",
+     "desde": "Jason"
+    },
+    {
+     "tipo": "iconos",
+     "forma": "estrella",
+     "n": 3,
+     "color": "#FFD23F",
+     "pos": [
+      880,
+      800
+     ],
+     "desde": "Lucía"
+    }
+   ]
+  },
+  {
+   "titulo": "EL HACKER DEL HOTEL",
+   "texto": "Pero lo más loco: en 2022 se filtraron 90 vídeos del juego. El culpable, un chaval de 18 años, lo hizo desde la habitación de un hotel, con la tele y un Fire Stick de Amazon. Y estando en libertad bajo fianza, con prohibición de usar internet.",
+   "efectos": [
+    {
+     "tipo": "agitar",
+     "intensidad": 1.6,
+     "desde": "filtraron"
+    },
+    {
+     "tipo": "sello",
+     "texto": "90 VÍDEOS",
+     "color": "#E63946",
+     "pos": [
+      540,
+      520
+     ],
+     "size": 80,
+     "desde": "90",
+     "hasta": "habitación"
+    },
+    {
+     "tipo": "etiqueta",
+     "texto": "18 AÑOS",
+     "pos": [
+      540,
+      520
+     ],
+     "fondo": "#FFD23F",
+     "desde": "habitación"
+    },
+    {
+     "tipo": "objeto",
+     "forma": "svg",
+     "svg": "<text font-size=\"170\" text-anchor=\"middle\" y=\"59\">📺</text>",
+     "pos": [
+      880,
+      1160
+     ],
+     "entra": "derecha",
+     "desde": "tele"
+    },
+    {
+     "tipo": "bocadillo",
+     "texto": "¡¿Desde un hotel?!",
+     "pos": [
+      320,
+      640
+     ],
+     "desde": "hotel",
+     "hasta": "libertad"
+    },
+    {
+     "tipo": "sello",
+     "texto": "SIN INTERNET",
+     "color": "#9B5DE5",
+     "pos": [
+      400,
+      660
+     ],
+     "size": 70,
+     "rot": -8,
+     "desde": "prohibición"
+    }
+   ]
+  },
+  {
+   "titulo": "¿CUÁL NO SABÍAS?",
+   "texto": "¿Cuál de estos datos no sabías? Te leo en comentarios. ¡Y síguenos para más curiosidades!",
+   "efectos": [
+    {
+     "tipo": "encuesta",
+     "desde": 0
+    },
+    {
+     "tipo": "cierre",
+     "desde": "síguenos"
+    }
+   ]
+  }
+ ],
+ "encuesta": [
+  "3.790 M en un día",
+  "Récord del tráiler",
+  "Los dos retrasos",
+  "El hacker del hotel"
+ ],
+ "publicacion": {
+  "instagram": "GTA 6 hizo 3.790 millones de dólares en UN día 🤯🎮\n\nY lo más loco: lo filtró un chaval de 18 años desde un hotel… con un Fire Stick y estando castigado sin internet 📺😂\n\n👇 ¿Cuál de estos datos no sabías?\nA) 3.790 M en un día\nB) Récord del tráiler\nC) Los dos retrasos\nD) El hacker del hotel\n\nSíguenos para una curiosidad nueva cada día 🔔\n\n#gta6 #curiosidades #videojuegos #gaming #sabiasque",
+  "tiktok": "GTA 6: 3.790 millones en un día y filtrado desde un hotel con un Fire Stick 🤯🎮 ¿Cuál no sabías? 👇\n#gta6 #gtavi #curiosidades #videojuegos #gaming #datoscuriosos",
+  "youtube_titulo": "GTA 6: 5 curiosidades que casi nadie sabe 🎮 #shorts #curiosidades #gta6"
+ },
+ "fuentes": [
+  "ABC News — GTA 6 breaks 1st-day sales record ($3.79B): https://abcnews.com/GMA/Culture/grand-theft-auto-vi-breaks-1st-day-sales-record/story?id=138328412",
+  "Yahoo — GTA 6 first-day sales are official: https://www.yahoo.com/entertainment/movies/box-office-results/articles/gta-6s-first-day-sales-212256854.html",
+  "TechCrunch — GTA VI trailer breaks MrBeast's 24h record: https://techcrunch.com/2023/12/05/grand-theft-auto-vi-trailer-breaks-mrbeasts-record-for-most-youtube-views-in-24-hours/",
+  "Kotaku — 90 million views record: https://kotaku.com/gta-6-rockstar-games-trailer-90-million-views-record-1851075122",
+  "Variety — GTA 6 delayed to November 2026: https://au.variety.com/2025/tv/news/gta-6-release-delayed-november-2026-29751",
+  "PC Gamer — GTA 6 delayed to November: https://www.pcgamer.com/games/action/grand-theft-auto-6-is-delayed-to-november-these-extra-months-will-allow-us-to-finish-the-game-with-the-level-of-polish-you-have-come-to-expect-and-deserve",
+  "GTA Wiki — State of Leonida (origen del nombre no oficial): https://gta.wiki/w/State_of_Leonida",
+  "EssentiallySports — Leonida = León + Florida: https://essentiallysports.com/gaming-news-unknown-fact-about-gta-6s-leonida-shows-rockstar-games-fine-detailing",
+  "PC Gamer — Lucía, first proper leading lady: https://www.pcgamer.com/with-grand-theft-auto-6s-lucia-being-the-series-first-proper-leading-lady-im-hoping-she-doesnt-become-another-caricature-or-stereotype",
+  "GamesRadar — female protagonist: https://gamesradar.com/leading-with-gta-6s-female-protagonist-is-a-move-that-should-have-happened-a-long-time-ago",
+  "Kotaku — hacker con Fire Stick en un hotel: https://kotaku.com/gta-6-rockstar-leak-hacker-amazon-fire-stick-hotel-1850770299",
+  "Engadget — Fire TV Stick en un hotel: https://engadget.com/gta-vi-hacker-leaked-footage-using-a-fire-tv-stick-in-a-budget-uk-hotel-room-121548381.html"
+ ],
+ "portada": {
+  "escena": 0,
+  "t": "loco",
+  "linea1": "GTA 6",
+  "linea2": "LO QUE NO SABES",
+  "color2": "#FF9AD5",
+  "banda": "LO FILTRARON DESDE UN HOTEL",
+  "color_banda": "#E63946"
+ }
+}
