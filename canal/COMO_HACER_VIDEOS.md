@@ -1,27 +1,45 @@
-# Cómo pedir un vídeo nuevo — «¿No lo sabías?» (@nolosabias672)
+# Cómo pedir vídeos a Claude Code (sin perder nada)
 
-**Abre una conversación NUEVA de Claude Code para cada vídeo** (en el repositorio `marte1234tt/marte1234tt`
-y con el entorno **marte1234tt**). Gasta mucho menos que seguir en una conversación larga, y el resultado es
-el mismo: todo el «saber hacer» está guardado en el código y en la receta, no en la memoria del chat.
+## Lo importante
+Todo lo que hemos construido (estilo, voz, personajes, terminal, Packet Tracer, recetas) está **guardado en el código**,
+no en la memoria del chat. Una conversación nueva lo hace igual si le pegas el mensaje de abajo.
 
-## Copia y pega este mensaje (cambia el TEMA o borra esa línea)
+**Abre una conversación NUEVA para cada vídeo o tanda** (gasta mucho menos):
+claude.ai/code → **Nueva sesión** → repositorio **marte1234tt/marte1234tt** → entorno **marte1234tt** (no "Default").
+
+---
+
+## A) Vídeo de estudio (tutorial con tu cara)
+1. Adjunta **tus apuntes** (.docx/.pdf) y **tu foto** (la misma de siempre).
+2. Pega esto y cambia lo de MAYÚSCULAS:
 
 ```
 Ejecuta primero:
 git fetch origin ccr-a1090919-8ybl6i && git checkout FETCH_HEAD -- canal .claude && pip install -q edge-tts==7.3.1
 
-Luego lee .claude/skills/hacer-video/SKILL.md entero y síguelo paso a paso para hacer un vídeo
-de la cuenta @nolosabias672.
-TEMA: <escribe aquí el tema, o borra esta línea para que lo elijas tú>
-Temas ya hechos (no los repitas): el pulpo, Cleopatra, Napoleón no era bajito
-Mándame por aquí el vídeo, la portada y el texto de publicación. No uses Google Drive ni hagas push a GitHub.
+Lee canal/CONTEXTO.md y .claude/skills/hacer-tutorial/SKILL.md enteros y síguelos.
+Copia la foto que te adjunto a canal/personajes/privado/profe.jpg (no la subas a git).
+Hazme un vídeo de estudio explicando: TEMA (por ejemplo: "dúplex, velocidad y apagar puertos" de los apuntes adjuntos).
+Detalles del ejercicio: DETALLES (o bórralo).
+Mándame el vídeo por aquí.
 ```
 
-## Después de cada vídeo
-Añade el tema nuevo a la línea «Temas ya hechos» de este mensaje (guárdalo en tus notas del móvil o del PC).
+## B) Vídeo de curiosidades para la cuenta
+```
+Ejecuta primero:
+git fetch origin ccr-a1090919-8ybl6i && git checkout FETCH_HEAD -- canal .claude && pip install -q edge-tts==7.3.1
 
-## Qué tienes que saber
-- Cada vídeo tarda unos 10–15 minutos y gasta uso de tu plan Pro. Un vídeo al día va bien.
-- El estilo, la voz (Álvaro, ritmo intermedio), la marca y los efectos son siempre los mismos: vienen del código.
-- Cada vídeo tiene su propio personaje dibujado. Ya existen: pulpo, Cleopatra y Napoleón.
-- Si algo sale raro en un vídeo, dilo en esa misma conversación y Claude lo corrige.
+Lee canal/CONTEXTO.md y .claude/skills/hacer-video/SKILL.md enteros y síguelos para hacer un vídeo de @nolosabias672.
+TEMA: TEMA (o borra esta línea para que lo elijas tú)
+Temas ya hechos (no los repitas): el pulpo, Cleopatra, Napoleón no era bajito
+Mándame por aquí el vídeo, la portada y el texto de publicación. No uses Google Drive.
+```
+Después de cada vídeo de curiosidades, añade el tema a "Temas ya hechos".
+
+---
+
+## Si prefieres seguir en ESTA conversación
+Escribe esto para resumirla y gastar menos:
+```
+/compact Conserva: el proyecto está en canal/ (rama ccr-a1090919-8ybl6i); contexto en canal/CONTEXTO.md; recetas en .claude/skills/hacer-video y .claude/skills/hacer-tutorial; la foto del profe está en canal/personajes/privado/profe.jpg; entrego vídeos por SendUserFile, sin Drive.
+```

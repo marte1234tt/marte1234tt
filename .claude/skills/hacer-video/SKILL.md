@@ -36,7 +36,7 @@ Crea `canal/temas/AAAA-MM-DD-<slug>/guion.json` con el formato del ejemplo:
   `saborear{extremidad}`, `aplastar{escala}`, `antenas`, `iconos{forma,n,pos,color}`,
   `etiqueta{texto (admite \n),pos,ancla,fondo,color}`, `bocadillo{texto,pos}`, `comparacion{izq,der,desde_der}`,
   `contador{numero,etiqueta,pos}`, `sello{texto,pos,color,rot}`, `linea_tiempo{rango,y,puntos[{anio,etiqueta,icono,desde}],tramos[{de,a,texto,desde}]}`,
-  `encuesta`, `cierre`.
+  `encuesta`, `cierre`, `terminal` y `topologia` (ver `.claude/skills/hacer-tutorial/SKILL.md`).
 - Emojis dentro de `objeto` svg (`<text font-size="160" text-anchor="middle" y="55">🌕</text>`) o de `icono` funcionan.
 - Zonas: título arriba (y≈330), etiquetas entre y=420 y y=1400, **nada importante por debajo de 1400** (subtítulos).
 - Si un efecto que necesitas no existe, puedes crear `extra.js` junto al guion (`"js": "extra.js"`) que añada
