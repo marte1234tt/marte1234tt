@@ -67,7 +67,7 @@
   },
   {
    "titulo": "EL EJERCICIO",
-   "texto": "Este es el ejercicio: seis PCs, dos por departamento. Vendes en la VLAN 10, Compres en la VLAN 20 y Direcció en la VLAN 30. Cada VLAN tendrá ocho puertos del switch.",
+   "texto": "Este es el ejercicio: seis PCs, dos por departamento. Vendes en la VLAN 10, Compres en la VLAN 20 y Direcció en la VLAN 30. Vendes va en los puertos 1 y 2, Compres en el 3 y el 4, y Direcció en el 5 y el 6.",
    "efectos": [
     {
      "tipo": "posicion",
@@ -82,10 +82,10 @@
      "puertos": [
       "Fa0/1",
       "Fa0/2",
-      "Fa0/9",
-      "Fa0/10",
-      "Fa0/17",
-      "Fa0/18"
+      "Fa0/3",
+      "Fa0/4",
+      "Fa0/5",
+      "Fa0/6"
      ],
      "vlans": [
       {
@@ -238,7 +238,7 @@
   },
   {
    "titulo": "PUERTOS DE VENDES",
-   "texto": "Ahora los puertos. Con interface range cogemos del fa0/1 al fa0/8, los ponemos en modo acceso, y los metemos en la VLAN 10.",
+   "texto": "Ahora, puerto por puerto. Entra en interface fa0/1, ponlo en modo acceso, y asígnalo a la VLAN 10. Sal con exit. Repite con el fa0/2: switchport mode access, y switchport access vlan 10.",
    "efectos": [
     {
      "tipo": "posicion",
@@ -309,31 +309,51 @@
       },
       {
        "prompt": "s1(config)#",
-       "cmd": "interface range fa0/1 - 8",
+       "cmd": "interface fa0/1",
        "desde": "interface"
       },
       {
-       "prompt": "s1(config-if-range)#",
+       "prompt": "s1(config-if)#",
        "cmd": "switchport mode access",
-       "desde": "acceso"
+       "desde": "modo"
       },
       {
-       "prompt": "s1(config-if-range)#",
+       "prompt": "s1(config-if)#",
        "cmd": "switchport access vlan 10",
-       "desde": "metemos"
+       "desde": "asígnalo"
       },
       {
-       "prompt": "s1(config-if-range)#",
+       "prompt": "s1(config-if)#",
        "cmd": "exit",
-       "desde": "metemos+2.4"
+       "desde": "exit"
+      },
+      {
+       "prompt": "s1(config)#",
+       "cmd": "interface fa0/2",
+       "desde": "Repite+0.4"
+      },
+      {
+       "prompt": "s1(config-if)#",
+       "cmd": "switchport mode access",
+       "desde": "switchport"
+      },
+      {
+       "prompt": "s1(config-if)#",
+       "cmd": "switchport access vlan 10",
+       "desde": "switchport+2.2"
+      },
+      {
+       "prompt": "s1(config-if)#",
+       "cmd": "exit",
+       "desde": "switchport+3.6"
       }
      ]
     }
    ]
   },
   {
-   "titulo": "COMPRES Y DIRECCIÓ",
-   "texto": "Lo mismo para Compres, del fa0/9 al fa0/16, en la VLAN 20. Y para Direcció, del fa0/17 al fa0/24, en la VLAN 30.",
+   "titulo": "PUERTOS DE COMPRES",
+   "texto": "Ahora Compres, en la VLAN 20. Primero el fa0/3: interface, modo acceso y VLAN 20. Y después, exactamente igual con el fa0/4.",
    "efectos": [
     {
      "tipo": "posicion",
@@ -348,30 +368,6 @@
      "y1": 1110,
      "titulo": "s1 · CLI  (Packet Tracer)",
      "lineas": [
-      {
-       "prompt": "s1(config)#",
-       "cmd": "vlan 20",
-       "desde": -10,
-       "aparece": -10
-      },
-      {
-       "prompt": "s1(config-vlan)#",
-       "cmd": "name Compres",
-       "desde": -10,
-       "aparece": -10
-      },
-      {
-       "prompt": "s1(config-vlan)#",
-       "cmd": "exit",
-       "desde": -10,
-       "aparece": -10
-      },
-      {
-       "prompt": "s1(config)#",
-       "cmd": "vlan 30",
-       "desde": -10,
-       "aparece": -10
-      },
       {
        "prompt": "s1(config-vlan)#",
        "cmd": "name Direccio",
@@ -386,70 +382,99 @@
       },
       {
        "prompt": "s1(config)#",
-       "cmd": "interface range fa0/1 - 8",
+       "cmd": "interface fa0/1",
        "desde": -10,
        "aparece": -10
       },
       {
-       "prompt": "s1(config-if-range)#",
+       "prompt": "s1(config-if)#",
        "cmd": "switchport mode access",
        "desde": -10,
        "aparece": -10
       },
       {
-       "prompt": "s1(config-if-range)#",
+       "prompt": "s1(config-if)#",
        "cmd": "switchport access vlan 10",
        "desde": -10,
        "aparece": -10
       },
       {
-       "prompt": "s1(config-if-range)#",
+       "prompt": "s1(config-if)#",
        "cmd": "exit",
        "desde": -10,
        "aparece": -10
       },
       {
        "prompt": "s1(config)#",
-       "cmd": "interface range fa0/9 - 16",
-       "desde": "Compres"
+       "cmd": "interface fa0/2",
+       "desde": -10,
+       "aparece": -10
       },
       {
-       "prompt": "s1(config-if-range)#",
+       "prompt": "s1(config-if)#",
        "cmd": "switchport mode access",
-       "desde": "Compres+1.4"
+       "desde": -10,
+       "aparece": -10
       },
       {
-       "prompt": "s1(config-if-range)#",
-       "cmd": "switchport access vlan 20",
-       "desde": "20"
+       "prompt": "s1(config-if)#",
+       "cmd": "switchport access vlan 10",
+       "desde": -10,
+       "aparece": -10
       },
       {
-       "prompt": "s1(config-if-range)#",
+       "prompt": "s1(config-if)#",
        "cmd": "exit",
-       "desde": "Direcció-0.6"
+       "desde": -10,
+       "aparece": -10
       },
       {
        "prompt": "s1(config)#",
-       "cmd": "interface range fa0/17 - 24",
-       "desde": "Direcció"
+       "cmd": "interface fa0/3",
+       "desde": 0.9
       },
       {
-       "prompt": "s1(config-if-range)#",
+       "prompt": "s1(config-if)#",
        "cmd": "switchport mode access",
-       "desde": "Direcció+1.4"
+       "desde": 2.15
       },
       {
-       "prompt": "s1(config-if-range)#",
-       "cmd": "switchport access vlan 30",
-       "desde": "30"
+       "prompt": "s1(config-if)#",
+       "cmd": "switchport access vlan 20",
+       "desde": 3.4
+      },
+      {
+       "prompt": "s1(config-if)#",
+       "cmd": "exit",
+       "desde": 4.7
+      },
+      {
+       "prompt": "s1(config)#",
+       "cmd": "interface fa0/4",
+       "desde": 5.6
+      },
+      {
+       "prompt": "s1(config-if)#",
+       "cmd": "switchport mode access",
+       "desde": 6.85
+      },
+      {
+       "prompt": "s1(config-if)#",
+       "cmd": "switchport access vlan 20",
+       "desde": 8.1
+      },
+      {
+       "prompt": "s1(config-if)#",
+       "cmd": "exit",
+       "desde": 9.399999999999999
       }
      ]
     }
    ]
   },
   {
-   "titulo": "COMPRUEBA",
-   "texto": "Vuelve con end y escribe show vlan brief: verás las tres VLAN, cada una con sus ocho puertos.",
+   "titulo": "PUERTOS DE DIRECCIÓ",
+   "texto": "Y por último Direcció, en la VLAN 30. Lo mismo con el fa0/5, y después con el fa0/6. Ya están los seis.",
    "efectos": [
     {
      "tipo": "posicion",
@@ -465,67 +490,188 @@
      "titulo": "s1 · CLI  (Packet Tracer)",
      "lineas": [
       {
-       "prompt": "s1(config-if-range)#",
-       "cmd": "switchport mode access",
-       "desde": -10,
-       "aparece": -10
-      },
-      {
-       "prompt": "s1(config-if-range)#",
+       "prompt": "s1(config-if)#",
        "cmd": "switchport access vlan 10",
        "desde": -10,
        "aparece": -10
       },
       {
-       "prompt": "s1(config-if-range)#",
+       "prompt": "s1(config-if)#",
        "cmd": "exit",
        "desde": -10,
        "aparece": -10
       },
       {
        "prompt": "s1(config)#",
-       "cmd": "interface range fa0/9 - 16",
+       "cmd": "interface fa0/3",
        "desde": -10,
        "aparece": -10
       },
       {
-       "prompt": "s1(config-if-range)#",
+       "prompt": "s1(config-if)#",
        "cmd": "switchport mode access",
        "desde": -10,
        "aparece": -10
       },
       {
-       "prompt": "s1(config-if-range)#",
+       "prompt": "s1(config-if)#",
        "cmd": "switchport access vlan 20",
        "desde": -10,
        "aparece": -10
       },
       {
-       "prompt": "s1(config-if-range)#",
+       "prompt": "s1(config-if)#",
        "cmd": "exit",
        "desde": -10,
        "aparece": -10
       },
       {
        "prompt": "s1(config)#",
-       "cmd": "interface range fa0/17 - 24",
+       "cmd": "interface fa0/4",
        "desde": -10,
        "aparece": -10
       },
       {
-       "prompt": "s1(config-if-range)#",
+       "prompt": "s1(config-if)#",
        "cmd": "switchport mode access",
        "desde": -10,
        "aparece": -10
       },
       {
-       "prompt": "s1(config-if-range)#",
+       "prompt": "s1(config-if)#",
+       "cmd": "switchport access vlan 20",
+       "desde": -10,
+       "aparece": -10
+      },
+      {
+       "prompt": "s1(config-if)#",
+       "cmd": "exit",
+       "desde": -10,
+       "aparece": -10
+      },
+      {
+       "prompt": "s1(config)#",
+       "cmd": "interface fa0/5",
+       "desde": 0.9
+      },
+      {
+       "prompt": "s1(config-if)#",
+       "cmd": "switchport mode access",
+       "desde": 2.15
+      },
+      {
+       "prompt": "s1(config-if)#",
+       "cmd": "switchport access vlan 30",
+       "desde": 3.4
+      },
+      {
+       "prompt": "s1(config-if)#",
+       "cmd": "exit",
+       "desde": 4.7
+      },
+      {
+       "prompt": "s1(config)#",
+       "cmd": "interface fa0/6",
+       "desde": 5.6
+      },
+      {
+       "prompt": "s1(config-if)#",
+       "cmd": "switchport mode access",
+       "desde": 6.85
+      },
+      {
+       "prompt": "s1(config-if)#",
+       "cmd": "switchport access vlan 30",
+       "desde": 8.1
+      },
+      {
+       "prompt": "s1(config-if)#",
+       "cmd": "exit",
+       "desde": 9.399999999999999
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "titulo": "COMPRUEBA",
+   "texto": "Vuelve con end y escribe show vlan brief: verás las tres VLAN, cada una con sus dos puertos.",
+   "efectos": [
+    {
+     "tipo": "posicion",
+     "x": 905,
+     "y": 1335,
+     "escala": 0.4,
+     "desde": -1
+    },
+    {
+     "tipo": "terminal",
+     "desde": 0,
+     "y1": 1110,
+     "titulo": "s1 · CLI  (Packet Tracer)",
+     "lineas": [
+      {
+       "prompt": "s1(config-if)#",
+       "cmd": "switchport access vlan 20",
+       "desde": -10,
+       "aparece": -10
+      },
+      {
+       "prompt": "s1(config-if)#",
+       "cmd": "exit",
+       "desde": -10,
+       "aparece": -10
+      },
+      {
+       "prompt": "s1(config)#",
+       "cmd": "interface fa0/5",
+       "desde": -10,
+       "aparece": -10
+      },
+      {
+       "prompt": "s1(config-if)#",
+       "cmd": "switchport mode access",
+       "desde": -10,
+       "aparece": -10
+      },
+      {
+       "prompt": "s1(config-if)#",
        "cmd": "switchport access vlan 30",
        "desde": -10,
        "aparece": -10
       },
       {
-       "prompt": "s1(config-if-range)#",
+       "prompt": "s1(config-if)#",
+       "cmd": "exit",
+       "desde": -10,
+       "aparece": -10
+      },
+      {
+       "prompt": "s1(config)#",
+       "cmd": "interface fa0/6",
+       "desde": -10,
+       "aparece": -10
+      },
+      {
+       "prompt": "s1(config-if)#",
+       "cmd": "switchport mode access",
+       "desde": -10,
+       "aparece": -10
+      },
+      {
+       "prompt": "s1(config-if)#",
+       "cmd": "switchport access vlan 30",
+       "desde": -10,
+       "aparece": -10
+      },
+      {
+       "prompt": "s1(config-if)#",
+       "cmd": "exit",
+       "desde": -10,
+       "aparece": -10
+      },
+      {
+       "prompt": "s1(config)#",
        "cmd": "end",
        "desde": "end"
       },
@@ -536,10 +682,10 @@
        "salida": [
         "VLAN Name      Status    Ports",
         "---- --------- --------- -----------------",
-        "1    default   active    Gig0/1, Gig0/2",
-        "10   Vendes    active    Fa0/1, Fa0/2 ... Fa0/8",
-        "20   Compres   active    Fa0/9, Fa0/10 ... Fa0/16",
-        "30   Direccio  active    Fa0/17 ... Fa0/24"
+        "1    default   active    Fa0/7 ... Fa0/24, Gig0/1",
+        "10   Vendes    active    Fa0/1, Fa0/2",
+        "20   Compres   active    Fa0/3, Fa0/4",
+        "30   Direccio  active    Fa0/5, Fa0/6"
        ]
       }
      ]
@@ -564,55 +710,55 @@
      "titulo": "s1 · CLI  (Packet Tracer)",
      "lineas": [
       {
-       "prompt": "s1(config-if-range)#",
-       "cmd": "exit",
-       "desde": -10,
-       "aparece": -10
-      },
-      {
        "prompt": "s1(config)#",
-       "cmd": "interface range fa0/9 - 16",
+       "cmd": "interface fa0/5",
        "desde": -10,
        "aparece": -10
       },
       {
-       "prompt": "s1(config-if-range)#",
+       "prompt": "s1(config-if)#",
        "cmd": "switchport mode access",
        "desde": -10,
        "aparece": -10
       },
       {
-       "prompt": "s1(config-if-range)#",
-       "cmd": "switchport access vlan 20",
-       "desde": -10,
-       "aparece": -10
-      },
-      {
-       "prompt": "s1(config-if-range)#",
-       "cmd": "exit",
-       "desde": -10,
-       "aparece": -10
-      },
-      {
-       "prompt": "s1(config)#",
-       "cmd": "interface range fa0/17 - 24",
-       "desde": -10,
-       "aparece": -10
-      },
-      {
-       "prompt": "s1(config-if-range)#",
-       "cmd": "switchport mode access",
-       "desde": -10,
-       "aparece": -10
-      },
-      {
-       "prompt": "s1(config-if-range)#",
+       "prompt": "s1(config-if)#",
        "cmd": "switchport access vlan 30",
        "desde": -10,
        "aparece": -10
       },
       {
-       "prompt": "s1(config-if-range)#",
+       "prompt": "s1(config-if)#",
+       "cmd": "exit",
+       "desde": -10,
+       "aparece": -10
+      },
+      {
+       "prompt": "s1(config)#",
+       "cmd": "interface fa0/6",
+       "desde": -10,
+       "aparece": -10
+      },
+      {
+       "prompt": "s1(config-if)#",
+       "cmd": "switchport mode access",
+       "desde": -10,
+       "aparece": -10
+      },
+      {
+       "prompt": "s1(config-if)#",
+       "cmd": "switchport access vlan 30",
+       "desde": -10,
+       "aparece": -10
+      },
+      {
+       "prompt": "s1(config-if)#",
+       "cmd": "exit",
+       "desde": -10,
+       "aparece": -10
+      },
+      {
+       "prompt": "s1(config)#",
        "cmd": "end",
        "desde": -10,
        "aparece": -10
@@ -624,10 +770,10 @@
        "salida": [
         "VLAN Name      Status    Ports",
         "---- --------- --------- -----------------",
-        "1    default   active    Gig0/1, Gig0/2",
-        "10   Vendes    active    Fa0/1, Fa0/2 ... Fa0/8",
-        "20   Compres   active    Fa0/9, Fa0/10 ... Fa0/16",
-        "30   Direccio  active    Fa0/17 ... Fa0/24"
+        "1    default   active    Fa0/7 ... Fa0/24, Gig0/1",
+        "10   Vendes    active    Fa0/1, Fa0/2",
+        "20   Compres   active    Fa0/3, Fa0/4",
+        "30   Direccio  active    Fa0/5, Fa0/6"
        ],
        "aparece": -10
       },
@@ -666,10 +812,10 @@
      "puertos": [
       "Fa0/1",
       "Fa0/2",
-      "Fa0/9",
-      "Fa0/10",
-      "Fa0/17",
-      "Fa0/18"
+      "Fa0/3",
+      "Fa0/4",
+      "Fa0/5",
+      "Fa0/6"
      ],
      "vlans": [
       {

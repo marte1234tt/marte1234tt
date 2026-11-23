@@ -52,11 +52,11 @@ tutorial("Basica configuración del switch", [
 
 # ---------------------------------------------------------------- 2. VLANs (3 VLAN)
 V = [{"num": 10, "nombre": "VENDES", "color": "#3A86FF"}, {"num": 20, "nombre": "COMPRES", "color": "#FF7F50"}, {"num": 30, "nombre": "DIRECCIO", "color": "#9B5DE5"}]
-PUERTOS = ["Fa0/1", "Fa0/2", "Fa0/9", "Fa0/10", "Fa0/17", "Fa0/18"]
+PUERTOS = ["Fa0/1", "Fa0/2", "Fa0/3", "Fa0/4", "Fa0/5", "Fa0/6"]
 TABLA = ["VLAN Name      Status    Ports", "---- --------- --------- -----------------",
-         "1    default   active    Gig0/1, Gig0/2",
-         "10   Vendes    active    Fa0/1, Fa0/2 ... Fa0/8", "20   Compres   active    Fa0/9, Fa0/10 ... Fa0/16",
-         "30   Direccio  active    Fa0/17 ... Fa0/24"]
+         "1    default   active    Fa0/7 ... Fa0/24, Gig0/1",
+         "10   Vendes    active    Fa0/1, Fa0/2", "20   Compres   active    Fa0/3, Fa0/4",
+         "30   Direccio  active    Fa0/5, Fa0/6"]
 tutorial("Vlans configurar 3 VLANs en el switch", [
  {"titulo": "¿QUÉ ES UNA VLAN?", "texto": "Una VLAN divide un switch en varias redes separadas. Los equipos solo se ven con los de su misma VLAN, como si estuvieran en switches distintos.",
   "efectos": [{"tipo": "entrada"}, {"tipo": "mirar", "x": "vaiven"},
@@ -64,7 +64,7 @@ tutorial("Vlans configurar 3 VLANs en el switch", [
               {"tipo": "etiqueta", "texto": "VLAN 20", "pos": [540, 470], "fondo": "#FF7F50", "color": "#FFFFFF", "desde": "varias"},
               {"tipo": "etiqueta", "texto": "VLAN 30", "pos": [850, 560], "fondo": "#9B5DE5", "color": "#FFFFFF", "desde": "separadas"},
               {"tipo": "sello", "texto": "NO SE VEN", "color": "#E63946", "pos": [540, 700], "size": 80, "desde": "solo"}]},
- {"titulo": "EL EJERCICIO", "texto": "Este es el ejercicio: seis PCs, dos por departamento. Vendes en la VLAN 10, Compres en la VLAN 20 y Direcció en la VLAN 30. Cada VLAN tendrá ocho puertos del switch.",
+ {"titulo": "EL EJERCICIO", "texto": "Este es el ejercicio: seis PCs, dos por departamento. Vendes en la VLAN 10, Compres en la VLAN 20 y Direcció en la VLAN 30. Vendes va en los puertos 1 y 2, Compres en el 3 y el 4, y Direcció en el 5 y el 6.",
   "topo": {"puertos": PUERTOS, "vlans": [dict(V[0], desde="Vendes"), dict(V[1], desde="Compres"), dict(V[2], desde="Direcció")]}},
  {"titulo": "ENTRA A CONFIGURAR", "texto": "En el switch, escribe enable, pon la contraseña, y luego configure terminal.", "aparece": 0.2,
   "lineas": [["s1>", "enable", "enable", ["Password:"]], ["s1#", "configure terminal", "configure"], ["s1(config)#", "", "configure+1.6"]]},
@@ -72,16 +72,17 @@ tutorial("Vlans configurar 3 VLANs en el switch", [
   "lineas": [["s1(config)#", "vlan 10", "10"], ["s1(config-vlan)#", "name Vendes", "Vendes"], ["s1(config-vlan)#", "exit", "Luego-0.4"],
              ["s1(config)#", "vlan 20", "20"], ["s1(config-vlan)#", "name Compres", "Compres"], ["s1(config-vlan)#", "exit", "último-0.6"],
              ["s1(config)#", "vlan 30", "30"], ["s1(config-vlan)#", "name Direccio", "Direccio"], ["s1(config-vlan)#", "exit", "exit"], ["s1(config)#", "", "exit+1.2"]]},
- {"titulo": "PUERTOS DE VENDES", "texto": "Ahora los puertos. Con interface range cogemos del fa0/1 al fa0/8, los ponemos en modo acceso, y los metemos en la VLAN 10.",
-  "lineas": [["s1(config)#", "interface range fa0/1 - 8", "interface"], ["s1(config-if-range)#", "switchport mode access", "acceso"],
-             ["s1(config-if-range)#", "switchport access vlan 10", "metemos"], ["s1(config-if-range)#", "exit", "metemos+2.4"]]},
- {"titulo": "COMPRES Y DIRECCIÓ", "texto": "Lo mismo para Compres, del fa0/9 al fa0/16, en la VLAN 20. Y para Direcció, del fa0/17 al fa0/24, en la VLAN 30.",
-  "lineas": [["s1(config)#", "interface range fa0/9 - 16", "Compres"], ["s1(config-if-range)#", "switchport mode access", "Compres+1.4"],
-             ["s1(config-if-range)#", "switchport access vlan 20", "20"], ["s1(config-if-range)#", "exit", "Direcció-0.6"],
-             ["s1(config)#", "interface range fa0/17 - 24", "Direcció"], ["s1(config-if-range)#", "switchport mode access", "Direcció+1.4"],
-             ["s1(config-if-range)#", "switchport access vlan 30", "30"]]},
- {"titulo": "COMPRUEBA", "texto": "Vuelve con end y escribe show vlan brief: verás las tres VLAN, cada una con sus ocho puertos.",
-  "lineas": [["s1(config-if-range)#", "end", "end"], ["s1#", "show vlan brief", "show", TABLA]]},
+ {"titulo": "PUERTOS DE VENDES", "texto": "Ahora, puerto por puerto. Entra en interface fa0/1, ponlo en modo acceso, y asígnalo a la VLAN 10. Sal con exit. Repite con el fa0/2: switchport mode access, y switchport access vlan 10.",
+  "lineas": [["s1(config)#", "interface fa0/1", "interface"], ["s1(config-if)#", "switchport mode access", "modo"],
+             ["s1(config-if)#", "switchport access vlan 10", "asígnalo"], ["s1(config-if)#", "exit", "exit"],
+             ["s1(config)#", "interface fa0/2", "Repite+0.4"], ["s1(config-if)#", "switchport mode access", "switchport"],
+             ["s1(config-if)#", "switchport access vlan 10", "switchport+2.2"], ["s1(config-if)#", "exit", "switchport+3.6"]]},
+ {"titulo": "PUERTOS DE COMPRES", "texto": "Ahora Compres, en la VLAN 20. Primero el fa0/3: interface, modo acceso y VLAN 20. Y después, exactamente igual con el fa0/4.",
+  "lineas": [["s1(config)#", "interface fa0/3", 0.9], ["s1(config-if)#", "switchport mode access", 2.15], ["s1(config-if)#", "switchport access vlan 20", 3.4], ["s1(config-if)#", "exit", 4.7], ["s1(config)#", "interface fa0/4", 5.6], ["s1(config-if)#", "switchport mode access", 6.85], ["s1(config-if)#", "switchport access vlan 20", 8.1], ["s1(config-if)#", "exit", 9.399999999999999]]},
+ {"titulo": "PUERTOS DE DIRECCIÓ", "texto": "Y por último Direcció, en la VLAN 30. Lo mismo con el fa0/5, y después con el fa0/6. Ya están los seis.",
+  "lineas": [["s1(config)#", "interface fa0/5", 0.9], ["s1(config-if)#", "switchport mode access", 2.15], ["s1(config-if)#", "switchport access vlan 30", 3.4], ["s1(config-if)#", "exit", 4.7], ["s1(config)#", "interface fa0/6", 5.6], ["s1(config-if)#", "switchport mode access", 6.85], ["s1(config-if)#", "switchport access vlan 30", 8.1], ["s1(config-if)#", "exit", 9.399999999999999]]},
+ {"titulo": "COMPRUEBA", "texto": "Vuelve con end y escribe show vlan brief: verás las tres VLAN, cada una con sus dos puertos.",
+  "lineas": [["s1(config)#", "end", "end"], ["s1#", "show vlan brief", "show", TABLA]]},
  {"titulo": "GUARDA", "texto": "Y no te olvides de guardar con copy running-config startup-config.",
   "lineas": [["s1#", "copy running-config startup-config", "copy", ["Building configuration...", "[OK]"]], ["s1#", "", "copy+3"]]},
  {"titulo": "PRUEBA CON PING", "texto": "Ahora la prueba. Pon a cada PC una IP de la misma red. El PC0 hace ping a su compañero de Vendes y responde. Pero si hace ping a uno de Compres, nada: están en VLANs distintas.",
